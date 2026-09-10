@@ -1,0 +1,9 @@
+build/
+web/node_modules/
+web/dist/
+tray/build/
+internal/api/dist/assets/
+*.log
+re/bin/
+re/lib/
+re/strings.txt

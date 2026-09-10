@@ -1,0 +1,3548 @@
+[
+ {
+  "id": "creality-cr-abs",
+  "vendor": "Creality",
+  "name": "CR-ABS",
+  "type": "ABS",
+  "min_temp": 230,
+  "max_temp": 260,
+  "pressure": 0.04,
+  "rfid": "07001",
+  "density": 1.08,
+  "slicer_preset": "CR-ABS @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 10,
+   "part_max": 60,
+   "aux": 0,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "creality-cr-petg",
+  "vendor": "Creality",
+  "name": "CR-PETG",
+  "type": "PETG",
+  "min_temp": 220,
+  "max_temp": 270,
+  "pressure": 0.07,
+  "rfid": "06001",
+  "density": 1.24,
+  "slicer_preset": "CR-PETG @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 40,
+   "part_max": 80,
+   "aux": 0,
+   "exhaust": 0
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "creality-cr-pla",
+  "vendor": "Creality",
+  "name": "CR-PLA",
+  "type": "PLA",
+  "min_temp": 190,
+  "max_temp": 240,
+  "pressure": 0.04,
+  "rfid": "04001",
+  "density": 1.25,
+  "slicer_preset": "CR-PLA @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 80,
+   "exhaust": 0
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "creality-cr-pla-fluo",
+  "vendor": "Creality",
+  "name": "CR-PLA Fluo",
+  "type": "PLA",
+  "min_temp": 190,
+  "max_temp": 240,
+  "pressure": 0.04,
+  "rfid": "15001",
+  "density": 1.24,
+  "slicer_preset": "CR-PLA Fluo @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 80,
+   "exhaust": 0
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "creality-cr-pla-matte",
+  "vendor": "Creality",
+  "name": "CR-PLA Matte",
+  "type": "PLA",
+  "min_temp": 190,
+  "max_temp": 240,
+  "pressure": 0.04,
+  "rfid": "14001",
+  "density": 1.3,
+  "slicer_preset": "CR-PLA Matte @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 80,
+   "exhaust": 0
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "creality-cr-silk",
+  "vendor": "Creality",
+  "name": "CR-Silk",
+  "type": "PLA",
+  "min_temp": 190,
+  "max_temp": 240,
+  "pressure": 0.04,
+  "rfid": "05001",
+  "density": 1.25,
+  "slicer_preset": "CR-Silk @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 80,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "creality-cr-tpu",
+  "vendor": "Creality",
+  "name": "CR-TPU",
+  "type": "TPU",
+  "min_temp": 210,
+  "max_temp": 240,
+  "pressure": 0.4,
+  "rfid": "16001",
+  "density": 1.12,
+  "slicer_preset": "CR-TPU @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 80,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": false,
+   "reason": "flexible filament bends in the CFS tubes and causes feed/unload failures; use the external spool holder (Creality CFS compatibility note)"
+  },
+  "warnings": [
+   "Load on the external spool holder, not the CFS; keep speed low and retraction short"
+  ]
+ },
+ {
+  "id": "creality-en-plaplus",
+  "vendor": "Creality",
+  "name": "EN-PLA+",
+  "type": "PLA",
+  "min_temp": 190,
+  "max_temp": 240,
+  "pressure": 0.04,
+  "rfid": "09001",
+  "density": 1.24,
+  "slicer_preset": "EN-PLA+ @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 80,
+   "exhaust": 0
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "creality-ender-fast-pla",
+  "vendor": "Creality",
+  "name": "ENDER FAST PLA",
+  "type": "PLA",
+  "min_temp": 190,
+  "max_temp": 240,
+  "pressure": 0.04,
+  "rfid": "09002",
+  "density": 1.21,
+  "slicer_preset": "ENDER FAST PLA @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 80,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "creality-ender-pla",
+  "vendor": "Creality",
+  "name": "Ender-PLA",
+  "type": "PLA",
+  "min_temp": 190,
+  "max_temp": 240,
+  "pressure": 0.04,
+  "rfid": "08001",
+  "density": 1.24,
+  "slicer_preset": "Ender-PLA @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 80,
+   "exhaust": 0
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "generic-generic-abs",
+  "vendor": "Generic",
+  "name": "Generic ABS",
+  "type": "ABS",
+  "min_temp": 240,
+  "max_temp": 280,
+  "pressure": 0.06,
+  "rfid": "00004",
+  "density": 1.04,
+  "slicer_preset": "Generic ABS @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 10,
+   "part_max": 60,
+   "aux": 0,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "generic-generic-asa",
+  "vendor": "Generic",
+  "name": "Generic ASA",
+  "type": "ASA",
+  "min_temp": 240,
+  "max_temp": 280,
+  "pressure": 0.04,
+  "rfid": "00007",
+  "density": 1.1,
+  "slicer_preset": "Generic ASA @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 10,
+   "part_max": 90,
+   "aux": 0,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "generic-generic-bvoh",
+  "vendor": "Generic",
+  "name": "Generic BVOH",
+  "type": "BVOH",
+  "min_temp": 200,
+  "max_temp": 220,
+  "pressure": 0.05,
+  "rfid": "00010",
+  "density": 1.138,
+  "slicer_preset": "Generic BVOH @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 50,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": "only when dry: damp PVA/BVOH is not CFS-compatible"
+  },
+  "warnings": [
+   "Hygroscopic support material: keep sealed with desiccant, dry before loading"
+  ]
+ },
+ {
+  "id": "generic-generic-pa",
+  "vendor": "Generic",
+  "name": "Generic PA",
+  "type": "PA",
+  "min_temp": 240,
+  "max_temp": 260,
+  "pressure": 0.058,
+  "rfid": "00008",
+  "density": 1.12,
+  "slicer_preset": "Generic PA @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 60,
+   "part_max": 80,
+   "aux": 80,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "generic-generic-paht-cf",
+  "vendor": "Generic",
+  "name": "Generic PAHT-CF",
+  "type": "PA-CF",
+  "min_temp": 280,
+  "max_temp": 320,
+  "pressure": 0.036,
+  "rfid": "00016",
+  "density": 1.2,
+  "slicer_preset": "Generic PAHT-CF @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 10,
+   "part_max": 50,
+   "aux": 0,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": [
+   "Abrasive (fibre/particle filled): needs a hardened nozzle (the K2 ships with one) and wears it faster"
+  ]
+ },
+ {
+  "id": "generic-generic-pet",
+  "vendor": "Generic",
+  "name": "Generic PET",
+  "type": "PET",
+  "min_temp": 250,
+  "max_temp": 270,
+  "pressure": 0.1,
+  "rfid": "00020",
+  "density": 1.28,
+  "slicer_preset": "Generic PET @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 60,
+   "part_max": 80,
+   "aux": 0,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "generic-generic-petg",
+  "vendor": "Generic",
+  "name": "Generic PETG",
+  "type": "PETG",
+  "min_temp": 220,
+  "max_temp": 270,
+  "pressure": 0.04,
+  "rfid": "00003",
+  "density": 1.27,
+  "slicer_preset": "Generic PETG @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 40,
+   "part_max": 90,
+   "aux": 0,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "generic-generic-petg-cf",
+  "vendor": "Generic",
+  "name": "Generic PETG-CF",
+  "type": "PETG-CF",
+  "min_temp": 240,
+  "max_temp": 260,
+  "pressure": 0.06,
+  "rfid": "00014",
+  "density": 1.26,
+  "slicer_preset": "Generic PETG-CF @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 40,
+   "part_max": 80,
+   "aux": 0,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": [
+   "Abrasive (fibre/particle filled): needs a hardened nozzle (the K2 ships with one) and wears it faster"
+  ]
+ },
+ {
+  "id": "creality-generic-petg-gf",
+  "vendor": "Creality",
+  "name": "Generic PETG-GF",
+  "type": "PETG-GF",
+  "min_temp": 240,
+  "max_temp": 270,
+  "pressure": 0.06,
+  "rfid": "",
+  "density": 1.28,
+  "slicer_preset": "Generic PETG-GF @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 40,
+   "part_max": 80,
+   "aux": 0,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": [
+   "Abrasive (fibre/particle filled): needs a hardened nozzle (the K2 ships with one) and wears it faster"
+  ]
+ },
+ {
+  "id": "generic-generic-pla",
+  "vendor": "Generic",
+  "name": "Generic PLA",
+  "type": "PLA",
+  "min_temp": 190,
+  "max_temp": 240,
+  "pressure": 0.04,
+  "rfid": "00001",
+  "density": 1.25,
+  "slicer_preset": "Generic PLA @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 80,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "generic-generic-pla-cf",
+  "vendor": "Generic",
+  "name": "Generic PLA-CF",
+  "type": "PLA-CF",
+  "min_temp": 190,
+  "max_temp": 240,
+  "pressure": 0.05,
+  "rfid": "00006",
+  "density": 1.21,
+  "slicer_preset": "Generic PLA-CF @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 0,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": [
+   "Abrasive (fibre/particle filled): needs a hardened nozzle (the K2 ships with one) and wears it faster"
+  ]
+ },
+ {
+  "id": "generic-generic-pla-silk",
+  "vendor": "Generic",
+  "name": "Generic PLA-Silk",
+  "type": "PLA",
+  "min_temp": 190,
+  "max_temp": 240,
+  "pressure": 0.04,
+  "rfid": "00002",
+  "density": 1.25,
+  "slicer_preset": "Generic PLA-Silk @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 95,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "generic-generic-pp",
+  "vendor": "Generic",
+  "name": "Generic PP",
+  "type": "PP",
+  "min_temp": 220,
+  "max_temp": 260,
+  "pressure": 0.08,
+  "rfid": "00019",
+  "density": 0.91,
+  "slicer_preset": "Generic PP @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 80,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "generic-generic-pva",
+  "vendor": "Generic",
+  "name": "Generic PVA",
+  "type": "PVA",
+  "min_temp": 215,
+  "max_temp": 225,
+  "pressure": 0.05,
+  "rfid": "00011",
+  "density": 1.37,
+  "slicer_preset": "Generic PVA @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 50,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": "only when dry: damp PVA/BVOH is not CFS-compatible"
+  },
+  "warnings": [
+   "Hygroscopic support material: keep sealed with desiccant, dry before loading"
+  ]
+ },
+ {
+  "id": "generic-generic-tpu",
+  "vendor": "Generic",
+  "name": "Generic TPU",
+  "type": "TPU",
+  "min_temp": 200,
+  "max_temp": 250,
+  "pressure": 0.3,
+  "rfid": "00005",
+  "density": 1.24,
+  "slicer_preset": "Generic TPU @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 80,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": false,
+   "reason": "flexible filament bends in the CFS tubes and causes feed/unload failures; use the external spool holder (Creality CFS compatibility note)"
+  },
+  "warnings": [
+   "Load on the external spool holder, not the CFS; keep speed low and retraction short"
+  ]
+ },
+ {
+  "id": "creality-hp-asa",
+  "vendor": "Creality",
+  "name": "HP-ASA",
+  "type": "ASA",
+  "min_temp": 240,
+  "max_temp": 280,
+  "pressure": 0.04,
+  "rfid": "19001",
+  "density": 1.15,
+  "slicer_preset": "HP-ASA @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 10,
+   "part_max": 40,
+   "aux": 0,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "creality-hp-tpu",
+  "vendor": "Creality",
+  "name": "HP-TPU",
+  "type": "TPU",
+  "min_temp": 200,
+  "max_temp": 220,
+  "pressure": 0.4,
+  "rfid": "10001",
+  "density": 1.26,
+  "slicer_preset": "HP-TPU @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 80,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": false,
+   "reason": "flexible filament bends in the CFS tubes and causes feed/unload failures; use the external spool holder (Creality CFS compatibility note)"
+  },
+  "warnings": [
+   "Load on the external spool holder, not the CFS; keep speed low and retraction short"
+  ]
+ },
+ {
+  "id": "creality-hyper-abs",
+  "vendor": "Creality",
+  "name": "Hyper ABS",
+  "type": "ABS",
+  "min_temp": 230,
+  "max_temp": 260,
+  "pressure": 0.03,
+  "rfid": "03001",
+  "density": 1.08,
+  "slicer_preset": "Hyper ABS @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 10,
+   "part_max": 60,
+   "aux": 0,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "creality-hyper-l-w-pla",
+  "vendor": "Creality",
+  "name": "Hyper L-W PLA",
+  "type": "PLA",
+  "min_temp": 200,
+  "max_temp": 270,
+  "pressure": 0.1,
+  "rfid": "01002",
+  "density": 1.21,
+  "slicer_preset": "Hyper L-W PLA @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 50,
+   "part_max": 100,
+   "aux": 80,
+   "exhaust": 0
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "creality-hyper-luminous",
+  "vendor": "Creality",
+  "name": "Hyper Luminous",
+  "type": "PLA",
+  "min_temp": 190,
+  "max_temp": 230,
+  "pressure": 0.042,
+  "rfid": "01003",
+  "density": 1.3,
+  "slicer_preset": "Hyper Luminous @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 80,
+   "exhaust": 0
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "creality-hyper-marble",
+  "vendor": "Creality",
+  "name": "Hyper Marble",
+  "type": "PLA",
+  "min_temp": 190,
+  "max_temp": 240,
+  "pressure": 0.04,
+  "rfid": "29001",
+  "density": 1.25,
+  "slicer_preset": "Hyper Marble @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 80,
+   "exhaust": 0
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "creality-hyper-paht-cf",
+  "vendor": "Creality",
+  "name": "Hyper PAHT-CF",
+  "type": "PA-CF",
+  "min_temp": 280,
+  "max_temp": 320,
+  "pressure": 0.036,
+  "rfid": "12003",
+  "density": 1.06,
+  "slicer_preset": "Hyper PAHT-CF @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 10,
+   "part_max": 50,
+   "aux": 0,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": [
+   "Abrasive (fibre/particle filled): needs a hardened nozzle (the K2 ships with one) and wears it faster"
+  ]
+ },
+ {
+  "id": "creality-hyper-petg",
+  "vendor": "Creality",
+  "name": "Hyper PETG",
+  "type": "PETG",
+  "min_temp": 220,
+  "max_temp": 270,
+  "pressure": 0.05,
+  "rfid": "06002",
+  "density": 1.23,
+  "slicer_preset": "Hyper PETG @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 40,
+   "part_max": 80,
+   "aux": 0,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "creality-hyper-petg-cf",
+  "vendor": "Creality",
+  "name": "Hyper PETG-CF",
+  "type": "PETG-CF",
+  "min_temp": 240,
+  "max_temp": 260,
+  "pressure": 0.06,
+  "rfid": "06003",
+  "density": 1.25,
+  "slicer_preset": "Hyper PETG-CF @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 40,
+   "part_max": 80,
+   "aux": 0,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": [
+   "Abrasive (fibre/particle filled): needs a hardened nozzle (the K2 ships with one) and wears it faster"
+  ]
+ },
+ {
+  "id": "creality-hyper-petg-gf",
+  "vendor": "Creality",
+  "name": "Hyper PETG-GF",
+  "type": "PETG-GF",
+  "min_temp": 240,
+  "max_temp": 260,
+  "pressure": 0.06,
+  "rfid": "06004",
+  "density": 1.32,
+  "slicer_preset": "Hyper PETG-GF @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 40,
+   "part_max": 80,
+   "aux": 0,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": [
+   "Abrasive (fibre/particle filled): needs a hardened nozzle (the K2 ships with one) and wears it faster"
+  ]
+ },
+ {
+  "id": "creality-hyper-pla",
+  "vendor": "Creality",
+  "name": "Hyper PLA",
+  "type": "PLA",
+  "min_temp": 190,
+  "max_temp": 240,
+  "pressure": 0.04,
+  "rfid": "01001",
+  "density": 1.24,
+  "slicer_preset": "Hyper PLA @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 80,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "creality-hyper-pla-cf",
+  "vendor": "Creality",
+  "name": "Hyper PLA-CF",
+  "type": "PLA-CF",
+  "min_temp": 190,
+  "max_temp": 240,
+  "pressure": 0.04,
+  "rfid": "02001",
+  "density": 1.27,
+  "slicer_preset": "Hyper PLA-CF @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 0,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": [
+   "Abrasive (fibre/particle filled): needs a hardened nozzle (the K2 ships with one) and wears it faster"
+  ]
+ },
+ {
+  "id": "creality-hyper-stardust",
+  "vendor": "Creality",
+  "name": "Hyper Stardust",
+  "type": "PLA",
+  "min_temp": 190,
+  "max_temp": 240,
+  "pressure": 0.04,
+  "rfid": "01004",
+  "density": 1.24,
+  "slicer_preset": "Hyper Stardust @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 80,
+   "exhaust": 0
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "creality-soleyin-basic-petg",
+  "vendor": "Creality",
+  "name": "Soleyin Basic PETG",
+  "type": "PETG",
+  "min_temp": 230,
+  "max_temp": 250,
+  "pressure": 0.08,
+  "rfid": "06005",
+  "density": 1.25,
+  "slicer_preset": "Soleyin Basic PETG @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 40,
+   "part_max": 80,
+   "aux": 0,
+   "exhaust": 0
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "creality-soleyin-ultra-pla",
+  "vendor": "Creality",
+  "name": "Soleyin Ultra PLA",
+  "type": "PLA",
+  "min_temp": 190,
+  "max_temp": 240,
+  "pressure": 0.06,
+  "rfid": "01601",
+  "density": 1.25,
+  "slicer_preset": "Soleyin Ultra PLA @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 95,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "polymaker-polylite-pc-clear",
+  "vendor": "Polymaker",
+  "name": "PolyLite PC Clear",
+  "type": "PC",
+  "min_temp": 250,
+  "max_temp": 270,
+  "pressure": 0.03,
+  "rfid": "",
+  "density": 1.19,
+  "notes": "Polymaker PolyLite PC (transparent). Mfr: 250-270C nozzle, 90-105C bed, fan OFF, dry 75C/12h if wet. Fan kept near zero and flow capped at 12mm3/s for clarity and layer bonding; preheat bed 10-15min before start. Glue stick / Magigoo PC on the plate.",
+  "slicer_preset": "Polymaker PolyLite PC Clear @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 0,
+   "part_max": 15,
+   "aux": 0,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "polymaker-polymax-pc",
+  "vendor": "Polymaker",
+  "name": "PolyMax PC",
+  "type": "PC",
+  "min_temp": 250,
+  "max_temp": 270,
+  "pressure": 0.03,
+  "rfid": "",
+  "density": 1.19,
+  "notes": "Polymaker PolyMax PC. Mfr: 250-270C nozzle, 90-105C bed, fan OFF, dry 75C/12h. Anneal 90C/2h for max strength.",
+  "slicer_preset": "Polymaker PolyMax PC @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 0,
+   "part_max": 20,
+   "aux": 0,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "polymaker-polylite-pla",
+  "vendor": "Polymaker",
+  "name": "PolyLite PLA",
+  "type": "PLA",
+  "min_temp": 190,
+  "max_temp": 230,
+  "pressure": 0.04,
+  "rfid": "",
+  "density": 1.24,
+  "notes": "Polymaker PolyLite PLA. Mfr: 190-230C nozzle, 25-60C bed, fan ON.",
+  "slicer_preset": "Polymaker PolyLite PLA @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 80,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "polymaker-polyterra-pla",
+  "vendor": "Polymaker",
+  "name": "PolyTerra PLA",
+  "type": "PLA",
+  "min_temp": 190,
+  "max_temp": 230,
+  "pressure": 0.04,
+  "rfid": "",
+  "density": 1.31,
+  "notes": "Polymaker PolyTerra PLA (matte). Mfr: 190-230C nozzle, 25-60C bed, fan ON. Softer/more brittle than standard PLA; keep retraction modest.",
+  "slicer_preset": "Polymaker PolyTerra PLA @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 80,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "polymaker-polylite-petg",
+  "vendor": "Polymaker",
+  "name": "PolyLite PETG",
+  "type": "PETG",
+  "min_temp": 230,
+  "max_temp": 240,
+  "pressure": 0.05,
+  "rfid": "",
+  "density": 1.25,
+  "notes": "Polymaker PolyLite PETG. Mfr: 230-240C nozzle, 70-80C bed, fan 30-60%%. Dry 65C/6h if stringy.",
+  "slicer_preset": "Polymaker PolyLite PETG @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 30,
+   "part_max": 60,
+   "aux": 0,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "polymaker-polylite-abs",
+  "vendor": "Polymaker",
+  "name": "PolyLite ABS",
+  "type": "ABS",
+  "min_temp": 245,
+  "max_temp": 265,
+  "pressure": 0.03,
+  "rfid": "",
+  "density": 1.08,
+  "notes": "Polymaker PolyLite ABS. Mfr: 245-265C nozzle, 90-100C bed, fan OFF/low. Keep the door closed.",
+  "slicer_preset": "Polymaker PolyLite ABS @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 0,
+   "part_max": 30,
+   "aux": 0,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "polymaker-polylite-asa",
+  "vendor": "Polymaker",
+  "name": "PolyLite ASA",
+  "type": "ASA",
+  "min_temp": 240,
+  "max_temp": 260,
+  "pressure": 0.04,
+  "rfid": "",
+  "density": 1.1,
+  "notes": "Polymaker PolyLite ASA. Mfr: 240-260C nozzle, 75-95C bed, fan OFF/low.",
+  "slicer_preset": "Polymaker PolyLite ASA @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 0,
+   "part_max": 30,
+   "aux": 0,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "polymaker-polyflex-tpu95",
+  "vendor": "Polymaker",
+  "name": "PolyFlex TPU95",
+  "type": "TPU",
+  "min_temp": 210,
+  "max_temp": 230,
+  "pressure": 0.3,
+  "rfid": "",
+  "density": 1.22,
+  "notes": "Polymaker PolyFlex TPU95 / TPU95-HF. Mfr: 210-230C nozzle, 25-60C bed. Not CFS-feedable; load direct.",
+  "slicer_preset": "Polymaker PolyFlex TPU95 @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 80,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": false,
+   "reason": "flexible filament bends in the CFS tubes and causes feed/unload failures; use the external spool holder (Creality CFS compatibility note)"
+  },
+  "warnings": [
+   "Load on the external spool holder, not the CFS; keep speed low and retraction short"
+  ]
+ },
+ {
+  "id": "bambu-pla-basic",
+  "vendor": "Bambu",
+  "name": "PLA Basic",
+  "type": "PLA",
+  "min_temp": 190,
+  "max_temp": 230,
+  "pressure": 0.04,
+  "rfid": "",
+  "density": 1.24,
+  "notes": "Bambu Lab PLA Basic. Mfr: 190-230C nozzle (220 rec), 35-65C bed. Dry 55C/8h if needed.",
+  "slicer_preset": "Bambu PLA Basic @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 80,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "bambu-pla-matte",
+  "vendor": "Bambu",
+  "name": "PLA Matte",
+  "type": "PLA",
+  "min_temp": 190,
+  "max_temp": 230,
+  "pressure": 0.04,
+  "rfid": "",
+  "density": 1.31,
+  "notes": "Bambu Lab PLA Matte. Mfr: 190-230C nozzle, 35-65C bed. Abrasive-ish; lower flow than Basic.",
+  "slicer_preset": "Bambu PLA Matte @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 80,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "bambu-petg-hf",
+  "vendor": "Bambu",
+  "name": "PETG HF",
+  "type": "PETG",
+  "min_temp": 240,
+  "max_temp": 270,
+  "pressure": 0.05,
+  "rfid": "",
+  "density": 1.27,
+  "notes": "Bambu Lab PETG HF. Mfr: 240-270C nozzle (250 rec), 65-75C bed. Dry 65C/8h.",
+  "slicer_preset": "Bambu PETG HF @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 30,
+   "part_max": 80,
+   "aux": 0,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "bambu-abs",
+  "vendor": "Bambu",
+  "name": "ABS",
+  "type": "ABS",
+  "min_temp": 240,
+  "max_temp": 270,
+  "pressure": 0.03,
+  "rfid": "",
+  "density": 1.04,
+  "notes": "Bambu Lab ABS. Mfr: 240-270C nozzle (260 rec), 90-100C bed, enclosed. Dry 80C/8h.",
+  "slicer_preset": "Bambu ABS @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 10,
+   "part_max": 60,
+   "aux": 0,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "bambu-asa",
+  "vendor": "Bambu",
+  "name": "ASA",
+  "type": "ASA",
+  "min_temp": 240,
+  "max_temp": 270,
+  "pressure": 0.04,
+  "rfid": "",
+  "density": 1.05,
+  "notes": "Bambu Lab ASA. Mfr: 240-270C nozzle, 90-100C bed, enclosed. Dry 80C/8h.",
+  "slicer_preset": "Bambu ASA @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 10,
+   "part_max": 40,
+   "aux": 0,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "bambu-pc",
+  "vendor": "Bambu",
+  "name": "PC",
+  "type": "PC",
+  "min_temp": 260,
+  "max_temp": 290,
+  "pressure": 0.03,
+  "rfid": "",
+  "density": 1.19,
+  "notes": "Bambu Lab PC. Mfr: 260-290C nozzle (270 rec), 90-110C bed, fan low, enclosed. Dry 80C/8h. Glue on plate.",
+  "slicer_preset": "Bambu PC @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 0,
+   "part_max": 20,
+   "aux": 0,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "bambu-tpu-95a-hf",
+  "vendor": "Bambu",
+  "name": "TPU 95A HF",
+  "type": "TPU",
+  "min_temp": 220,
+  "max_temp": 240,
+  "pressure": 0.2,
+  "rfid": "",
+  "density": 1.2,
+  "notes": "Bambu Lab TPU 95A HF. Mfr: 220-240C nozzle, 30-35C bed. HF grade tolerates ~6mm3/s. Not CFS-feedable.",
+  "slicer_preset": "Bambu TPU 95A HF @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 80,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": false,
+   "reason": "flexible filament bends in the CFS tubes and causes feed/unload failures; use the external spool holder (Creality CFS compatibility note)"
+  },
+  "warnings": [
+   "Load on the external spool holder, not the CFS; keep speed low and retraction short"
+  ]
+ },
+ {
+  "id": "sunlu-pla",
+  "vendor": "SUNLU",
+  "name": "PLA",
+  "type": "PLA",
+  "min_temp": 200,
+  "max_temp": 230,
+  "pressure": 0.04,
+  "rfid": "",
+  "density": 1.24,
+  "notes": "SUNLU PLA. Mfr: 200-230C nozzle, 50-65C bed.",
+  "slicer_preset": "SUNLU PLA @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 80,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "sunlu-plaplus",
+  "vendor": "SUNLU",
+  "name": "PLA+",
+  "type": "PLA",
+  "min_temp": 205,
+  "max_temp": 230,
+  "pressure": 0.04,
+  "rfid": "",
+  "density": 1.23,
+  "notes": "SUNLU PLA+. Mfr: 205-225C nozzle, 50-65C bed. Tougher than PLA; slightly hotter.",
+  "slicer_preset": "SUNLU PLA+ @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 80,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "sunlu-petg",
+  "vendor": "SUNLU",
+  "name": "PETG",
+  "type": "PETG",
+  "min_temp": 220,
+  "max_temp": 250,
+  "pressure": 0.05,
+  "rfid": "",
+  "density": 1.27,
+  "notes": "SUNLU PETG. Mfr: 220-250C nozzle, 70-80C bed. Dry 65C/6h.",
+  "slicer_preset": "SUNLU PETG @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 30,
+   "part_max": 60,
+   "aux": 0,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "sunlu-abs",
+  "vendor": "SUNLU",
+  "name": "ABS",
+  "type": "ABS",
+  "min_temp": 230,
+  "max_temp": 260,
+  "pressure": 0.03,
+  "rfid": "",
+  "density": 1.04,
+  "notes": "SUNLU ABS. Mfr: 230-260C nozzle, 90-110C bed, enclosed.",
+  "slicer_preset": "SUNLU ABS @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 10,
+   "part_max": 60,
+   "aux": 0,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "sunlu-tpu-95a",
+  "vendor": "SUNLU",
+  "name": "TPU 95A",
+  "type": "TPU",
+  "min_temp": 200,
+  "max_temp": 230,
+  "pressure": 0.3,
+  "rfid": "",
+  "density": 1.21,
+  "notes": "SUNLU TPU 95A. Mfr: 200-230C nozzle, 25-60C bed. Slow; not CFS-feedable.",
+  "slicer_preset": "SUNLU TPU 95A @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 80,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": false,
+   "reason": "flexible filament bends in the CFS tubes and causes feed/unload failures; use the external spool holder (Creality CFS compatibility note)"
+  },
+  "warnings": [
+   "Load on the external spool holder, not the CFS; keep speed low and retraction short"
+  ]
+ },
+ {
+  "id": "overture-pla",
+  "vendor": "Overture",
+  "name": "PLA",
+  "type": "PLA",
+  "min_temp": 190,
+  "max_temp": 230,
+  "pressure": 0.04,
+  "rfid": "",
+  "density": 1.24,
+  "notes": "Overture PLA. Mfr: 190-230C nozzle (200-220 rec), 50-60C bed.",
+  "slicer_preset": "Overture PLA @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 80,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "overture-pla-pro",
+  "vendor": "Overture",
+  "name": "PLA Pro",
+  "type": "PLA",
+  "min_temp": 190,
+  "max_temp": 230,
+  "pressure": 0.04,
+  "rfid": "",
+  "density": 1.24,
+  "notes": "Overture PLA Professional (PLA+). Mfr: 190-230C nozzle (210-220 rec), 50-60C bed.",
+  "slicer_preset": "Overture PLA Pro @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 80,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "overture-petg",
+  "vendor": "Overture",
+  "name": "PETG",
+  "type": "PETG",
+  "min_temp": 230,
+  "max_temp": 250,
+  "pressure": 0.05,
+  "rfid": "",
+  "density": 1.27,
+  "notes": "Overture PETG. Mfr: 230-250C nozzle, 80-90C bed. Dry 65C/6h.",
+  "slicer_preset": "Overture PETG @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 30,
+   "part_max": 60,
+   "aux": 0,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "overture-abs",
+  "vendor": "Overture",
+  "name": "ABS",
+  "type": "ABS",
+  "min_temp": 230,
+  "max_temp": 260,
+  "pressure": 0.03,
+  "rfid": "",
+  "density": 1.04,
+  "notes": "Overture ABS. Mfr: 230-260C nozzle, 90-110C bed, enclosed.",
+  "slicer_preset": "Overture ABS @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 10,
+   "part_max": 60,
+   "aux": 0,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "overture-tpu-95a",
+  "vendor": "Overture",
+  "name": "TPU 95A",
+  "type": "TPU",
+  "min_temp": 210,
+  "max_temp": 230,
+  "pressure": 0.3,
+  "rfid": "",
+  "density": 1.21,
+  "notes": "Overture TPU 95A. Mfr: 210-230C nozzle, 25-60C bed. Slow; not CFS-feedable.",
+  "slicer_preset": "Overture TPU 95A @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 80,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": false,
+   "reason": "flexible filament bends in the CFS tubes and causes feed/unload failures; use the external spool holder (Creality CFS compatibility note)"
+  },
+  "warnings": [
+   "Load on the external spool holder, not the CFS; keep speed low and retraction short"
+  ]
+ },
+ {
+  "id": "hatchbox-pla",
+  "vendor": "Hatchbox",
+  "name": "PLA",
+  "type": "PLA",
+  "min_temp": 180,
+  "max_temp": 220,
+  "pressure": 0.04,
+  "rfid": "",
+  "density": 1.24,
+  "notes": "Hatchbox PLA. Mfr: 180-210C nozzle, 50-60C bed. Runs cool; flow capped at 12mm3/s so it doesn't starve at speed. Raise to 215-220 if extrusion clicks.",
+  "slicer_preset": "Hatchbox PLA @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 80,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "hatchbox-petg",
+  "vendor": "Hatchbox",
+  "name": "PETG",
+  "type": "PETG",
+  "min_temp": 230,
+  "max_temp": 260,
+  "pressure": 0.05,
+  "rfid": "",
+  "density": 1.27,
+  "notes": "Hatchbox PETG. Mfr: 230-260C nozzle, 70-85C bed.",
+  "slicer_preset": "Hatchbox PETG @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 30,
+   "part_max": 60,
+   "aux": 0,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "hatchbox-abs",
+  "vendor": "Hatchbox",
+  "name": "ABS",
+  "type": "ABS",
+  "min_temp": 210,
+  "max_temp": 245,
+  "pressure": 0.03,
+  "rfid": "",
+  "density": 1.04,
+  "notes": "Hatchbox ABS. Mfr: 210-240C nozzle, 90-110C bed, enclosed. Runs cooler than most ABS.",
+  "slicer_preset": "Hatchbox ABS @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 10,
+   "part_max": 60,
+   "aux": 0,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "prusament-pla",
+  "vendor": "Prusament",
+  "name": "PLA",
+  "type": "PLA",
+  "min_temp": 205,
+  "max_temp": 225,
+  "pressure": 0.04,
+  "rfid": "",
+  "density": 1.24,
+  "notes": "Prusament PLA. Mfr: 215C nozzle, 60C bed (40-60).",
+  "slicer_preset": "Prusament PLA @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 80,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "prusament-petg",
+  "vendor": "Prusament",
+  "name": "PETG",
+  "type": "PETG",
+  "min_temp": 240,
+  "max_temp": 260,
+  "pressure": 0.05,
+  "rfid": "",
+  "density": 1.27,
+  "notes": "Prusament PETG. Mfr: 250C nozzle (240 first layer), 90C bed (85 first). Dry 65C/6h.",
+  "slicer_preset": "Prusament PETG @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 30,
+   "part_max": 60,
+   "aux": 0,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "prusament-asa",
+  "vendor": "Prusament",
+  "name": "ASA",
+  "type": "ASA",
+  "min_temp": 250,
+  "max_temp": 270,
+  "pressure": 0.04,
+  "rfid": "",
+  "density": 1.07,
+  "notes": "Prusament ASA. Mfr: 260C nozzle, 105C bed, enclosed, fan low.",
+  "slicer_preset": "Prusament ASA @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 0,
+   "part_max": 30,
+   "aux": 0,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "prusament-pc-blend",
+  "vendor": "Prusament",
+  "name": "PC Blend",
+  "type": "PC",
+  "min_temp": 265,
+  "max_temp": 285,
+  "pressure": 0.03,
+  "rfid": "",
+  "density": 1.22,
+  "notes": "Prusament PC Blend. Mfr: 275C nozzle, 110C bed, enclosed, fan low. Dry 90C/6h. Glue on smooth plate.",
+  "slicer_preset": "Prusament PC Blend @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 0,
+   "part_max": 20,
+   "aux": 0,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "elegoo-pla",
+  "vendor": "ELEGOO",
+  "name": "PLA",
+  "type": "PLA",
+  "min_temp": 190,
+  "max_temp": 230,
+  "pressure": 0.04,
+  "rfid": "",
+  "density": 1.24,
+  "notes": "ELEGOO PLA / Rapid PLA. Mfr: 190-230C nozzle, 50-65C bed.",
+  "slicer_preset": "ELEGOO PLA @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 80,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "elegoo-plaplus",
+  "vendor": "ELEGOO",
+  "name": "PLA+",
+  "type": "PLA",
+  "min_temp": 205,
+  "max_temp": 230,
+  "pressure": 0.04,
+  "rfid": "",
+  "density": 1.23,
+  "notes": "ELEGOO PLA+ / Rapid PLA+. Mfr: 205-225C nozzle, 50-65C bed.",
+  "slicer_preset": "ELEGOO PLA+ @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 80,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "elegoo-petg",
+  "vendor": "ELEGOO",
+  "name": "PETG",
+  "type": "PETG",
+  "min_temp": 230,
+  "max_temp": 260,
+  "pressure": 0.05,
+  "rfid": "",
+  "density": 1.27,
+  "notes": "ELEGOO PETG / Rapid PETG. Mfr: 230-260C nozzle, 70-80C bed. Dry 65C/6h.",
+  "slicer_preset": "ELEGOO PETG @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 30,
+   "part_max": 60,
+   "aux": 0,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "elegoo-abs",
+  "vendor": "ELEGOO",
+  "name": "ABS",
+  "type": "ABS",
+  "min_temp": 240,
+  "max_temp": 260,
+  "pressure": 0.03,
+  "rfid": "",
+  "density": 1.04,
+  "notes": "ELEGOO ABS. Mfr: 240-260C nozzle, 90-110C bed, enclosed.",
+  "slicer_preset": "ELEGOO ABS @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 10,
+   "part_max": 60,
+   "aux": 0,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "elegoo-asa",
+  "vendor": "ELEGOO",
+  "name": "ASA",
+  "type": "ASA",
+  "min_temp": 240,
+  "max_temp": 270,
+  "pressure": 0.04,
+  "rfid": "",
+  "density": 1.07,
+  "notes": "ELEGOO ASA. Mfr: 240-270C nozzle, 90-100C bed, enclosed.",
+  "slicer_preset": "ELEGOO ASA @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 10,
+   "part_max": 40,
+   "aux": 0,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "elegoo-tpu-95a",
+  "vendor": "ELEGOO",
+  "name": "TPU 95A",
+  "type": "TPU",
+  "min_temp": 200,
+  "max_temp": 230,
+  "pressure": 0.3,
+  "rfid": "",
+  "density": 1.21,
+  "notes": "ELEGOO TPU 95A. Mfr: 200-230C nozzle, 25-60C bed. Slow; not CFS-feedable.",
+  "slicer_preset": "ELEGOO TPU 95A @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 80,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": false,
+   "reason": "flexible filament bends in the CFS tubes and causes feed/unload failures; use the external spool holder (Creality CFS compatibility note)"
+  },
+  "warnings": [
+   "Load on the external spool holder, not the CFS; keep speed low and retraction short"
+  ]
+ },
+ {
+  "id": "generic-rainbow-pla",
+  "vendor": "Generic",
+  "name": "Rainbow PLA",
+  "type": "PLA",
+  "min_temp": 190,
+  "max_temp": 230,
+  "pressure": 0.04,
+  "rfid": "",
+  "density": 1.24,
+  "notes": "Gradient / rainbow PLA that shifts colour along the spool. Standard PLA settings. The colour list is for k2ctl's CFS view; the printer bay record gets the middle colour.",
+  "slicer_preset": "Generic Rainbow PLA @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 80,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": [],
+  "colors": [
+   "#ff4d4d",
+   "#ffb400",
+   "#3ddc84",
+   "#2b8cff",
+   "#b56cff"
+  ]
+ },
+ {
+  "id": "inland-pla",
+  "vendor": "Inland",
+  "name": "PLA",
+  "type": "PLA",
+  "min_temp": 190,
+  "max_temp": 230,
+  "pressure": 0.04,
+  "rfid": "",
+  "density": 1.24,
+  "notes": "Inland PLA. Mfr: 190-230C nozzle, 50-60C bed.",
+  "slicer_preset": "Inland PLA @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 80,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "inland-plaplus",
+  "vendor": "Inland",
+  "name": "PLA+",
+  "type": "PLA",
+  "min_temp": 205,
+  "max_temp": 230,
+  "pressure": 0.04,
+  "rfid": "",
+  "density": 1.23,
+  "notes": "Inland PLA+. Mfr: 205-225C nozzle, 50-65C bed.",
+  "slicer_preset": "Inland PLA+ @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 80,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "inland-petg",
+  "vendor": "Inland",
+  "name": "PETG",
+  "type": "PETG",
+  "min_temp": 230,
+  "max_temp": 250,
+  "pressure": 0.05,
+  "rfid": "",
+  "density": 1.27,
+  "notes": "Inland PETG. Mfr: 230-250C nozzle, 70-80C bed.",
+  "slicer_preset": "Inland PETG @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 30,
+   "part_max": 60,
+   "aux": 0,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "amolen-transparent-rainbow-tpu-95a",
+  "vendor": "AMOLEN",
+  "name": "Transparent Rainbow TPU 95A",
+  "type": "TPU",
+  "min_temp": 220,
+  "max_temp": 240,
+  "pressure": 0.3,
+  "rfid": "",
+  "density": 1.19,
+  "notes": "AMOLEN transparent multicolour rainbow TPU, Shore 95A ± 2. Mfr: 220-240C nozzle, 30-65C bed, fan on, speed <60 mm/s, retraction 0.5-1.0 mm @ 20-30 mm/s, dry 55±5C 6-8 h. Density 1.19. Not for the CFS (flexible). Source: https://www.amolen.com/products/tpu-rainbow",
+  "slicer_preset": "AMOLEN Transparent Rainbow TPU 95A @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 80,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": false,
+   "reason": "95A TPU: Creality says flexible filament bends in the CFS tube and causes feed/unload failures; print it from the external spool holder"
+  },
+  "warnings": [
+   "Keep speed under 60 mm/s",
+   "Retraction 0.5–1.0 mm @ 20–30 mm/s",
+   "Dry 55 ± 5 °C for 6–8 h before use",
+   "Translucent: colour shifts along the spool",
+   "Load on the external spool holder, not the CFS; keep speed low and retraction short"
+  ],
+  "colors": [
+   "#ff6ec7",
+   "#ffa64d",
+   "#fff275",
+   "#7ce8a4",
+   "#5ec8ff",
+   "#b68cff"
+  ],
+  "dry": {
+   "temp_c": 55,
+   "hours": 7
+  }
+ },
+ {
+  "id": "amolen-silk-rainbow-pla",
+  "vendor": "AMOLEN",
+  "name": "Silk Rainbow PLA",
+  "type": "PLA",
+  "min_temp": 210,
+  "max_temp": 240,
+  "pressure": 0.04,
+  "rfid": "",
+  "density": 1.24,
+  "notes": "AMOLEN silk multicolour rainbow PLA. Mfr: 210-240C nozzle (205-210 sweet spot), 30-65C bed, dry 55±5C 6-8 h. Source: https://amolen.com/products/amolen-silk-multicolor-rainbow-pla-filamnet-1kg1-75",
+  "slicer_preset": "AMOLEN Silk Rainbow PLA @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 80,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": [
+   "Silk: bed above 65 °C dulls the gloss; slower outer walls shine more"
+  ],
+  "colors": [
+   "#ff4d6d",
+   "#ff9f1c",
+   "#ffe066",
+   "#3ddc84",
+   "#2b8cff",
+   "#b56cff"
+  ],
+  "dry": {
+   "temp_c": 55,
+   "hours": 7
+  }
+ },
+ {
+  "id": "amolen-silk-pla-s-series",
+  "vendor": "AMOLEN",
+  "name": "Silk PLA S-Series",
+  "type": "PLA",
+  "min_temp": 210,
+  "max_temp": 240,
+  "pressure": 0.04,
+  "rfid": "",
+  "density": 1.24,
+  "notes": "AMOLEN fast-colour-change silk PLA. Mfr: 210-240C nozzle, 30-65C bed, speed <200 mm/s. Source: https://www.amolen.com/products/pla-silk-s-series",
+  "slicer_preset": "AMOLEN Silk PLA S-Series @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 80,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": [
+   "Retraction 0.8–1.2 mm @ 25–40 mm/s",
+   "Fast colour change: colour shifts every few metres"
+  ],
+  "dry": {
+   "temp_c": 55,
+   "hours": 7
+  }
+ },
+ {
+  "id": "amolen-glow-pla",
+  "vendor": "AMOLEN",
+  "name": "Glow PLA",
+  "type": "PLA",
+  "min_temp": 210,
+  "max_temp": 230,
+  "pressure": 0.04,
+  "rfid": "",
+  "density": 1.24,
+  "notes": "AMOLEN glow-in-the-dark PLA. Mfr: 210-230C nozzle, 30-65C bed, dry 55±5C 6-8 h. Source: https://www.amolen.com/products/pla-glow",
+  "slicer_preset": "AMOLEN Glow PLA @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 80,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": [
+   "Glow pigment is abrasive: hardened 0.5–0.6 mm nozzle recommended by AMOLEN",
+   "Abrasive (fibre/particle filled): needs a hardened nozzle (the K2 ships with one) and wears it faster"
+  ],
+  "dry": {
+   "temp_c": 55,
+   "hours": 7
+  }
+ },
+ {
+  "id": "sunlu-pla-meta",
+  "vendor": "SUNLU",
+  "name": "PLA Meta",
+  "type": "PLA",
+  "min_temp": 185,
+  "max_temp": 210,
+  "pressure": 0.04,
+  "rfid": "",
+  "density": 1.23,
+  "notes": "SUNLU PLA Meta (high flow, low stringing). Mfr: 185-210C nozzle, 50-65C bed. Source: https://filamentsettings.com/filament/sunlu-pla-meta/",
+  "slicer_preset": "SUNLU PLA Meta @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 80,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "sunlu-silk-pla",
+  "vendor": "SUNLU",
+  "name": "Silk PLA",
+  "type": "PLA",
+  "min_temp": 205,
+  "max_temp": 215,
+  "pressure": 0.04,
+  "rfid": "",
+  "density": 1.24,
+  "notes": "SUNLU silk PLA. Mfr: 205-215C nozzle, 60-80C bed. Source: https://www.sunlu.com/wiki/43",
+  "slicer_preset": "SUNLU Silk PLA @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 80,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": [
+   "Silk: dry sealed at 40–50 °C only (SUNLU), never above 50 °C"
+  ]
+ },
+ {
+  "id": "sunlu-silk-plaplus-rainbow",
+  "vendor": "SUNLU",
+  "name": "Silk PLA+ Rainbow",
+  "type": "PLA",
+  "min_temp": 205,
+  "max_temp": 215,
+  "pressure": 0.04,
+  "rfid": "",
+  "density": 1.24,
+  "notes": "SUNLU silk PLA+ rainbow (colour shifts along the spool). Silk PLA settings: 205-215C nozzle, 60-80C bed. Source: https://www.sunlu.com/wiki/43",
+  "slicer_preset": "SUNLU Silk PLA+ Rainbow @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 80,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": [],
+  "colors": [
+   "#ff5c5c",
+   "#ffb84d",
+   "#ffe66d",
+   "#5be37a",
+   "#4fa3ff",
+   "#c084fc"
+  ]
+ },
+ {
+  "id": "elegoo-silk-pla",
+  "vendor": "ELEGOO",
+  "name": "Silk PLA",
+  "type": "PLA",
+  "min_temp": 190,
+  "max_temp": 230,
+  "pressure": 0.04,
+  "rfid": "",
+  "density": 1.24,
+  "notes": "ELEGOO silk PLA. Mfr: 190-230C nozzle, 35-65C bed. Source: https://us.elegoo.com/products/elegoo-silk-pla-filament-1-75mm-colored-1kg",
+  "slicer_preset": "ELEGOO Silk PLA @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 80,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "elegoo-pla-cf",
+  "vendor": "ELEGOO",
+  "name": "PLA-CF",
+  "type": "PLA-CF",
+  "min_temp": 210,
+  "max_temp": 240,
+  "pressure": 0.04,
+  "rfid": "",
+  "density": 1.27,
+  "notes": "ELEGOO carbon-fibre PLA. Mfr: 210-240C nozzle, 35-65C bed. Source: https://us.elegoo.com/products/pla-cf-filament-1-75mm-black-1kg",
+  "slicer_preset": "ELEGOO PLA-CF @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 0,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": [
+   "Abrasive (fibre/particle filled): needs a hardened nozzle (the K2 ships with one) and wears it faster"
+  ]
+ },
+ {
+  "id": "elegoo-rapid-tpu-95a",
+  "vendor": "ELEGOO",
+  "name": "Rapid TPU 95A",
+  "type": "TPU",
+  "min_temp": 200,
+  "max_temp": 230,
+  "pressure": 0.25,
+  "rfid": "",
+  "density": 1.21,
+  "notes": "ELEGOO Rapid TPU 95A (high speed). Mfr: 200-230C nozzle (220 start), 40-60C bed, dry 70±5C 8 h. Source: https://eu.elegoo.com/en-es/products/rapid-tpu-filament-1-75mm-colored-1kg",
+  "slicer_preset": "ELEGOO Rapid TPU 95A @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 80,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": false,
+   "reason": "flexible filament bends in the CFS tubes and causes feed/unload failures; use the external spool holder (Creality CFS compatibility note)"
+  },
+  "warnings": [
+   "Load on the external spool holder, not the CFS; keep speed low and retraction short"
+  ],
+  "dry": {
+   "temp_c": 70,
+   "hours": 8
+  }
+ },
+ {
+  "id": "overture-matte-pla",
+  "vendor": "Overture",
+  "name": "Matte PLA",
+  "type": "PLA",
+  "min_temp": 190,
+  "max_temp": 230,
+  "pressure": 0.04,
+  "rfid": "",
+  "density": 1.26,
+  "notes": "Overture matte PLA. Mfr: 190-230C nozzle, 50-60C bed; dry PLA at 50C, never above 55C. Source: https://overture3d.com/products/overture-matte-pla",
+  "slicer_preset": "Overture Matte PLA @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 80,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": [],
+  "dry": {
+   "temp_c": 50,
+   "hours": 6
+  }
+ },
+ {
+  "id": "overture-silk-pla",
+  "vendor": "Overture",
+  "name": "Silk PLA",
+  "type": "PLA",
+  "min_temp": 190,
+  "max_temp": 230,
+  "pressure": 0.04,
+  "rfid": "",
+  "density": 1.24,
+  "notes": "Overture silk PLA. Overture PLA profile guide: 190-230C nozzle, 50-60C bed. Source: https://overture3d.com/blogs/overture-blogs/overture-filament-profiles-guide",
+  "slicer_preset": "Overture Silk PLA @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 80,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": [],
+  "dry": {
+   "temp_c": 50,
+   "hours": 6
+  }
+ },
+ {
+  "id": "hatchbox-tpu-95a",
+  "vendor": "Hatchbox",
+  "name": "TPU 95A",
+  "type": "TPU",
+  "min_temp": 190,
+  "max_temp": 235,
+  "pressure": 0.3,
+  "rfid": "",
+  "density": 1.24,
+  "notes": "Hatchbox TPU Shore 95A. Mfr: 190-235C nozzle, ±0.03 mm. Source: https://www.hatchbox3d.com/products/3d-tpu-1kg1-75-blk",
+  "slicer_preset": "Hatchbox TPU 95A @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 80,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": false,
+   "reason": "flexible filament bends in the CFS tubes and causes feed/unload failures; use the external spool holder (Creality CFS compatibility note)"
+  },
+  "warnings": [
+   "Load on the external spool holder, not the CFS; keep speed low and retraction short"
+  ]
+ },
+ {
+  "id": "hatchbox-silk-pla",
+  "vendor": "Hatchbox",
+  "name": "Silk PLA",
+  "type": "PLA",
+  "min_temp": 180,
+  "max_temp": 210,
+  "pressure": 0.04,
+  "rfid": "",
+  "density": 1.24,
+  "notes": "Hatchbox silk PLA. Hatchbox PLA range 180-210C nozzle, 20-60C bed; runs cool, raise temp if under-extruding at speed. Source: https://filamentcheatsheet.com/database/brand/hatchbox/",
+  "slicer_preset": "Hatchbox Silk PLA @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 80,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "inland-tough-pla",
+  "vendor": "Inland",
+  "name": "Tough PLA",
+  "type": "PLA",
+  "min_temp": 210,
+  "max_temp": 230,
+  "pressure": 0.04,
+  "rfid": "",
+  "density": 1.24,
+  "notes": "Inland Tough PLA. Mfr: 210-230C nozzle, 60-80C bed. Source: https://www.microcenter.com/product/692935/inland-175mm-pla-basic-3d-printer-filament-1kg-(22lbs)-cardboard-spool-black",
+  "slicer_preset": "Inland Tough PLA @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 80,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "inland-silk-pla",
+  "vendor": "Inland",
+  "name": "Silk PLA",
+  "type": "PLA",
+  "min_temp": 190,
+  "max_temp": 220,
+  "pressure": 0.04,
+  "rfid": "",
+  "density": 1.24,
+  "notes": "Inland silk PLA. Mfr: 190-220C nozzle, 60-80C bed. Source: https://www.microcenter.com/product/692935/inland-175mm-pla-basic-3d-printer-filament-1kg-(22lbs)-cardboard-spool-black",
+  "slicer_preset": "Inland Silk PLA @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 80,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "anycubic-pla",
+  "vendor": "Anycubic",
+  "name": "PLA",
+  "type": "PLA",
+  "min_temp": 190,
+  "max_temp": 230,
+  "pressure": 0.04,
+  "rfid": "",
+  "density": 1.24,
+  "notes": "Anycubic PLA. Mfr: 190-230C nozzle, 55-65C bed, dry max 50C. Source: https://wiki.anycubic.com/en/filament-and-resin/filament-guide",
+  "slicer_preset": "Anycubic PLA @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 80,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": [],
+  "dry": {
+   "temp_c": 50,
+   "hours": 6
+  }
+ },
+ {
+  "id": "anycubic-high-speed-pla",
+  "vendor": "Anycubic",
+  "name": "High Speed PLA",
+  "type": "PLA",
+  "min_temp": 180,
+  "max_temp": 260,
+  "pressure": 0.04,
+  "rfid": "",
+  "density": 1.24,
+  "notes": "Anycubic High Speed PLA. Mfr: 180-260C by speed band, 45-60C bed. Source: https://store.anycubic.com/products/high-speed-pla-filament",
+  "slicer_preset": "Anycubic High Speed PLA @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 80,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": [
+   "Temperature follows speed: 180–210 °C ≤150 mm/s, 210–230 °C to 300 mm/s, 230–260 °C above"
+  ],
+  "dry": {
+   "temp_c": 50,
+   "hours": 6
+  }
+ },
+ {
+  "id": "anycubic-silk-pla",
+  "vendor": "Anycubic",
+  "name": "Silk PLA",
+  "type": "PLA",
+  "min_temp": 190,
+  "max_temp": 220,
+  "pressure": 0.04,
+  "rfid": "",
+  "density": 1.24,
+  "notes": "Anycubic silk PLA. Mfr: prints around 200C. Source: https://store.anycubic.com/pages/filaments-performance-comparison",
+  "slicer_preset": "Anycubic Silk PLA @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 80,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "anycubic-petg",
+  "vendor": "Anycubic",
+  "name": "PETG",
+  "type": "PETG",
+  "min_temp": 220,
+  "max_temp": 250,
+  "pressure": 0.05,
+  "rfid": "",
+  "density": 1.27,
+  "notes": "Anycubic PETG. Mfr: 220-250C nozzle, 70-80C bed, dry max 65C. Source: https://store.anycubic.com/blogs/3d-printing-guides/petg-vs-pla-filament",
+  "slicer_preset": "Anycubic PETG @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 30,
+   "part_max": 60,
+   "aux": 0,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": [],
+  "dry": {
+   "temp_c": 65,
+   "hours": 6
+  }
+ },
+ {
+  "id": "anycubic-abs",
+  "vendor": "Anycubic",
+  "name": "ABS",
+  "type": "ABS",
+  "min_temp": 240,
+  "max_temp": 280,
+  "pressure": 0.03,
+  "rfid": "",
+  "density": 1.04,
+  "notes": "Anycubic ABS. Mfr: 240-280C nozzle, 90-100C bed, enclosed. Source: https://wiki.anycubic.com/en/filament-and-resin/abs-printing-guide",
+  "slicer_preset": "Anycubic ABS @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 10,
+   "part_max": 60,
+   "aux": 0,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "anycubic-tpu-95a",
+  "vendor": "Anycubic",
+  "name": "TPU 95A",
+  "type": "TPU",
+  "min_temp": 195,
+  "max_temp": 230,
+  "pressure": 0.3,
+  "rfid": "",
+  "density": 1.24,
+  "notes": "Anycubic TPU 95A. Mfr: 195-230C nozzle, 50-60C bed, 50-150 mm/s claimed; start slow on the K2. Source: https://store.anycubic.com/products/tpu-filament",
+  "slicer_preset": "Anycubic TPU 95A @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 80,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": false,
+   "reason": "flexible filament bends in the CFS tubes and causes feed/unload failures; use the external spool holder (Creality CFS compatibility note)"
+  },
+  "warnings": [
+   "Load on the external spool holder, not the CFS; keep speed low and retraction short"
+  ]
+ },
+ {
+  "id": "flashforge-pla",
+  "vendor": "Flashforge",
+  "name": "PLA",
+  "type": "PLA",
+  "min_temp": 180,
+  "max_temp": 230,
+  "pressure": 0.04,
+  "rfid": "",
+  "density": 1.24,
+  "notes": "Flashforge PLA. Mfr: 210C nozzle / 60C bed (range 180-230C). Source: https://www.flashforge.com/blogs/news/pla-bed-temperature-guide",
+  "slicer_preset": "Flashforge PLA @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 80,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "flashforge-petg",
+  "vendor": "Flashforge",
+  "name": "PETG",
+  "type": "PETG",
+  "min_temp": 220,
+  "max_temp": 250,
+  "pressure": 0.05,
+  "rfid": "",
+  "density": 1.23,
+  "notes": "Flashforge PETG. Mfr: 220-250C nozzle, 75-90C bed. Source: https://www.flashforge.com/blogs/news/how-to-use-a-3d-printer-for-different-filaments",
+  "slicer_preset": "Flashforge PETG @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 30,
+   "part_max": 60,
+   "aux": 0,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "flashforge-abs-basic",
+  "vendor": "Flashforge",
+  "name": "ABS Basic",
+  "type": "ABS",
+  "min_temp": 220,
+  "max_temp": 260,
+  "pressure": 0.03,
+  "rfid": "",
+  "density": 1.08,
+  "notes": "Flashforge ABS Basic. Mfr: 220-260C nozzle, 100-110C bed, enclosed. Source: https://www.flashforge.com/blogs/news/abs-print-temperature",
+  "slicer_preset": "Flashforge ABS Basic @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 10,
+   "part_max": 60,
+   "aux": 0,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "bambu-pla-cf",
+  "vendor": "Bambu",
+  "name": "PLA-CF",
+  "type": "PLA-CF",
+  "min_temp": 210,
+  "max_temp": 240,
+  "pressure": 0.04,
+  "rfid": "",
+  "density": 1.22,
+  "notes": "Bambu Lab PLA-CF. Mfr: 210-240C nozzle, 45-65C bed, dry 55C 8 h. Hardened nozzle. Source: https://bambulab.com/en/filament/pla-cf",
+  "slicer_preset": "Bambu PLA-CF @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 0,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": [
+   "Abrasive (fibre/particle filled): needs a hardened nozzle (the K2 ships with one) and wears it faster"
+  ],
+  "dry": {
+   "temp_c": 55,
+   "hours": 8
+  }
+ },
+ {
+  "id": "bambu-petg-cf",
+  "vendor": "Bambu",
+  "name": "PETG-CF",
+  "type": "PETG-CF",
+  "min_temp": 240,
+  "max_temp": 270,
+  "pressure": 0.06,
+  "rfid": "",
+  "density": 1.25,
+  "notes": "Bambu Lab PETG-CF. Mfr: 240-270C nozzle, 60-80C bed, dry 65C 8 h. Hardened nozzle. Source: https://bambulab.com/en-eu/filament/petg-cf",
+  "slicer_preset": "Bambu PETG-CF @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 20,
+   "part_max": 50,
+   "aux": 0,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": [
+   "Abrasive (fibre/particle filled): needs a hardened nozzle (the K2 ships with one) and wears it faster"
+  ],
+  "dry": {
+   "temp_c": 65,
+   "hours": 8
+  }
+ },
+ {
+  "id": "bambu-pa6-cf",
+  "vendor": "Bambu",
+  "name": "PA6-CF",
+  "type": "PA6-CF",
+  "min_temp": 260,
+  "max_temp": 300,
+  "pressure": 0.058,
+  "rfid": "",
+  "density": 1.26,
+  "notes": "Bambu Lab PA6-CF. Mfr: 260-300C nozzle, 100-120C bed, dry 80C 8-12 h. Hardened nozzle. Source: https://bambulab.com/en-us/filament/pa6-cf",
+  "slicer_preset": "Bambu PA6-CF @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 0,
+   "part_max": 20,
+   "aux": 80,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": [
+   "Dry 80 °C 8–12 h before every use; nylon absorbs water within hours",
+   "Chamber as warm as the K2 allows (60 °C)",
+   "Abrasive (fibre/particle filled): needs a hardened nozzle (the K2 ships with one) and wears it faster"
+  ],
+  "dry": {
+   "temp_c": 80,
+   "hours": 10
+  }
+ },
+ {
+  "id": "bambu-paht-cf",
+  "vendor": "Bambu",
+  "name": "PAHT-CF",
+  "type": "PAHT-CF",
+  "min_temp": 260,
+  "max_temp": 300,
+  "pressure": 0.036,
+  "rfid": "",
+  "density": 1.2,
+  "notes": "Bambu Lab PAHT-CF. Mfr: 260-300C nozzle, 100-120C bed, dry 80C 8-12 h. Hardened nozzle. Source: https://bambulab.com/en-us/filament/paht-cf",
+  "slicer_preset": "Bambu PAHT-CF @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 0,
+   "part_max": 20,
+   "aux": 0,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": [
+   "Dry 80 °C 8–12 h before every use",
+   "Abrasive (fibre/particle filled): needs a hardened nozzle (the K2 ships with one) and wears it faster"
+  ],
+  "dry": {
+   "temp_c": 80,
+   "hours": 10
+  }
+ },
+ {
+  "id": "prusament-petg-cf",
+  "vendor": "Prusament",
+  "name": "PETG-CF",
+  "type": "PETG-CF",
+  "min_temp": 240,
+  "max_temp": 260,
+  "pressure": 0.06,
+  "rfid": "",
+  "density": 1.27,
+  "notes": "Prusament PETG-CF. Mfr: 240-260C nozzle, 80-90C bed. Hardened nozzle, 0.2 mm layers or more. Source: https://help.prusa3d.com/article/composite-materials-filled-with-carbon-kevlar-or-glass_167387",
+  "slicer_preset": "Prusament PETG-CF @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 20,
+   "part_max": 50,
+   "aux": 0,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": [
+   "Abrasive (fibre/particle filled): needs a hardened nozzle (the K2 ships with one) and wears it faster"
+  ]
+ },
+ {
+  "id": "ninjatek-cheetah-95a",
+  "vendor": "NinjaTek",
+  "name": "Cheetah 95A",
+  "type": "TPU",
+  "min_temp": 220,
+  "max_temp": 250,
+  "pressure": 0.3,
+  "rfid": "",
+  "density": 1.22,
+  "notes": "NinjaTek Cheetah TPU 95A (fast flexible). Mfr: 220-250C nozzle, bed <=40C. Source: https://ninjatek.com/support/troubleshooting-guide/",
+  "slicer_preset": "NinjaTek Cheetah 95A @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 80,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": false,
+   "reason": "flexible filament bends in the CFS tubes and causes feed/unload failures; use the external spool holder (Creality CFS compatibility note)"
+  },
+  "warnings": [
+   "Bed 40 °C max per NinjaTek",
+   "Minimum 10 % infill",
+   "Load on the external spool holder, not the CFS; keep speed low and retraction short"
+  ]
+ },
+ {
+  "id": "ninjatek-ninjaflex-85a",
+  "vendor": "NinjaTek",
+  "name": "NinjaFlex 85A",
+  "type": "TPU",
+  "min_temp": 225,
+  "max_temp": 235,
+  "pressure": 0.3,
+  "rfid": "",
+  "density": 1.19,
+  "notes": "NinjaTek NinjaFlex 85A. Mfr: 225-235C nozzle, bed <=40C. Too soft for the K2 extruder per Creality's TPU guide. Source: https://3dinsider.com/ninjaflex-filament/",
+  "slicer_preset": "NinjaTek NinjaFlex 85A @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 80,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": false,
+   "reason": "flexible filament; and Creality says TPU of 90A or softer cannot be printed on the K2 at all (the extruder gear flattens it and clogs the nozzle)"
+  },
+  "warnings": [
+   "Creality: 90A or softer TPU is NOT printable on the K2 — expect jams; listed for reference",
+   "Minimum 20 % infill",
+   "Load on the external spool holder, not the CFS; keep speed low and retraction short"
+  ]
+ },
+ {
+  "id": "priline-polycarbonate",
+  "vendor": "PRILINE",
+  "name": "Polycarbonate",
+  "type": "PC",
+  "min_temp": 265,
+  "max_temp": 280,
+  "pressure": 0.03,
+  "rfid": "",
+  "density": 1.2,
+  "notes": "PRILINE PC. Community tuning: 265-280C nozzle (275-280 for layer fusion), 100/110C bed, glue. Source: https://ncbob.com/bobsblog/2020/8/16/printing-with-priline-carbon-fiber-polycarbonate",
+  "slicer_preset": "PRILINE Polycarbonate @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 0,
+   "part_max": 15,
+   "aux": 0,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": [
+   "Dry 20 h at 70 °C (158 °F) when new; wet PC strings and pops",
+   "Bed 100 °C first layer, 110 °C after",
+   "Abrasive (fibre/particle filled): needs a hardened nozzle (the K2 ships with one) and wears it faster"
+  ],
+  "dry": {
+   "temp_c": 70,
+   "hours": 20
+  }
+ },
+ {
+  "id": "priline-carbon-fiber-polycarbonate",
+  "vendor": "PRILINE",
+  "name": "Carbon Fiber Polycarbonate",
+  "type": "PC-CF",
+  "min_temp": 265,
+  "max_temp": 280,
+  "pressure": 0.03,
+  "rfid": "",
+  "density": 1.22,
+  "notes": "PRILINE 20% carbon-fibre PC. Community tuning: 265-280C nozzle, 100/110C bed, hardened nozzle. Source: https://ncbob.com/bobsblog/2020/8/16/printing-with-priline-carbon-fiber-polycarbonate",
+  "slicer_preset": "PRILINE Carbon Fiber Polycarbonate @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 0,
+   "part_max": 15,
+   "aux": 0,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": [
+   "Dry 20 h at 70 °C (158 °F) when new",
+   "Abrasive (fibre/particle filled): needs a hardened nozzle (the K2 ships with one) and wears it faster"
+  ],
+  "dry": {
+   "temp_c": 70,
+   "hours": 20
+  }
+ },
+ {
+  "id": "geeetech-pla",
+  "vendor": "Geeetech",
+  "name": "PLA",
+  "type": "PLA",
+  "min_temp": 190,
+  "max_temp": 220,
+  "pressure": 0.04,
+  "rfid": "",
+  "density": 1.24,
+  "notes": "Geeetech PLA. Mfr: 190-220C nozzle, 40-60C bed. Source: https://www.geeetech.com/geeetech-pla-sand-gold-175mm-1kg-per-roll-pla-filament-p-1280.html",
+  "slicer_preset": "Geeetech PLA @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 80,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "geeetech-silk-pla",
+  "vendor": "Geeetech",
+  "name": "Silk PLA",
+  "type": "PLA",
+  "min_temp": 200,
+  "max_temp": 230,
+  "pressure": 0.04,
+  "rfid": "",
+  "density": 1.24,
+  "notes": "Geeetech silk PLA. Mfr: 200-230C nozzle, 40-60C bed. Source: https://www.geeetech.com/geeetech-silk-black-pla-175mm-1kgroll-p-1266.html",
+  "slicer_preset": "Geeetech Silk PLA @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 80,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "geeetech-matte-pla",
+  "vendor": "Geeetech",
+  "name": "Matte PLA",
+  "type": "PLA",
+  "min_temp": 190,
+  "max_temp": 220,
+  "pressure": 0.04,
+  "rfid": "",
+  "density": 1.24,
+  "notes": "Geeetech matte PLA. Mfr: 190-220C nozzle, 50-70C bed. Source: https://www.geeetech.com/products/pla-matte-3d-printer-filament-1-75mm-1kg-roll",
+  "slicer_preset": "Geeetech Matte PLA @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 80,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "jayo-pla",
+  "vendor": "JAYO",
+  "name": "PLA",
+  "type": "PLA",
+  "min_temp": 200,
+  "max_temp": 230,
+  "pressure": 0.04,
+  "rfid": "",
+  "density": 1.24,
+  "notes": "JAYO PLA. Mfr: 200-230C nozzle, 50-65C bed. Source: https://jayo3d.com/products/5kg-large-spool-pla-pla-and-pla-matte-3d-printer-filament",
+  "slicer_preset": "JAYO PLA @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 80,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "jayo-plaplus",
+  "vendor": "JAYO",
+  "name": "PLA+",
+  "type": "PLA",
+  "min_temp": 210,
+  "max_temp": 235,
+  "pressure": 0.04,
+  "rfid": "",
+  "density": 1.24,
+  "notes": "JAYO PLA+. Mfr: 210-235C nozzle, 55-65C bed. Source: https://www.amazon.com/Filament-JAYO-1-75mm-Plus-1-1kg/dp/B0BJ1DWCG2",
+  "slicer_preset": "JAYO PLA+ @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 80,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "jayo-petg",
+  "vendor": "JAYO",
+  "name": "PETG",
+  "type": "PETG",
+  "min_temp": 220,
+  "max_temp": 230,
+  "pressure": 0.05,
+  "rfid": "",
+  "density": 1.23,
+  "notes": "JAYO PETG. Mfr: 220-230C nozzle, 60-70C bed. Source: https://jayo3d.com/",
+  "slicer_preset": "JAYO PETG @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 30,
+   "part_max": 60,
+   "aux": 0,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "tinmorry-pla",
+  "vendor": "TINMORRY",
+  "name": "PLA",
+  "type": "PLA",
+  "min_temp": 195,
+  "max_temp": 225,
+  "pressure": 0.04,
+  "rfid": "",
+  "density": 1.24,
+  "notes": "TINMORRY PLA. Mfr: 195-225C nozzle, 60-75C bed. Source: https://tinmorry.net/en-us/products/pla-filament-1-75mm-1kg-tinmorry-tangle-free-3d-printing-materials-for-3d-printer-1-spool-signal-white",
+  "slicer_preset": "TINMORRY PLA @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 80,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "tinmorry-silk-pla",
+  "vendor": "TINMORRY",
+  "name": "Silk PLA",
+  "type": "PLA",
+  "min_temp": 195,
+  "max_temp": 225,
+  "pressure": 0.04,
+  "rfid": "",
+  "density": 1.24,
+  "notes": "TINMORRY silk PLA. Mfr: 195-225C nozzle, 50-60C bed. Source: https://tinmorry.net/en-us/products/filament-1-75-pla-tinmorry-pla-filament-1-75-mm-filament-3d-druckmaterialien-1-kg-1-spool-silk-bronze",
+  "slicer_preset": "TINMORRY Silk PLA @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 80,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "tinmorry-petg",
+  "vendor": "TINMORRY",
+  "name": "PETG",
+  "type": "PETG",
+  "min_temp": 230,
+  "max_temp": 260,
+  "pressure": 0.05,
+  "rfid": "",
+  "density": 1.23,
+  "notes": "TINMORRY PETG / Rapid PETG-Eco. Mfr: 230-260C nozzle, 75-90C bed. Source: https://tinmorry.net/en-us/products/petg-filament-1-75mm-tinmorry-improved-petg-eco-3d-printing-materials-compatible-with-bambu-fdm-3d-printer-1-kg-1-spool-black",
+  "slicer_preset": "TINMORRY PETG @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 30,
+   "part_max": 60,
+   "aux": 0,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "tinmorry-petg-galaxy",
+  "vendor": "TINMORRY",
+  "name": "PETG Galaxy",
+  "type": "PETG",
+  "min_temp": 235,
+  "max_temp": 245,
+  "pressure": 0.05,
+  "rfid": "",
+  "density": 1.23,
+  "notes": "TINMORRY PETG Galaxy (sparkle). Mfr: 235-245C nozzle, 70-85C bed. Source: https://tinmorry.com/product/petg/petg-galaxy/",
+  "slicer_preset": "TINMORRY PETG Galaxy @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 30,
+   "part_max": 60,
+   "aux": 0,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": [
+   "Abrasive (fibre/particle filled): needs a hardened nozzle (the K2 ships with one) and wears it faster"
+  ]
+ },
+ {
+  "id": "iiid-max-high-speed-plaplus",
+  "vendor": "IIID MAX",
+  "name": "High Speed PLA+",
+  "type": "PLA",
+  "min_temp": 190,
+  "max_temp": 230,
+  "pressure": 0.04,
+  "rfid": "",
+  "density": 1.24,
+  "notes": "IIID MAX High Speed PLA+ (made in USA). Mfr: 190-230C nozzle, 50-70C bed, up to 300 mm/s. Source: https://iiidmax.com/products/iiid-max-high-speed-pla",
+  "slicer_preset": "IIID MAX High Speed PLA+ @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 80,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "duramic-petg",
+  "vendor": "DURAMIC",
+  "name": "PETG",
+  "type": "PETG",
+  "min_temp": 230,
+  "max_temp": 250,
+  "pressure": 0.05,
+  "rfid": "",
+  "density": 1.23,
+  "notes": "DURAMIC 3D PETG. Mfr: 240±10C nozzle, 70-80C bed. Source: https://duramic3d.com/products/duramic-3d-petg-filament",
+  "slicer_preset": "DURAMIC PETG @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 30,
+   "part_max": 60,
+   "aux": 0,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "duramic-tpu-95a",
+  "vendor": "DURAMIC",
+  "name": "TPU 95A",
+  "type": "TPU",
+  "min_temp": 210,
+  "max_temp": 230,
+  "pressure": 0.3,
+  "rfid": "",
+  "density": 1.24,
+  "notes": "DURAMIC 3D TPU 95A. Mfr: 220±10C nozzle, 25-60C bed, 20-40 mm/s. Source: https://duramic3d.com/collections/tpu",
+  "slicer_preset": "DURAMIC TPU 95A @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 80,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": false,
+   "reason": "flexible filament bends in the CFS tubes and causes feed/unload failures; use the external spool holder (Creality CFS compatibility note)"
+  },
+  "warnings": [
+   "Mfr speed 20–40 mm/s",
+   "Load on the external spool holder, not the CFS; keep speed low and retraction short"
+  ]
+ },
+ {
+  "id": "3d-solutech-pla",
+  "vendor": "3D Solutech",
+  "name": "PLA",
+  "type": "PLA",
+  "min_temp": 190,
+  "max_temp": 210,
+  "pressure": 0.04,
+  "rfid": "",
+  "density": 1.24,
+  "notes": "3D Solutech PLA. Mfr: 190-210C nozzle (no heated bed needed; 50-60C works). Source: https://www.printlog3d.com/library/pla/3d-solutech-pla-standard",
+  "slicer_preset": "3D Solutech PLA @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 80,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "matterhackers-pro-series-petg",
+  "vendor": "MatterHackers",
+  "name": "PRO Series PETG",
+  "type": "PETG",
+  "min_temp": 230,
+  "max_temp": 245,
+  "pressure": 0.05,
+  "rfid": "",
+  "density": 1.23,
+  "notes": "MatterHackers PRO Series PETG. Mfr: 230-245C nozzle, 65-80C bed. Source: https://www.matterhackers.com/3d-printer-filament-compare",
+  "slicer_preset": "MatterHackers PRO Series PETG @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 30,
+   "part_max": 60,
+   "aux": 0,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "matterhackers-pro-series-tpu",
+  "vendor": "MatterHackers",
+  "name": "PRO Series TPU",
+  "type": "TPU",
+  "min_temp": 220,
+  "max_temp": 240,
+  "pressure": 0.3,
+  "rfid": "",
+  "density": 1.24,
+  "notes": "MatterHackers PRO Series TPU. Mfr: 220-240C nozzle. Source: https://www.matterhackers.com/3d-printer-filament-compare",
+  "slicer_preset": "MatterHackers PRO Series TPU @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 80,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": false,
+   "reason": "flexible filament bends in the CFS tubes and causes feed/unload failures; use the external spool holder (Creality CFS compatibility note)"
+  },
+  "warnings": [
+   "Load on the external spool holder, not the CFS; keep speed low and retraction short"
+  ]
+ },
+ {
+  "id": "kingroon-petg-basic",
+  "vendor": "Kingroon",
+  "name": "PETG Basic",
+  "type": "PETG",
+  "min_temp": 210,
+  "max_temp": 230,
+  "pressure": 0.05,
+  "rfid": "",
+  "density": 1.23,
+  "notes": "Kingroon PETG Basic. TDS: 210-230C nozzle (230 recommended), 65-80C bed. Source: https://3d.nice-cdn.com/upload/file/KINGROON_PETG_Basic_Technical_Data_Sheet_V1.0.pdf",
+  "slicer_preset": "Kingroon PETG Basic @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 30,
+   "part_max": 60,
+   "aux": 0,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "eryone-pla-cf",
+  "vendor": "Eryone",
+  "name": "PLA-CF",
+  "type": "PLA-CF",
+  "min_temp": 190,
+  "max_temp": 220,
+  "pressure": 0.04,
+  "rfid": "",
+  "density": 1.27,
+  "notes": "Eryone PLA carbon fibre. Mfr: 190-220C nozzle, 60-70C bed. Source: https://eryone3d.com/products/pla-carbon-fiber-filament",
+  "slicer_preset": "Eryone PLA-CF @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 0,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": [
+   "Abrasive (fibre/particle filled): needs a hardened nozzle (the K2 ships with one) and wears it faster"
+  ]
+ },
+ {
+  "id": "eryone-petg",
+  "vendor": "Eryone",
+  "name": "PETG",
+  "type": "PETG",
+  "min_temp": 215,
+  "max_temp": 230,
+  "pressure": 0.05,
+  "rfid": "",
+  "density": 1.23,
+  "notes": "Eryone PETG. Mfr: 215-230C nozzle, 80-100C bed. Source: https://eryone3d.com/products/petg",
+  "slicer_preset": "Eryone PETG @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 30,
+   "part_max": 60,
+   "aux": 0,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": []
+ },
+ {
+  "id": "ttyt3d-silk-rainbow-pla",
+  "vendor": "TTYT3D",
+  "name": "Silk Rainbow PLA",
+  "type": "PLA",
+  "min_temp": 215,
+  "max_temp": 230,
+  "pressure": 0.04,
+  "rfid": "",
+  "density": 1.24,
+  "notes": "TTYT3D silk rainbow PLA. Mfr: 220C nozzle (220-230 works), 50-60C bed, 0.4 mm+ nozzle. Source: https://www.amazon.com/ask/questions/Tx24HECPNDROGWH/",
+  "slicer_preset": "TTYT3D Silk Rainbow PLA @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 80,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": [
+   "Silk rainbow: slower speeds, gentle retraction, more infill (TTYT3D)"
+  ],
+  "colors": [
+   "#ff5470",
+   "#ff9e3d",
+   "#ffe45c",
+   "#4bd67f",
+   "#3b9dff",
+   "#a86bff"
+  ]
+ },
+ {
+  "id": "protopasta-htpla",
+  "vendor": "Protopasta",
+  "name": "HTPLA",
+  "type": "PLA",
+  "min_temp": 210,
+  "max_temp": 230,
+  "pressure": 0.04,
+  "rfid": "",
+  "density": 1.24,
+  "notes": "Protopasta HTPLA. Mfr: 210-230C nozzle, 50-60C bed. Source: https://proto-pasta.com/pages/getting-started-with-proto-pasta-plas",
+  "slicer_preset": "Protopasta HTPLA @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 80,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": [
+   "Anneal after printing for the high-temp properties"
+  ]
+ },
+ {
+  "id": "protopasta-carbon-fiber-htpla",
+  "vendor": "Protopasta",
+  "name": "Carbon Fiber HTPLA",
+  "type": "PLA-CF",
+  "min_temp": 210,
+  "max_temp": 255,
+  "pressure": 0.04,
+  "rfid": "",
+  "density": 1.27,
+  "notes": "Protopasta carbon fibre HTPLA. Mfr tuning: 210-230 nominal, 240-255C on E3D-style hotends. Source: https://proto-pasta.com/blogs/how-to/tuning-for-carbon-fiber-htpla-on-your-prusa-mk3-or-other-3d-printer",
+  "slicer_preset": "Protopasta Carbon Fiber HTPLA @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 0,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": [
+   "Protopasta: hot first layer (up to 255 °C) avoids start-up jams, then ~240 °C",
+   "Anneal for heat resistance",
+   "Abrasive (fibre/particle filled): needs a hardened nozzle (the K2 ships with one) and wears it faster"
+  ]
+ },
+ {
+  "id": "sainsmart-tpu-95a",
+  "vendor": "SainSmart",
+  "name": "TPU 95A",
+  "type": "TPU",
+  "min_temp": 200,
+  "max_temp": 220,
+  "pressure": 0.3,
+  "rfid": "",
+  "density": 1.24,
+  "notes": "SainSmart flexible TPU 95A. Mfr: 200-220C nozzle, 30-55C bed, <=20-30 mm/s, dry 55C 4 h+. Source: https://www.sainsmart.com/products/all-colors-tpu-flexible-filament-1-75mm-0-8kg-1-76lb",
+  "slicer_preset": "SainSmart TPU 95A @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 100,
+   "part_max": 100,
+   "aux": 80,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": false,
+   "reason": "flexible filament bends in the CFS tubes and causes feed/unload failures; use the external spool holder (Creality CFS compatibility note)"
+  },
+  "warnings": [
+   "SainSmart: 15–30 mm/s, direct-drive dual gear extruder",
+   "Load on the external spool holder, not the CFS; keep speed low and retraction short"
+  ],
+  "dry": {
+   "temp_c": 55,
+   "hours": 4
+  }
+ },
+ {
+  "id": "siraya-tech-fibreheart-ppa-cf",
+  "vendor": "Siraya Tech",
+  "name": "Fibreheart PPA-CF",
+  "type": "PPA-CF",
+  "min_temp": 280,
+  "max_temp": 300,
+  "pressure": 0.036,
+  "rfid": "",
+  "density": 1.25,
+  "notes": "Siraya Tech Fibreheart PPA-CF (15% CF high-temp nylon). Mfr: 280-320C nozzle, bed from 80C, dry 100C 4-6 h. Source: https://siraya.tech/pages/siraya-tech-fibreheart-ppa-cf-filament-user-manual",
+  "slicer_preset": "Siraya Tech Fibreheart PPA-CF @Creality K2 0.4 nozzle",
+  "fans": {
+   "part_min": 0,
+   "part_max": 20,
+   "aux": 0,
+   "exhaust": 60
+  },
+  "cfs": {
+   "ok": true,
+   "reason": ""
+  },
+  "warnings": [
+   "Mfr range 280–320 °C; the K2 hotend stops at 300 °C",
+   "Dry 100 °C 4–6 h if it has taken on moisture; store below 15 % RH",
+   "Hardened nozzle, 0.4 mm or larger",
+   "Abrasive (fibre/particle filled): needs a hardened nozzle (the K2 ships with one) and wears it faster"
+  ],
+  "dry": {
+   "temp_c": 100,
+   "hours": 5
+  }
+ }
+]

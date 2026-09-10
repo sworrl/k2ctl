@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=K2 tray
+Comment=Creality K2 status, filament slot swaps, webcam and sensors in the system tray
+Exec=k2ctl-tray
+Icon=k2ctl
+Terminal=false
+Categories=Utility;
+X-KDE-autostart-after=panel

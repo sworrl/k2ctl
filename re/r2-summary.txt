@@ -1,0 +1,4 @@
+r_config_set: variable 'bin.relocs.apply' not found
+r_config_set: variable 'bin.relocs.apply' not found
+r_config_set: variable 'bin.relocs.apply' not found
+[2KCannot find basic block for switch case at 0x000c8ff4 bbdelta = 16

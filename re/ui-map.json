@@ -1,0 +1,2811 @@
+{
+ "lvgl/demos/widgets/lv_demo_widgets.c": {
+  "images": [],
+  "texts": [
+   "LVGL v8",
+   "Widgets demo",
+   "Profile",
+   "Analytics",
+   "Elena Smith",
+   "This is a short description of me. Take a look at my profile!",
+   "Log out",
+   "Invite",
+   "Your profile",
+   "User name",
+   "Your name",
+   "Password",
+   "Min. 8 chars.",
+   "Gender",
+   "Female",
+   "Birthday",
+   "Your skills",
+   "Experience",
+   "Team player",
+   "Hard-working",
+   "Unique visitors",
+   "Monthly revenue",
+   "Monthly Target",
+   "Tablet: ",
+   "Desktop: ",
+   "Sessions",
+   "Mobile: ",
+   "Normal Speed",
+   "Low speed",
+   "Network Speed",
+   "High Speed",
+   "Monthly Summary",
+   "Top products",
+   "Clothes",
+   "Blue jeans",
+   "Notification",
+   "Item purchased",
+   "New connection",
+   "New subscriber",
+   "New message"
+  ],
+  "formats": [
+   "Sales: 44%",
+   "Revenue: 63%",
+   "Costs: 58%",
+   " 17% growth this week",
+   "%02d.%02d.%d",
+   "Revenue: %d %%",
+   "Sales: %d %%",
+   "Costs: %d %%",
+   "Desktop: %u",
+   "Tablet: %u",
+   "Mobile: %u"
+  ]
+ },
+ "lvgl/src/draw/lv_draw_transform.c": {
+  "images": [],
+  "texts": [
+   "NULL pointer"
+  ],
+  "formats": [
+   "Asserted at expression: %s (%s)"
+  ]
+ },
+ "lvgl/src/draw/sw/lv_draw_sw_layer.c": {
+  "images": [],
+  "texts": [],
+  "formats": []
+ },
+ "lvgl/src/draw/sw/lv_draw_sw_blend.c": {
+  "images": [],
+  "texts": [],
+  "formats": []
+ },
+ "lvgl/src/draw/sw/lv_draw_sw_rect.c": {
+  "images": [],
+  "texts": [
+   "Couldn't read the background image"
+  ],
+  "formats": []
+ },
+ "lvgl/src/draw/sw/lv_draw_sw_gradient.c": {
+  "images": [],
+  "texts": [
+   "Out of memory",
+   "Faild to allcoate item for teh gradient"
+  ],
+  "formats": [
+   "Asserted at expression: %s (%s)",
+   "Asserted at expression: %s"
+  ]
+ },
+ "lvgl/src/draw/sw/lv_draw_sw_letter.c": {
+  "images": [],
+  "texts": [],
+  "formats": [
+   "lv_draw_letter: glyph dsc. not found for U+%X"
+  ]
+ },
+ "lvgl/src/draw/lv_draw_label.c": {
+  "images": [],
+  "texts": [],
+  "formats": []
+ },
+ "lvgl/src/draw/lv_img_cache.c": {
+  "images": [],
+  "texts": [
+   "Image draw cannot open the image resource"
+  ],
+  "formats": []
+ },
+ "lvgl/src/draw/lv_draw_img.c": {
+  "images": [],
+  "texts": [
+   "Image draw: src is NULL",
+   "Image draw error",
+   "Image draw can't read the line"
+  ],
+  "formats": []
+ },
+ "lvgl/src/draw/lv_draw_mask.c": {
+  "images": [],
+  "texts": [
+   "Unexpected start angle",
+   "Unexpected end angle",
+   "Out of memory"
+  ],
+  "formats": [
+   "Asserted at expression: %s (%s)"
+  ]
+ },
+ "lvgl/src/draw/lv_img_decoder.c": {
+  "images": [],
+  "texts": [
+   "Out of memory",
+   "Image get info get read file header",
+   "Image get info found unknown src type",
+   "Built-in image decoder can't open the file",
+   "Image decoder open: unknown color format",
+   "Built-in image decoder read not supports the color format",
+   "Built-in image decoder seek failed",
+   "Built-in image decoder read failed"
+  ],
+  "formats": [
+   "Asserted at expression: %s (%s)"
+  ]
+ },
+ "lvgl/src/draw/lv_draw_layer.c": {
+  "images": [],
+  "texts": [
+   "Out of memory",
+   "Couldn't allocate a new layer context"
+  ],
+  "formats": [
+   "Asserted at expression: %s (%s)"
+  ]
+ },
+ "lvgl/src/draw/lv_img_buf.c": {
+  "images": [],
+  "texts": [],
+  "formats": []
+ },
+ "lvgl/src/extra/libs/png/lv_png.c": {
+  "images": [],
+  "texts": [
+   "LodePNG",
+   "NLEN is not ones complement of LEN in a deflate block",
+   "FDICT encountered in zlib header while it's not used for PNG",
+   "PNG file is smaller than a PNG header",
+   "PNG file must have PLTE chunk if color type is palette",
+   "ICC profile unreasonably large"
+  ],
+  "formats": [
+   "error %u: %s"
+  ]
+ },
+ "lvgl/src/extra/libs/freetype/lv_freetype.c": {
+  "images": [],
+  "texts": [
+   "Failed to open cache manager",
+   "Failed to open Cmap Cache",
+   "Failed to open image cache",
+   "Failed to LookupSize"
+  ],
+  "formats": [
+   "init freeType error(%d)",
+   "FT_New_Face error:%d",
+   "name_in_names_del error(not find:%p).",
+   "%,3:;4-&",
+   "%14)1>,"
+  ]
+ },
+ "lvgl/src/extra/libs/qrcode/lv_qrcode.c": {
+  "images": [],
+  "texts": [
+   "Out of memory"
+  ],
+  "formats": [
+   "Asserted at expression: %s (%s)",
+   "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ $%*+-./:",
+   "!#%&(+-/1",
+   " #%(*-0369<?BFJMQ"
+  ]
+ },
+ "lvgl/src/extra/libs/qrcode/qrcodegen.c": {
+  "images": [],
+  "texts": [],
+  "formats": [
+   "bitLen % 8 == 0"
+  ]
+ },
+ "lvgl/src/extra/libs/gif/lv_gif.c": {
+  "images": [],
+  "texts": [
+   "Could't load the source"
+  ],
+  "formats": []
+ },
+ "lvgl/src/extra/libs/gif/gifdec.c": {
+  "images": [],
+  "texts": [
+   "NETSCAPE"
+  ],
+  "formats": [
+   "unknown extension: %02X"
+  ]
+ },
+ "lvgl/src/extra/others/monkey/lv_monkey.c": {
+  "images": [],
+  "texts": [
+   "Out of memory",
+   "NULL pointer"
+  ],
+  "formats": [
+   "Asserted at expression: %s (%s)"
+  ]
+ },
+ "lvgl/src/extra/widgets/msgbox/lv_msgbox.c": {
+  "images": [],
+  "texts": [
+   "Out of memory"
+  ],
+  "formats": [
+   "Asserted at expression: %s (%s)"
+  ]
+ },
+ "lvgl/src/extra/widgets/span/lv_span.c": {
+  "images": [],
+  "texts": [
+   "Out of memory"
+  ],
+  "formats": [
+   "Asserted at expression: %s (%s)"
+  ]
+ },
+ "lvgl/src/extra/widgets/menu/lv_menu.c": {
+  "images": [],
+  "texts": [
+   "Out of memory"
+  ],
+  "formats": [
+   "Asserted at expression: %s (%s)"
+  ]
+ },
+ "lvgl/src/extra/widgets/tileview/lv_tileview.c": {
+  "images": [],
+  "texts": [],
+  "formats": [
+   "No tile found with at (%d,%d) index"
+  ]
+ },
+ "lvgl/src/extra/widgets/chart/lv_chart.c": {
+  "images": [],
+  "texts": [
+   "Out of memory",
+   "NULL pointer"
+  ],
+  "formats": [
+   "Asserted at expression: %s (%s)",
+   "Invalid axis: %d",
+   "Invalid index: %d"
+  ]
+ },
+ "lvgl/src/extra/widgets/meter/lv_meter.c": {
+  "images": [],
+  "texts": [
+   "Out of memory",
+   "January",
+   "February",
+   "August",
+   "September",
+   "October",
+   "November",
+   "December"
+  ],
+  "formats": [
+   "Asserted at expression: %s (%s)"
+  ]
+ },
+ "lvgl/src/extra/widgets/calendar/lv_calendar.c": {
+  "images": [],
+  "texts": [
+   "NULL pointer"
+  ],
+  "formats": [
+   "Asserted at expression: %s (%s)"
+  ]
+ },
+ "lvgl/src/extra/layouts/flex/lv_flex.c": {
+  "images": [],
+  "texts": [
+   "Out of memory"
+  ],
+  "formats": [
+   "Asserted at expression: %s (%s)",
+   "Asserted at expression: %s"
+  ]
+ },
+ "lvgl/src/hal/lv_hal_indev.c": {
+  "images": [],
+  "texts": [
+   "Out of memory",
+   "NULL pointer"
+  ],
+  "formats": [
+   "Asserted at expression: %s (%s)",
+   "Asserted at expression: %s"
+  ]
+ },
+ "lvgl/src/hal/lv_hal_disp.c": {
+  "images": [],
+  "texts": [
+   "Out of memory"
+  ],
+  "formats": [
+   "Asserted at expression: %s (%s)"
+  ]
+ },
+ "lvgl/src/widgets/lv_dropdown.c": {
+  "images": [],
+  "texts": [
+   "NULL pointer",
+   "Out of memory",
+   "Option 1",
+   "Option 2",
+   "Option 3"
+  ],
+  "formats": [
+   "Asserted at expression: %s (%s)",
+   "dropdown option cnt: %d, option_index : %d"
+  ]
+ },
+ "lvgl/src/widgets/lv_arc.c": {
+  "images": [],
+  "texts": [
+   "NULL pointer"
+  ],
+  "formats": [
+   "Asserted at expression: %s (%s)",
+   "Invalid mode: %d"
+  ]
+ },
+ "lvgl/src/widgets/lv_textarea.c": {
+  "images": [],
+  "texts": [
+   "Out of memory",
+   "NULL pointer"
+  ],
+  "formats": [
+   "Asserted at expression: %s (%s)"
+  ]
+ },
+ "lvgl/src/widgets/lv_btnmatrix.c": {
+  "images": [],
+  "texts": [
+   "Out of memory"
+  ],
+  "formats": [
+   "Asserted at expression: %s (%s)"
+  ]
+ },
+ "lvgl/src/widgets/lv_img.c": {
+  "images": [],
+  "texts": [
+   "Out of memory"
+  ],
+  "formats": [
+   "Asserted at expression: %s (%s)"
+  ]
+ },
+ "lvgl/src/widgets/lv_canvas.c": {
+  "images": [],
+  "texts": [
+   "NULL pointer",
+   "Out of memory"
+  ],
+  "formats": [
+   "Asserted at expression: %s (%s)"
+  ]
+ },
+ "lvgl/src/widgets/lv_label.c": {
+  "images": [],
+  "texts": [
+   "Out of memory",
+   "NULL pointer",
+   "Check box"
+  ],
+  "formats": [
+   "Asserted at expression: %s (%s)",
+   "-------alloc text :%s , len is %ld"
+  ]
+ },
+ "lvgl/src/widgets/lv_table.c": {
+  "images": [],
+  "texts": [
+   "NULL pointer",
+   "Out of memory"
+  ],
+  "formats": [
+   "Asserted at expression: %s (%s)"
+  ]
+ },
+ "lvgl/src/widgets/lv_roller.c": {
+  "images": [],
+  "texts": [
+   "NULL pointer",
+   "Option 1",
+   "Option 2",
+   "Option 3",
+   "Option 4",
+   "Option 5",
+   "DDDDDDA",
+   "DDDDDDDDA",
+   "DDDDDDDDD",
+   "DDDDDDB",
+   "TDDDDE",
+   "DDDDDDDDDDDD0",
+   "DDDDDDDDDDJ"
+  ],
+  "formats": [
+   "Asserted at expression: %s (%s)",
+   "%%&'()*+"
+  ]
+ },
+ "lvgl/src/font/lv_font.c": {
+  "images": [],
+  "texts": [
+   "NULL pointer",
+   "Vfffffb",
+   "UUUUUUR",
+   "UUUUUZ",
+   "EUUUUUUUUUUUT",
+   "DDDDDDDDDDDD0"
+  ],
+  "formats": [
+   "Asserted at expression: %s (%s)",
+   "%%&'()*+"
+  ]
+ },
+ "lvgl/src/font/lv_font_loader.c": {
+  "images": [],
+  "texts": [],
+  "formats": [
+   "Error loading font file: %s",
+   "Error reading '%s' label.",
+   "Unknown cmaps format type %d.",
+   "Unknown index_to_loc_format: %d.",
+   "Unknown kern_format_type: %d"
+  ]
+ },
+ "lvgl/src/font/lv_font_fmt_txt.c": {
+  "images": [],
+  "texts": [
+   "DDDDDDDDA",
+   "Gwwwwwwwwwwwwb",
+   "GwwwwwwwwwQ",
+   "DDDDDDC",
+   "Wwwwwwt",
+   "DDDDDDDC",
+   "Vfffffffa",
+   "PVfffffP",
+   "DDDDDDDDD ",
+   "DDDDDDD0",
+   "DDDDD0",
+   "DDDDDDDDD",
+   "DDDDDDDE",
+   "DDDDDD ",
+   "DDDDBO",
+   "DDDDDO",
+   "DDDDDA",
+   "DDDDDDD",
+   "DDDDDD1",
+   "DDDDDE",
+   "DDDDDDDDDDD",
+   "DDDDDC",
+   "DDDDDDDDDDDDB",
+   "DDDDDDDDDDDDD0"
+  ],
+  "formats": [
+   "%%&'()*+"
+  ]
+ },
+ "lvgl/src/core/lv_obj_tree.c": {
+  "images": [],
+  "texts": [
+   "Can't set the parent of a screen",
+   "No screen found"
+  ],
+  "formats": []
+ },
+ "lvgl/src/core/lv_disp.c": {
+  "images": [],
+  "texts": [],
+  "formats": []
+ },
+ "lvgl/src/core/lv_event.c": {
+  "images": [],
+  "texts": [
+   "Out of memory",
+   "Not interpreted with this event code"
+  ],
+  "formats": [
+   "Asserted at expression: %s (%s)"
+  ]
+ },
+ "lvgl/src/core/lv_indev.c": {
+  "images": [],
+  "texts": [],
+  "formats": [
+   "X is %d which is smaller than zero",
+   "X is %d which is greater than hor. res",
+   "Y is %d which is smaller than zero",
+   "Y is %d which is greater than ver. res"
+  ]
+ },
+ "lvgl/src/core/lv_obj_style.c": {
+  "images": [],
+  "texts": [
+   "Out of memory"
+  ],
+  "formats": [
+   "Asserted at expression: %s (%s)"
+  ]
+ },
+ "lvgl/src/core/lv_obj_pos.c": {
+  "images": [],
+  "texts": [
+   "Out of memory"
+  ],
+  "formats": [
+   "Asserted at expression: %s (%s)"
+  ]
+ },
+ "lvgl/src/core/lv_obj.c": {
+  "images": [],
+  "texts": [
+   "Out of memory"
+  ],
+  "formats": [
+   "Asserted at expression: %s (%s)"
+  ]
+ },
+ "lvgl/src/core/lv_refr.c": {
+  "images": [],
+  "texts": [
+   "Can't draw the background image",
+   "Unhandled intermediate layer type",
+   "Couldn't create a new layer context"
+  ],
+  "formats": []
+ },
+ "lvgl/src/core/lv_group.c": {
+  "images": [],
+  "texts": [
+   "Out of memory"
+  ],
+  "formats": [
+   "Asserted at expression: %s (%s)"
+  ]
+ },
+ "lvgl/src/core/lv_obj_class.c": {
+  "images": [],
+  "texts": [
+   "No display created yet. No place to assign the new screen"
+  ],
+  "formats": []
+ },
+ "lvgl/src/misc/lv_timer.c": {
+  "images": [],
+  "texts": [
+   "Out of memory"
+  ],
+  "formats": [
+   "Asserted at expression: %s (%s)"
+  ]
+ },
+ "lvgl/src/misc/lv_anim_timeline.c": {
+  "images": [],
+  "texts": [
+   "Out of memory",
+   "NULL pointer"
+  ],
+  "formats": [
+   "Asserted at expression: %s (%s)"
+  ]
+ },
+ "lvgl/src/misc/lv_anim.c": {
+  "images": [],
+  "texts": [
+   "Out of memory"
+  ],
+  "formats": [
+   "Asserted at expression: %s (%s)"
+  ]
+ },
+ "lvgl/src/misc/lv_style.c": {
+  "images": [],
+  "texts": [
+   "Cannot reset const style",
+   "No more custom property IDs available",
+   "Unable to allocate space for custom property lookup table",
+   "NULL pointer",
+   "Cannot remove prop from const style",
+   "Cannot set property of constant style"
+  ],
+  "formats": [
+   "Asserted at expression: %s (%s)"
+  ]
+ },
+ "lvgl/src/misc/lv_mem.c": {
+  "images": [],
+  "texts": [],
+  "formats": [
+   "Asserted at expression: %s (%s)"
+  ]
+ },
+ "lvgl/src/misc/lv_color.c": {
+  "images": [],
+  "texts": [],
+  "formats": [
+   "Invalid palette: %d",
+   "Invalid level: %d. Must be 1..5",
+   "Invalid level: %d. Must be 1..4"
+  ]
+ },
+ "lvgl/src/misc/lv_txt.c": {
+  "images": [],
+  "texts": [
+   "Out of memory"
+  ],
+  "formats": [
+   "Asserted at expression: %s (%s)"
+  ]
+ },
+ "lvgl/src/misc/lv_fs.c": {
+  "images": [],
+  "texts": [
+   "Can't open file: path is NULL",
+   "Out of memory"
+  ],
+  "formats": [
+   "Can't open file (%s): unknown driver letter",
+   "Can't open file (%s): driver not ready",
+   "Can't open file (%s): open function not exists",
+   "Asserted at expression: %s (%s)"
+  ]
+ },
+ "lvgl/src/misc/lv_lru.c": {
+  "images": [],
+  "texts": [
+   "LRU Cache unable to create cache object",
+   "LRU Cache unable to create cache hash table",
+   "NULL pointer",
+   "ManagerTest"
+  ],
+  "formats": [
+   "Asserted at expression: %s (%s)",
+   "A[%s]\t(%d.%03d, +%d)\t %s: %pV \t(in %s line #%d)",
+   "!!H#l%",
+   "ui cmd %0x, data %s, is set %d"
+  ]
+ },
+ "custom/lvgl_cmd.c": {
+  "images": [],
+  "texts": [],
+  "formats": [
+   "E%c%.3f F%d",
+   "X%.3f F%d",
+   "Y%.3f F%d",
+   "Z%.3f F%d",
+   "11\t%d\t%c",
+   "21\t%d\t%c",
+   "n%s\t%s\t0",
+   "clear maintenance item : %s",
+   "4%d\t%d",
+   "3%d\t%d\t%d\t%d",
+   "6%d\t%d\t%d\t%d",
+   "5%d\t%d",
+   "10\t%c\t2",
+   "10\tC\t%d",
+   "10\t%d\t%d",
+   "10\tD\t%d",
+   "11\t%03d\t%03d",
+   "21\t%03d\t%03d",
+   "31\t%03d\t%03d",
+   "cfs usb upgrade %s",
+   "cfs ota upgrade %s",
+   "10\tD\t%c"
+  ]
+ },
+ "custom/mystyle.c": {
+  "images": [],
+  "texts": [],
+  "formats": [
+   "start set_print_file_name %p"
+  ]
+ },
+ "custom/lvgl_horizontal_screen_interface.c": {
+  "images": [],
+  "texts": [],
+  "formats": [
+   "start set_filling_chart_info %p",
+   "cur path is 3mf : %d",
+   "real file num %d",
+   "-----cur loading %d, last loading %d",
+   "%s : %d%%",
+   "file count : %d"
+  ]
+ },
+ "custom/commu_thread.c": {
+  "images": [],
+  "texts": [
+   "Analytical data Error"
+  ],
+  "formats": [
+   "\t%s\t%s",
+   "powerloss filename:%s,state:%d",
+   "PreparePrint content:%s",
+   "local disk : %d, sub dir : %d, change gcodeChangeFlag: %s",
+   "printStepsCount: %s",
+   "printStepindex: %s",
+   "data error, i:%d",
+   "result %s,%s,%s,%s,%s,%s,%s,%s, %d.",
+   "%s\t%s\t%s\t%s\t%s\t%s\t%s",
+   "refresh material_seneor %c",
+   "refresh motor_loss_state: %d",
+   "light value:%d",
+   "FilamentSensor state:%d",
+   "refresh the CheckUpdataFlag state:%d",
+   "the ServerOption value:%d",
+   "the AgreePrivacyPolicy value:%d",
+   "the IsAgreeSharePicture value:%d",
+   "wifi state:%c, name: %s, ip: %s, level: %s",
+   "wire_net state:%c, ip: %s, gateway: %s, subnet_mask:%s, dns: %s",
+   "the print_state change:%d",
+   "%s,%s,%s,%d,%d,%d",
+   "faq_qrcode:%s",
+   "errorcode:%s,k1_errorcode:%s,error msg:%s",
+   "------upgrade cfs %x",
+   "----------upgrade cfs %0x",
+   "----------upgrade cfs count %d",
+   "---------last upgrade cfs %0x, cfs_index %d",
+   "--------linux ota has new %d, setting flag %d, check Version %d",
+   "take camera state:model camer%d,nozzle camera%d.",
+   "cxyusername:%s, userid:%s, imgsrc:%s",
+   "%s\t%s\t%s\t%s",
+   "fan speed throat :%d, board:%d, model:%d, chamber:%d",
+   "system_state Fanfeedback:%d",
+   "system_state Laser_state:%d",
+   "system_state Mqtt_state:%d",
+   "belt mdl info : %s",
+   "belt mdlx:%s, belt mdly:%s",
+   "bed adjust z last result : %s",
+   "cut_posx : %s",
+   "cut_state : %s"
+  ]
+ },
+ "custom/custom.c": {
+  "images": [
+   "img_qrcode_tips.png",
+   "img_refresh.png",
+   "ui_img_dir_up.png",
+   "img_new_binding_user_mask.png"
+  ],
+  "texts": [
+   "UI init open the screen light",
+   "Monkey test completed",
+   "Monkey test",
+   "Monkey test already running"
+  ],
+  "formats": [
+   "reportStr; len = %d, str = %s",
+   "%s/%s/%s/%s",
+   "Monkey config file not found: %s",
+   "Invalid monkey test configuration: duration=%d, min=%d, max=%d",
+   "S:%s/%s"
+  ]
+ },
+ "k1_horizontal_ui/ui_Screen_SelftestDevicebinding.c": {
+  "images": [
+   "img_ver_check_failed.png"
+  ],
+  "texts": [
+   "Load SelftestDevice bingding page",
+   "Load cloud user information,Device bingding page"
+  ],
+  "formats": [
+   "Change the Serveroptions:%d",
+   "UserImg file path: %s",
+   "UserImg width: %d,height:%d, scale:%d",
+   "UserImg width: %d,height:%d",
+   "selftestdevicepage Change Server Option:%d",
+   "https://qr.creality.com/scan-code?n=%s&e=%d",
+   "S:%s/%s"
+  ]
+ },
+ "k1_horizontal_ui/ui_Screen_SelftestVersionCheck.c": {
+  "images": [
+   "img_version_check_success.png"
+  ],
+  "texts": [],
+  "formats": [
+   "%.2fMB",
+   "selftest download flag:%d,upgrade_progress:%s."
+  ]
+ },
+ "k1_horizontal_ui/ui_screen_PrintHome.c": {
+  "images": [
+   "img_new_wifi_low.png",
+   "img_new_camera.png",
+   "img_auto_drying.png",
+   "img_small_default_user_avatar.png",
+   "img_home_user_mask.png",
+   "img_new_exclude_objects.png",
+   "img_new_stop.png",
+   "img_new_resume.png",
+   "img_new_hotend.png",
+   "img_new_bed.png",
+   "img_new_chamber.png",
+   "img_new_light.png",
+   "print_proccess_mask.png",
+   "img_new_wifi_high.png",
+   "img_new_wifi_mid.png",
+   "img_new_pause.png"
+  ],
+  "texts": [
+   "Creality"
+  ],
+  "formats": [
+   "S:%s/%s",
+   "%s #%x %d~%d#",
+   "-------light state : %d",
+   "refresh RetryType: %d, RetryResult: %d",
+   "-%dh%02dm",
+   "set print file: %s",
+   "set print chart: %s",
+   "%dh%02dm",
+   "end print, print_time:%s",
+   "end print, used_fila_buff:%s",
+   "end print, imgsrc:%s",
+   "print_home_set_filament_runout klipperPrint=%d",
+   "low temp fila: %d",
+   "%d x CFS",
+   "setting Load cloud user information,reslut: %d",
+   "print proc step %d, value %d, name %s",
+   "print proc step index %d"
+  ]
+ },
+ "k1_horizontal_ui/ui_Screen_Settings.c": {
+  "images": [
+   "ui_img_dir_down.png",
+   "Visible.png",
+   "img_new_account_mask.png",
+   "img_qrcode_tips.png",
+   "img_refresh.png",
+   "ui_img_dir_up.png",
+   "NotVisible.png",
+   "wifi_state_1.png",
+   "wifi_state_2.png",
+   "wifi_state_3.png",
+   "wifi_state_4.png",
+   "state_normal.png",
+   "lock.png"
+  ],
+  "texts": [
+   "Option 1",
+   "Option 2",
+   "Option 3",
+   "Option 4"
+  ],
+  "formats": [
+   "S:%s/%s",
+   "light value down, current lightvalue:%d",
+   "light value up, current lightvalue:%d",
+   "screen_save_value set %d",
+   "setting Change the Serveroptions:%d",
+   "cloud server area mqttstate %d",
+   "exportlog page:machine state is print %d,don't start the print",
+   "resetmachine page:machine state is print %d,don't start the print",
+   "hidden the msgbox,%p",
+   "cur wifi ptr %p",
+   "cur wifi ptr %p, last wifi ptr %p",
+   "keyboard input id: %d",
+   "wifi name : %s, wifi type : %d",
+   "0\t%s\t%s",
+   "get data : %s",
+   "explain the wifi data error,result count:%d",
+   "wifi name : %s, type: %s, dis: %s, encryption_type: %s",
+   "refresh lightvalue is %d",
+   "Voiceflag state:%d",
+   "setting get user info reslut: %d",
+   "UserImg path: %s",
+   "Img width: %d,height:%d, scale:%d",
+   "Img width: %d,height:%d",
+   "setting Change Server Option:%d",
+   "setting device qrcode info:%s %s",
+   "https://qr.creality.com/scan-code?n=%s&e=%d",
+   "network state bits %0x"
+  ]
+ },
+ "k1_horizontal_ui/ui_custom_reminderbox.c": {
+  "images": [
+   "state_normal.png"
+  ],
+  "texts": [],
+  "formats": [
+   "S:%s/%s"
+  ]
+ },
+ "k1_horizontal_ui/ui_Screen_MachinePrintRecordsTest.c": {
+  "images": [
+   "state_error.png",
+   "layers.png"
+  ],
+  "texts": [
+   "PrintRecords",
+   "FLUIDD",
+   "YYY.864",
+   "HHH IFC",
+   "KKKzIII",
+   "SSSVUUU",
+   "VVVGdcc",
+   "CCCLZZZ",
+   "JEE0IFC",
+   "HHH JEC",
+   "IDBpIEC",
+   "JEE0IEC",
+   "HHH IEC",
+   "ICCPIEC",
+   "IECoIEC",
+   "JDDOIEC",
+   "JEE0IEB",
+   "IEE?JBB",
+   "SMDyox",
+   "K4hMQO",
+   "PPP QQS",
+   "PPP QQR",
+   "PPP RRS",
+   "PPP PPR",
+   "HHH IDB",
+   "HHH JFC",
+   "IECoIDC",
+   "JEE0JEC",
+   "IDBpJEC",
+   "IEE?HDC",
+   "JEE0IECoHDC",
+   "IECoJEE0",
+   "JEE0IECoIDC",
+   "IEE?HDB",
+   "SNLoRNL",
+   "RMM8RNL",
+   "TNKXRNL",
+   "PPH RNL",
+   "SOKGRNL",
+   "RRM8RNL"
+  ],
+  "formats": [
+   "#17CC5F %s#",
+   "#FF1030 %s#",
+   "#FFD15B %s#",
+   "print records test result %0x",
+   "print records img width: %d,height:%d, scale:%d",
+   "print records img width: %d,height:%d",
+   "%dh%0dm",
+   "%d/%02d/%02d %02d:%02d",
+   "%!!!'*(&",
+   "][[h\"\"\"%",
+   "``Y%aWS",
+   "g``%hb\\Xj_Z",
+   "g``%i_[",
+   "g``%j_[",
+   "g``%g`]JjaZqk_Z",
+   "jaZqg`]Jg``%UUU",
+   "g``%m`YMh^^zk_\\",
+   "|uu%xss3|ttD{uuU}xxfwsqxyut",
+   "F'''4*%%7,((:1--?0,,E00,K///Q411X633_722f944l:86r;97y;99",
+   "R'\"\"4%%%7+'';-($?1-)D0--J2//Q2//W611^644c777k866q:88w;99~<::",
+   "yE\t%x+!}R",
+   "%%;M]A",
+   "%[o%II",
+   "vBm8.g%",
+   "%&Jxc!<",
+   "%$Q=Dzu",
+   "gUVAH%",
+   "j_Jf%q",
+   "Rif%k\"V",
+   " m(\"%5",
+   "`0( `2( `2(#`5*%`8*(`8-(`5*(`8-(`5*(`,",
+   ")$>w&\"Ar%",
+   ",%6LdZ_^",
+   "%%%0&$#",
+   "%%\"`&$#",
+   "((( &%#",
+   "((( %$\"",
+   "###P&%#",
+   "(   '%\"o'$#",
+   "...2777%@88 B::"
+  ]
+ },
+ "k1_horizontal_ui/ui_Screen_ExcludeObject.c": {
+  "images": [],
+  "texts": [
+   "Ask users to confirm again"
+  ],
+  "formats": [
+   "polygonCount number:%d",
+   "----------create item : %p, index %d",
+   "-------start cur item %d, state : %d",
+   "-------end cur item %d, state : %d",
+   "-------item %d, state : %d",
+   "----------------exclude objs : %p",
+   "item %d, state : %d",
+   "get obj count is :%d",
+   "get count is change :%d",
+   "last exclueObjects count:%d",
+   "lv_mem_alloc length: %d",
+   "singeObjectName lenth is too long:%s",
+   "singeObjectName centerX:%d, singeObjectName centerY:%d",
+   "temppolygonCount:%d",
+   "1exclueObjects polygon address:%p",
+   "2exclueObjects polygon address:%p",
+   "the filter polygonCount : %d",
+   "exclude Objects Name:%s",
+   "current_object Name:%s",
+   "exclude Objects count change,refresh the page: old count %d, new count %d",
+   ":%d, name : %s",
+   "%s %d/%d"
+  ]
+ },
+ "k1_horizontal_ui/ui_custom_messagebox.c": {
+  "images": [],
+  "texts": [],
+  "formats": [
+   "Selected radio buttons: %d",
+   "ExpertOffsetAdd offset_z = %f !!"
+  ]
+ },
+ "k1_horizontal_ui/ui_screen_ExpertZoffset.c": {
+  "images": [
+   "zoffset_Add_Disable.png",
+   "zoffset_Add_Normal.png",
+   "zoffset_Sub_Normal.png",
+   "zoffset_Sub_Disable.png",
+   "zoffset_Add_Focus.png",
+   "zoffset_Sub_Focus.png"
+  ],
+  "texts": [],
+  "formats": [
+   "ExpertOffsetSub offset_z = %f !!",
+   "%.3fmm",
+   "S:%s/%s",
+   "expert_set_offset_z offset_z = %f !!",
+   "number:%d"
+  ]
+ },
+ "k1_horizontal_ui/ui_Screen_RootPolicy.c": {
+  "images": [],
+  "texts": [],
+  "formats": [
+   "touch %s",
+   "%s(%ds)"
+  ]
+ },
+ "k1_horizontal_ui/ui_custom_print_opt_screen.c": {
+  "images": [
+   "udiskicon.png"
+  ],
+  "texts": [],
+  "formats": [
+   "S:%s/%s",
+   "can't upload log, because the print_state:%d "
+  ]
+ },
+ "k1_horizontal_ui/ui_Screen_Exportlog.c": {
+  "images": [],
+  "texts": [],
+  "formats": [
+   "refresh the exprot log ,state is %d, process: %d.",
+   "%s : %d%%",
+   "can't upload log, because the print_state:%d "
+  ]
+ },
+ "k1_horizontal_ui/ui_Screen_CustomerService.c": {
+  "images": [
+   "warningTips.png",
+   "errorTips.png",
+   "TilteLeftstyle.png",
+   "TitleRightstyle.png",
+   "uploadtips.png",
+   "localexporttips.png"
+  ],
+  "texts": [],
+  "formats": [
+   "S:%s/%s",
+   "text value:%s levelvalue:%d, errorcode:%d, content:%s",
+   "-----------custom service get error title string res:%d, title : %s, error : %d",
+   "wiki is:%s",
+   "%d\t%d\t%s\t%s",
+   "---------width : %d",
+   "%.1fmm",
+   "Enter was pressed. The current text is: %s",
+   "fault code Size = %d",
+   "%d/%02d/%02d %02d:%02d:%02d",
+   "refresh the compressed log ,process is %d.",
+   "%s : %d%%",
+   "refresh the upload log ,state is %d.",
+   "production sn = %s",
+   "%s%d/%d/%02d %02d:%02d",
+   "TimePath = %s",
+   "----cur nozzle dia index %d",
+   "------select color %0x, index %d"
+  ]
+ },
+ "k1_horizontal_ui/ui_screen_material_info.c": {
+  "images": [],
+  "texts": [
+   "Creality",
+   "Generic",
+   "PLA-CF",
+   "Hyper-PLA",
+   "CR-PLA",
+   "CR-PLA Carbon"
+  ],
+  "formats": [
+   "-------------finish create color table %p",
+   "-----brand dropdown changed get selected str : %s",
+   "-----brand dropdown changed get name selected str : %s",
+   "-----type dropdown changed get name selected str : %s",
+   "-----name dropdown changed get selected str : %s",
+   "%s #%x %d~%d#",
+   "--------get select str -> brand string : %s, type string : %s, name : %s",
+   "--------mater brand %s, type %s, name %s",
+   "%d/%02d/%02d %02d:%02d",
+   "%dm%02ds",
+   "delay vedio img width: %d,height:%d, scale:%d"
+  ]
+ },
+ "k1_horizontal_ui/ui_custom_vedioinfo_part.c": {
+  "images": [],
+  "texts": [],
+  "formats": [
+   "delay vedio img width: %d,height:%d"
+  ]
+ },
+ "k1_horizontal_ui/ui_Screen_SelftestNetwork.c": {
+  "images": [
+   "state_normal.png",
+   "lock.png"
+  ],
+  "texts": [],
+  "formats": [
+   "get data : %s",
+   "explain the wifi data error,result count:%d",
+   "wifi name : %s, type : %s, dis : %s, encryption_type : %s",
+   "S:%s/%s"
+  ]
+ },
+ "k1_horizontal_ui/ui_screen_multi_color_common.c": {
+  "images": [],
+  "texts": [
+   "Material",
+   "Abnormality in obtaining consumables information"
+  ],
+  "formats": [
+   "  path = %s, name = %s,uiMater = %p",
+   "infoObj = %p",
+   "resultObj = %p",
+   "countObj = %p",
+   "listObj = %p",
+   "mInfo= %p,mJson= %p,mbox = %p",
+   "get %d box info in UI, failed",
+   "mJson= %p,mInfo= %p",
+   "buff= %p",
+   "mbox= %p",
+   " getMaterTypeOptionsFromFile: brand = %p,type = %p,name = %p,size = %d",
+   " getMaterTypeOptionsFromFile: brand = %p,type = %p,size = %d",
+   " getBrandOptionsFromFile: brand = %p,size = %d",
+   "root= %p",
+   "optionsObj = %p",
+   "mJson= %p",
+   "set Clipper Cmd:%s"
+  ]
+ },
+ "k1_horizontal_ui/ui_Screen_MachineCFSModeSwitch.c": {
+  "images": [],
+  "texts": [],
+  "formats": []
+ },
+ "k1_horizontal_ui/ui_Screen_MachineBeltMdl.c": {
+  "images": [
+   "belt_init.png",
+   "belt_dir.png",
+   "belt_install_right_tool.png",
+   "belt_uninstall_right_tool.png",
+   "belt_install_left_tool.png",
+   "belt_uninstall_left_tool.png",
+   "state_normal.png"
+  ],
+  "texts": [],
+  "formats": [
+   "belt y result btn text %s",
+   "belt y result btn real text %s",
+   "belt x result btn text %s",
+   "belt x result btn real text %s",
+   "belt setting btn real text %s",
+   "belt y tension value real text %s",
+   "belt x tension value real text %s",
+   "belt note ui_Label_BeltNoteTips real text %s",
+   "#FFDE5B %s#;",
+   "belt note ui_Label_BeltNoteContent1 real text %s",
+   "belt note ui_Label_BeltNoteContent2 real text %s",
+   "S:%s/%s",
+   "belt x zero btn real text %s",
+   "belt ui_Label_Belt_Right_Install real text %s",
+   "belt x install label real text %s",
+   "belt x end btn real text %s",
+   "-------belt test init home xy, homing flag : %d",
+   "-------belt test init home z, homing flag : %d",
+   "mdlx : %s, mdly : %s",
+   "-----------belt_test_all X: %0x, Y: %0x",
+   ": #17CC5F %s #",
+   "RefreshBeltMdlTension belt x tension value real text %s",
+   ": #108020 %s (",
+   ": #FF1030 %s (",
+   "RefreshBeltMdlTension belt y tension value real text %s",
+   "-------belt test home finished, homing flag : %d",
+   "#108020 %s#",
+   "#FF1030 %s#",
+   "#FFD15B %s#",
+   "history page:machine state is print %d,don't start the print"
+  ]
+ },
+ "k1_horizontal_ui/ui_custom_print_history_part.c": {
+  "images": [
+   "state_error.png",
+   "SortIcon.png",
+   "SortSelect.png"
+  ],
+  "texts": [],
+  "formats": [
+   "%dh%0dm",
+   "%d/%02d/%02d %02d:%02d",
+   "S:%s/%s",
+   "10\t%d\t0",
+   "copy file index:%d,%d"
+  ]
+ },
+ "k1_horizontal_ui/ui_screen_SubDir.c": {
+  "images": [
+   "SortDownUnSelect.png",
+   "SortDownSelect.png",
+   "SortUpSelect.png",
+   "K1C_Machine.png",
+   "K1_Machine.png",
+   "img_test_tip_k2plus_machine.png"
+  ],
+  "texts": [
+   "Change the file sort option"
+  ],
+  "formats": [
+   "copy file:%s",
+   "key is %d",
+   "deleta file index:%d,%d",
+   "deleta file:%s",
+   "sudir files count : %d",
+   "%d%02d%02d %02d:%02d",
+   "sortmodeSubD is illegal:%c",
+   "S:%s/%s",
+   "--------------tip machine %s"
+  ]
+ },
+ "k1_horizontal_ui/ui_Screen_SelftestTips.c": {
+  "images": [
+   "img_test_tip_f028_machine.png",
+   "img_test_tip_Z2_machine.png",
+   "img_test_tip_k2_machine.png",
+   "img_test_tip_GS04_machine.png",
+   "img_test_tip_k2pro_machine.png",
+   "img_test_tip_k2_s1_mchine.png",
+   "K1MAX_Machine.png"
+  ],
+  "texts": [
+   "UTC-12:00",
+   "UTC-11:00 ",
+   "UTC-10:00",
+   "UTC-9:30",
+   "UTC-9:00",
+   "UTC-8:00",
+   "UTC-7:00",
+   "UTC-6:00",
+   "UTC-5:00",
+   "UTC-4:00",
+   "UTC-3:30",
+   "UTC-3:00",
+   "UTC-2:00",
+   "UTC-1:00",
+   "GMT - ",
+   "CHAST "
+  ],
+  "formats": [
+   "timezone_value index: %d"
+  ]
+ },
+ "k1_horizontal_ui/ui_Screen_TimezoneSettings.c": {
+  "images": [],
+  "texts": [],
+  "formats": [
+   "timezone_txt:%s",
+   "timezone successful match, the content:%s",
+   "timezone match failed, the content:%s"
+  ]
+ },
+ "k1_horizontal_ui/ui_Screen_VersionCheck.c": {
+  "images": [],
+  "texts": [
+   "K2 Pro",
+   "K2 Plus"
+  ],
+  "formats": [
+   "updateversion page:machine state is print %d,don't start the print",
+   "-------------ota upgrade %0x, cfs index %d",
+   "-----------box info %p",
+   "can't UpdateVersion, because the print_state:%d "
+  ]
+ },
+ "k1_horizontal_ui/ui_Screen_Updateversion.c": {
+  "images": [],
+  "texts": [],
+  "formats": [
+   "---------oldver %p, new ver %p",
+   "oldversion:%s,newversion:%s",
+   "curVersionInt:%d",
+   "newVersionInt:%d",
+   "baseVersionInt:%d",
+   "upgrade cfs %0x, com %0x",
+   "upgrade cfs com %0x, !upgrade cfs %0x, cur cfs id com :%0x",
+   "------------ota cfs id %d, upgrade cfs %d",
+   "--------cfs ota upgrade cfs id com : %0x",
+   "---------start cancel upgrade %p",
+   "---------upgrade btn label %p",
+   "---------upgrade btn text ptr %p",
+   "enter the updatepage,mode :%d",
+   "download flag:%d,upgrade_progress:%s.",
+   "cfs download flag:%d,upgrade_progress:%s.",
+   "%.2fMB",
+   "-----------cfs result %d",
+   "-------upgrade_set_klipper_state_after_usb_upgrade_cfs starting: %d, klipper %d",
+   "--------cfs usb upgrade %d, version %s",
+   "------------------update_version_update_cfs_version_string cfs id com : %d",
+   "------------------update_version_update_ota_cfs_version_string cfs id com : %d",
+   "checkself timer userdata:%s"
+  ]
+ },
+ "k1_horizontal_ui/ui_Screen_SelftestAll.c": {
+  "images": [
+   "K1_CheckTips.png",
+   "K1Max_Checktips.png",
+   "K2Plus_Checktips.png",
+   "img_f028_Checktips.png",
+   "K2_Checktips.png",
+   "K2Pro_Checktips.png",
+   "img_k2_s1_check_tips.png",
+   "selfchecking_0.png",
+   "selfchecking_1.png",
+   "selfchecking_2.png",
+   "selfchecking_3.png",
+   "state_normal.png"
+  ],
+  "texts": [
+   "NULL pointer",
+   "M190 R60"
+  ],
+  "formats": [
+   "S:%s/%s",
+   "currenrcheck process change:%d",
+   "delete singlecheck obj,name:%s",
+   "Asserted at expression: %s (%s)",
+   "start singlecheck :%d",
+   "-----start bed temper test, type %d, bed cur temp : %d",
+   "M140 S%d",
+   "----------send f021 bed adjust cmd : %s",
+   "end singlecheck :%d",
+   "manual check:%d"
+  ]
+ },
+ "k1_horizontal_ui/ui_Screen_MachineBeltAutoTension.c": {
+  "images": [],
+  "texts": [
+   "BeltAutoTension"
+  ],
+  "formats": [
+   "----------camera detect btn result text %s",
+   "----------camera test start btn real text %s",
+   "----------camera test result label real text %s",
+   "#17CC5F %s#",
+   "#FF1030 %s#",
+   "#FFD15B %s#",
+   ": #17CC5F %s#",
+   ": #FF1030 %s#",
+   "set IR image %s"
+  ]
+ },
+ "k1_horizontal_ui/ui_Screen_LaserTest.c": {
+  "images": [],
+  "texts": [
+   "LaserIrImage2"
+  ],
+  "formats": [
+   "set laser calibration %s",
+   "set laser xy calibration result %s"
+  ]
+ },
+ "k1_horizontal_ui/ui_screen_ExpertHotPid.c": {
+  "images": [
+   "nuzzle.png",
+   "wait.png",
+   "TilteLeftstyle.png",
+   "TitleRightstyle.png"
+  ],
+  "texts": [],
+  "formats": [
+   "curTargetTempVal = %d",
+   "the print_state:%d ,unable to hotend pid",
+   "S:%s/%s",
+   "--------hot pid cur state %d, proccess %d",
+   "%d / %d",
+   "17\t%03d",
+   "change chart_file_index,cur chart_file_index:%d"
+  ]
+ },
+ "k1_horizontal_ui/ui_screen_Preview.c": {
+  "images": [
+   "gcode_weight_flag.png",
+   "gcode_weight_dir_flag.png",
+   "hotendicon.png",
+   "bedicon.png",
+   "auto_refill_prev_page.png",
+   "auto_refill_next_page.png"
+  ],
+  "texts": [],
+  "formats": [
+   "load preview page, is3mf %d",
+   "unload preview page, is 3mf %d",
+   "S:%s/%s",
+   "material_seneor state: %c",
+   "preview page:machine state is print %d,don't start the print",
+   "--------res %0x",
+   ": channel=%s, need=%dg, available=%dg",
+   "the filament type is %s.",
+   "%s:%d%%",
+   "setgcodeindex_3mf index:%d",
+   "set printform: %d",
+   "set current path is 3mf state:%d",
+   "change the preview filename:%s",
+   "change the preview totle_time:%dmin"
+  ]
+ },
+ "k1_horizontal_ui/ui_Screen_MachineCleanNozzle.c": {
+  "images": [
+   "img_clean_nozzle_heating.png",
+   "img_clean_nozzle_dir.png",
+   "img_clean_nozzle_cooling.png"
+  ],
+  "texts": [
+   "CleanNozzle",
+   "EEPROM",
+   "COOLFAN"
+  ],
+  "formats": [
+   "#42BDD8 %s#%s",
+   "%s#17CC5F %s#%s",
+   "S:%s/%s",
+   "-----start fila in clean_testted_step : %d",
+   "-----start clean_testted_step : %d",
+   "-----end clean_testted_step : %d",
+   "#108020 %s#",
+   "#FF1030 %s#",
+   "#FFD15B %s#",
+   "----index : %d, state : %d"
+  ]
+ },
+ "k1_horizontal_ui/ui_Screen_FactoryTest.c": {
+  "images": [],
+  "texts": [
+   "ZB-GY3"
+  ],
+  "formats": [
+   "reportStr; len = %d, str = %s",
+   "cmd=%s len=%d",
+   "set screen brightness = %d",
+   "set screen brightness = %s",
+   "eeprom wirte cmd = %s",
+   "eeprom read cmd = %s",
+   "resBuf=%s",
+   "factory test wifi get data : %s",
+   "factory test wifi single wifi data : %s,%d",
+   "factory test wifi explain the wifi data error,result count:%d",
+   "factory test wifi single wifi name : %s",
+   "factory test wifi single wifi type : %s",
+   "factory test wifi single wifi dis : %s",
+   "rs485 item test clicked data:%c",
+   "fw_version = %s",
+   "hw_version = %s",
+   "model = %d",
+   "device_sn = %d",
+   "device_mac = %d",
+   "%s %.1fGB"
+  ]
+ },
+ "k1_horizontal_ui/ui_screen_consumable_parts_replacement.c": {
+  "images": [],
+  "texts": [],
+  "formats": [
+   "the path %s"
+  ]
+ },
+ "k1_horizontal_ui/ui_Screen_SelftestCompleted.c": {
+  "images": [],
+  "texts": [],
+  "formats": [
+   "z position:%f",
+   "Z%.0f F%s",
+   "number:%d",
+   "tempbuff:%s"
+  ]
+ },
+ "k1_horizontal_ui/ui_Screen_MachineRFID_Test.c": {
+  "images": [],
+  "texts": [],
+  "formats": [
+   "%d/%02d/%02d %02d:%02d",
+   "#17CC5F %s#",
+   "#FF1030 %s#",
+   "#FFD15B %s#"
+  ]
+ },
+ "k1_horizontal_ui/ui_screen_cfs_consumable_parts_replacement.c": {
+  "images": [],
+  "texts": [],
+  "formats": [
+   "---------ai detection flag %d"
+  ]
+ },
+ "k1_horizontal_ui/ui_screen_DetectionAI.c": {
+  "images": [
+   "img_warn.png"
+  ],
+  "texts": [
+   "AI pause print mode open",
+   "AI pause print mode close",
+   "AI mode change"
+  ],
+  "formats": [
+   "---------first layer detection flag %d",
+   "---------flowcalibration detection flag %d",
+   "---------flowpercentcalibration detection flag %d",
+   "close the msgbox,the state:%d",
+   "S:%s/%s"
+  ]
+ },
+ "k1_horizontal_ui/ui_Screen_BedMeshAdjust.c": {
+  "images": [],
+  "texts": [],
+  "formats": [
+   "bed mesh method select %d",
+   "create_bed_mesh fail!!! count=%d",
+   "level point count error:%d",
+   "levelcount=%d ",
+   "refresh the bed mesh data:%s",
+   "single level data : %s,count: %d",
+   "level point count:%d",
+   "bed mesh count=%d",
+   "singlepoint:%s,point:%d",
+   "data=%s len=%d",
+   "index=%d",
+   "point=%s"
+  ]
+ },
+ "k1_horizontal_ui/ui_screen_Adjustment.c": {
+  "images": [],
+  "texts": [],
+  "formats": [
+   "%s #%x %d-%d#",
+   "%s #%x %d~%d#",
+   "------------cur page %d"
+  ]
+ },
+ "k1_horizontal_ui/ui_Screen_ExpertMode.c": {
+  "images": [],
+  "texts": [],
+  "formats": [
+   "print state:%d, %d"
+  ]
+ },
+ "k1_horizontal_ui/ui_Screen_MachineCutDubug.c": {
+  "images": [],
+  "texts": [
+   "Cutter"
+  ],
+  "formats": [
+   "-----------cut debug pass btn : %s ",
+   "-----------cut debug fail button : %s ",
+   "-----------cut setting button real text : %s ",
+   "-----------cut bebug running button real text : %s ",
+   "-----------cut bebug x pos lebel real text : %s ",
+   "-----------cut bebug running btn real text : %s ",
+   "-----------cut result prompt real text : %s ",
+   "-----------cut running retry btn real text : %s ",
+   " #  %s",
+   "RefreshCutcalibrateState:%d",
+   ": %.1f (",
+   " %.1f)",
+   "cut posX : %f",
+   ": #17CC5F %.1f # (",
+   ": #17CC5F %s #",
+   ": #BD1F30 %.1f # (",
+   ": #BD1F30 %s #",
+   "cut state isActive : %d",
+   "#108020 %s#",
+   "#FF1030 %s#",
+   "#FFD15B %s#",
+   "laser version=%s"
+  ]
+ },
+ "k1_horizontal_ui/ui_Screen_MachineMcuVersion.c": {
+  "images": [],
+  "texts": [
+   "Motors",
+   "MotorXYZ",
+   "McuVer"
+  ],
+  "formats": [
+   "mcu0 version=%s",
+   "----mcu0 version label real text %s",
+   "noz0 version=%s",
+   "----noz0 version label real text %s",
+   "extrude version=%s",
+   "----extrude version label real text %s",
+   "motorsVerStr = %s, motorsAddrStr = %s",
+   "#FFFFFF %s ##17CC5F  %s#",
+   "----motors_xyz version %d result label real text %s",
+   "beltsVerStr = %s, beltsAddrStr = %s",
+   "----belts version %d result label real text %s",
+   "rfidVerStr = %s, rfidAddrStr = %s",
+   "----rfid version %d result label real text %s",
+   ": #108020 %s #",
+   ": #FF1030 %s #",
+   "----motors xyz btn real text %s",
+   "----motors xyz version title label real text %s",
+   "----mcus btn real text %s",
+   "----mcus version item text %s",
+   "----mcus version item real text %s",
+   "----belts version btn real text %s",
+   "----belts version title real text %s",
+   "----rfid version btn real text %s",
+   "----rfid version title real text %s",
+   "----pass btn text %s",
+   "----pass btn real text %s",
+   "----fail btn text %s",
+   "----fail btn real text %s",
+   "#108020 %s#",
+   "#FF1030 %s#",
+   "#FFD15B %s#",
+   "mcu version can not find,result: %d",
+   "rm -rf %s"
+  ]
+ },
+ "k1_horizontal_ui/ui_Screen_MachineTest.c": {
+  "images": [],
+  "texts": [
+   "McuVer",
+   "ManualBed",
+   "Cutter",
+   "CameraFlow",
+   "NozzlePressure",
+   "StrainGauge",
+   "BeltAutoTension",
+   "PrintRecords",
+   "CleanNozzle"
+  ],
+  "formats": [
+   "---------file : %s not exist",
+   "mkdir -p %s",
+   "---------key %s, value %d",
+   "---------not find item %d"
+  ]
+ },
+ "k1_horizontal_ui/ui_screen_AxisMove.c": {
+  "images": [
+   "TilteLeftstyle.png",
+   "TitleRightstyle.png",
+   "icon_chamber.png",
+   "ui_img_chamber_heating.png",
+   "speed_mode.png",
+   "axiscoolpagefan.png",
+   "EstateNormal.png",
+   "ui_img_dir_up.png",
+   "ui_img_dir_down.png",
+   "axiscoolpagefan_open.png",
+   "EstateRunout.png",
+   "EstateRunoutIn.png",
+   "EstateIn.png",
+   "EstateRunoutOut.png",
+   "EstateOut.png"
+  ],
+  "texts": [
+   "AI mode change",
+   "AI pause print mode open",
+   "AI pause print mode close",
+   "There is material available, prompt to return the material"
+  ],
+  "formats": [
+   "title page %s",
+   "axispage E button click:%s",
+   "filament action %d",
+   "E%s%.3f F%d",
+   "pressed filament action %d",
+   "flow percent calibration flag %d",
+   "WasteDetection flag: %s",
+   " flowcalibration detection flag %d",
+   "ai detection flag %d",
+   "manualtest page:machine state is print %d,don't start the print",
+   "manualtest page:machine state is print %d,start the manualtest",
+   "S:%s/%s",
+   "100#83868b %#",
+   "%s #%x %d~%d#",
+   "%s #%x %d-%d#",
+   "Currently Homing, command not allowed,%d",
+   "Axis:%d dis:%f, position:%f, limitmin:%f, limitmax:%f, %d,direction:%d",
+   "refresh home flag %0x",
+   "xyz state: %d, flag: %d",
+   "set e state:%d",
+   "axis home flag %0x",
+   "axis move paused home flag %0x",
+   "fans value change:%d",
+   "extrude filament,the last targettemp is:%d",
+   "retract filament,the last targettemp is:%d",
+   "refresh the filament state:%d.",
+   "%d#83868b %%#",
+   "speed Selected radio buttons: %d",
+   "create manualcheck tips, tipsnumber:%d",
+   "next    cur_index = %d"
+  ]
+ },
+ "k1_horizontal_ui/ui_screen_CameraList.c": {
+  "images": [
+   "img_k2_s1_boot_machine.png",
+   "img_f028_boot_machine.png",
+   "img_boot4.png"
+  ],
+  "texts": [],
+  "formats": [
+   "prev    cur_index = %d, currentPage:%d",
+   "S:%s/%s"
+  ]
+ },
+ "k1_horizontal_ui/ui_Screen_SelftestPrivacyPolicy.c": {
+  "images": [],
+  "texts": [
+   "Privacy Disagree msgbox create success"
+  ],
+  "formats": [
+   "%s #%x %d~%d#",
+   "----------------ui_TwistPres_test_btn_event_handler moduleTwistPresFlag %d"
+  ]
+ },
+ "k1_horizontal_ui/ui_screen_ModuleTest.c": {
+  "images": [
+   "TilteLeftstyle.png",
+   "TitleRightstyle.png",
+   "nozzle_fila_empty.png",
+   "filamentTip.png",
+   "nozzle_fila_full.png",
+   "img_boot0_K2.png",
+   "img_boot0.png"
+  ],
+  "texts": [],
+  "formats": [
+   "#BD1F30 %s #",
+   "S:%s/%s",
+   "axiswist_press value title real text %s",
+   "axiswist_press test btn real text %s",
+   "axiswist_press result label real text %s",
+   "---axis twist pres state %d, state label %p, twist pres flag %d",
+   "#17cc5f %s #",
+   "press_date : %s",
+   "--------module test recv proccess flag : %d, proccess : %d",
+   "-----------min is %d, input %f "
+  ]
+ },
+ "k1_horizontal_ui/ui_custom_numbers_keys.c": {
+  "images": [],
+  "texts": [],
+  "formats": []
+ },
+ "k1_horizontal_ui/ui_Screen_OFF.c": {
+  "images": [],
+  "texts": [],
+  "formats": [
+   "-------close screen off retry time : %d!",
+   "%Y%m%d",
+   "%s/statistic-%s.json",
+   "write_error_file file(%s) err"
+  ]
+ },
+ "k1_horizontal_ui/data_tracking.c": {
+  "images": [],
+  "texts": [
+   "Key724"
+  ],
+  "formats": [
+   "write_error_file time(%s) err",
+   "%s/pipe-%s.json",
+   "dataTracking:%s",
+   "data_tracking_error_code_photo %s",
+   "-------appraisal json string : %s",
+   "show material edit_status %d"
+  ]
+ },
+ "k1_horizontal_ui/ui_screen_multi_color_box.c": {
+  "images": [
+   "img_cfs_humidity_normal.png",
+   "img_humidity_normal_rangle.png",
+   "img_humidity_arrow.png",
+   "img_humidity_little_height_rangle.png",
+   "img_humidity_height_rangle.png",
+   "img_cfs_hub_light.png",
+   "img_polygon_border.png",
+   "img_rfid_flag.png",
+   "img_cfs_humidity_little_height.png",
+   "img_cfs_humidity_height.png",
+   "img_cfs_hub_indicator_light.png",
+   "img_humidity.png",
+   "img_cfs_pro_drying.png",
+   "img_pro_manual_dry.png",
+   "nozzle_fila_empty.png",
+   "img_cfs_box_guide.png",
+   "img_cfs_box_guide2.png",
+   "img_cfs_pro_guide1.png",
+   "img_cfs_pro_box_guide.png",
+   "img_cfs_pro_box_guide2.png",
+   "img_cfs_pro_guide3.png",
+   "img_cfs_pro_humi.png",
+   "img_refill_dir.png",
+   "auto_refill_prev_page.png",
+   "auto_refill_next_page.png",
+   "nozzle_fila_full.png"
+  ],
+  "texts": [],
+  "formats": [
+   "1%d\t100\t300\t0\t%s\t",
+   "2%d\t60\t300\t",
+   "----cur select box: %d",
+   "----cur strCabin: %s",
+   "%s (%s%RH)",
+   "S:%s/%s",
+   "26%%RH",
+   "lgm ---------box id source %d, dest %d, info %p",
+   "lgm--------radius=%d, percent=%d",
+   "-lgm---mater info %p",
+   "lgm refresh multicolorbox, num %d",
+   "ui_MultiColorBoxWin open = %d",
+   "-------proccess : %d",
+   "%s (%d-%d",
+   "ui_DrawSwitchItem: index is %d",
+   "1/3 %s",
+   "2/3 %s",
+   "3/3 %s",
+   "%d%%RH",
+   "img path : %s",
+   "clear auto refill arr %p, item_count %d",
+   "---- auto refill com last count : %d, new count : %d",
+   "--minVal : %f, maxVal : %f"
+  ]
+ },
+ "k1_horizontal_ui/ui_Screen_MachineCameraFlowDetect.c": {
+  "images": [],
+  "texts": [
+   "CameraFlow"
+  ],
+  "formats": [
+   "flow test (maxVal - minVal) : %f",
+   "----------camera flow test num %d, result %s",
+   "#E2E3E3 1: ##01be6c %s #",
+   "----------camera flow test result real text %s",
+   "#E2E3E3 2: ##01be6c %s #",
+   "#E2E3E3 3: ##01be6c %s #",
+   "#E2E3E3 4: ##01be6c %s #",
+   "#E2E3E3 5: ##01be6c %s #",
+   "----------camera flow test result label real text %s",
+   "nozzle cam %s fail !!",
+   "ai capture cmd fail, count %d !!",
+   "ai capture get img success recount=%d",
+   "ai capture return error, count %d !!",
+   "ai capture buff : %s",
+   "----------camera result label real text %s",
+   ": %d #",
+   "----------camera result count success real text %s",
+   "rm -rf %s/%s/*",
+   "system fail! res = %s",
+   "----------camera test prompt real text %s",
+   "----------CameraTestPro camera result label real text %s",
+   "-------photo test flag %d, num %d",
+   "----------camera not exist test prompt real text %s",
+   "----------camera state not exist reslut real text %s",
+   "----------camera flow pass btn text %s",
+   "----------camera flow pass btn result text %s",
+   "----------camera flow fail btn result text %s",
+   "----------camera detect btn result text %s",
+   "----------camera test start btn real text %s",
+   "----------camera test result label real text %s",
+   "#17CC5F %s#",
+   "#FF1030 %s#",
+   "#FFD15B %s#",
+   "cavity camera capture cmd fail, res %s!!",
+   "cavity camera capture get img success recount=%s",
+   "cavity camera capture return error, count %d !!"
+  ]
+ },
+ "k1_horizontal_ui/ui_Screen_MachineNozzlePressure.c": {
+  "images": [],
+  "texts": [
+   "NozzlePressure"
+  ],
+  "formats": [
+   "---------Pressure pass Nozzle_Pres: %s",
+   "---------Pressure fail Nozzle_Pres: %s",
+   "#108020 %s#",
+   "#FF1030 %s#",
+   "#FFD15B %s#"
+  ]
+ },
+ "k1_horizontal_ui/ui_Screen_MachineScanGunSnNum.c": {
+  "images": [],
+  "texts": [
+   "Server config validation success",
+   "Server config saved to Keybox successfully",
+   "Failed to save server config to Keybox",
+   "Official"
+  ],
+  "formats": [
+   "open scanner failed: %s",
+   "select failed: %s",
+   "SN scanned: %s",
+   "Server code scanned: %s",
+   "Unknown scan length: %d",
+   "pthread create fail!!!,error: %s(errno: %d)",
+   "Invalid server location code: %s",
+   "Invalid server config code: %s",
+   "Validation retry %d/%d",
+   "Validation failed after %d retries",
+   "SN: %s",
+   "Server code validation passed: location=%s, type=%s",
+   "Unknown server_local: %d",
+   "Displaying loaded server location: %s",
+   "read sn number: %s",
+   "can't upload log, because the print_state:%d "
+  ]
+ },
+ "k1_horizontal_ui/ui_screen_VedioInfo.c": {
+  "images": [],
+  "texts": [],
+  "formats": [
+   "32\t%d\t%d",
+   "png_src:%s",
+   "delay vedio infoimg width: %d,height:%d, scale:%d",
+   "Udelay vedio infoimg width: %d,height:%d",
+   "  %d/%02d/%02d %02d:%02d",
+   "  %dm%02ds",
+   "%s:%d%%",
+   "-------exprot video proccess : %d"
+  ]
+ },
+ "k1_horizontal_ui/ui_screen_smart_light_settings.c": {
+  "images": [],
+  "texts": [],
+  "formats": []
+ },
+ "k1_horizontal_ui/ui_screen_daily_maintenance.c": {
+  "images": [],
+  "texts": [],
+  "formats": []
+ },
+ "k1_horizontal_ui/ui_Screen_NetworkInfo.c": {
+  "images": [],
+  "texts": [],
+  "formats": []
+ },
+ "k1_horizontal_ui/ui_Screen_MachineServerSwitch.c": {
+  "images": [],
+  "texts": [
+   "Server.CN",
+   "Server.COM"
+  ],
+  "formats": [
+   "%s %s  | awk -F '='  '{ print $2}' | tr -d ' '",
+   "Keybox get Server Setting:%s  Faild!",
+   "Keybox parse Server Setting:%s Failed! resBuf=%s",
+   "Keybox get Server Setting:%s = %d , to Set %d Same!",
+   "%s %s %d",
+   "Keybox set Server Setting:%s  Faild!",
+   "Keybox set Server Setting:%s = %d (cmdKeyBox:%s)  Success?[ resBuf:%s ]",
+   "Keybox value out of range for %s: %ld",
+   "Keybox get Server Setting:%s = %ld",
+   "gTimeoutRetryTimes :%d  singal_timeout_ms:%d",
+   "udisk server config not exist:%s",
+   "udisk server config is %s current:%s",
+   "%s #%x %d~%d# ",
+   "%s #%x %d~%d# h"
+  ]
+ },
+ "k1_horizontal_ui/ui_Screen_ManualDrySetting.c": {
+  "images": [
+   "img_cfs_humidity_normal.png",
+   "img_cabin_mater_normal.png",
+   "img_insufficient_power_tips.png",
+   "img_connect_power.png",
+   "img_left_cabin_drying.png",
+   "img_dry_proc_drying.png",
+   "img_dry_proc_temper.png",
+   "img_dry_proc_remainer_time.png",
+   "img_cabin_mater_warning.png",
+   "img_disconnect_power.png",
+   "img_cfs_humidity_little_height.png",
+   "img_cfs_humidity_height.png",
+   "img_manual_dry_putaway_filament.png",
+   "img_dry_proc_finished.png",
+   "img_left_cabin_dehumidification.png",
+   "img_right_cabin_dehumidification.png",
+   "img_right_cabin_drying.png"
+  ],
+  "texts": [
+   "CFS 2-1"
+  ],
+  "formats": [
+   "S:%s/%s",
+   "CFS 2-1 L%s",
+   "CFS 2-%d %s",
+   "CFS 2-%d",
+   "CFS 2-%d %s%s",
+   "-----left procc value : %d, remainder time : %d, showPro : %d",
+   "-----right procc value : %d, remainder time : %d, showPro : %d",
+   "-----procc value : %d, remainder time : %d",
+   "%dh%02dm",
+   "left===dry mode:%d, proccess : %d, drying : %d",
+   "right===dry mode:%d, proccess : %d, drying : %d",
+   "2right===dry mode:%d, proccess : %d, drying : %d",
+   "2left===dry mode:%d, proccess : %d, drying : %d"
+  ]
+ },
+ "k1_horizontal_ui/ui_Screen_Touchtone.c": {
+  "images": [],
+  "texts": [],
+  "formats": [
+   "keytone_setting_ddlist_1 value is %d"
+  ]
+ },
+ "k1_horizontal_ui/ui_screen_FileManage.c": {
+  "images": [
+   "SortDownUnSelect.png",
+   "SortDownSelect.png",
+   "SortUpSelect.png",
+   "TilteLeftstyle.png",
+   "TitleRightstyle.png",
+   "SortIcon.png",
+   "SortSelect.png"
+  ],
+  "texts": [
+   "Change the file sort option"
+  ],
+  "formats": [
+   "10\t%c\t%c",
+   "S:%s/%s",
+   "sortmode is illegal:%c",
+   "10\t%d\t0",
+   "copy file index:%d,%d",
+   "copy file:%s",
+   "key is %d",
+   "deleta file index:%d,%d",
+   "deleta file:%s",
+   "file last index %d, is local disk %d",
+   "udisk scan flag : %d",
+   "manager type : %d",
+   "%d%02d%02d %02d:%02d",
+   "udisk scan proc %d, is local %d",
+   "%s: %d%%",
+   "local disk scan proc %d, is local %d",
+   "%s:%d%%",
+   "copy file proc : %d",
+   "del file proc : %d"
+  ]
+ },
+ "k1_horizontal_ui/ui_Screen_AutoDrySetting.c": {
+  "images": [],
+  "texts": [
+   "CFS 2-1"
+  ],
+  "formats": []
+ },
+ "k1_horizontal_ui/ui_Screen_MachineAxisTwistPres.c": {
+  "images": [],
+  "texts": [
+   "StrainGauge",
+   "MP4-15",
+   "MP4-25"
+  ],
+  "formats": [
+   "axiswist_press pass btn text %s",
+   "axiswist_press pass btn real text %s",
+   "axiswist_press fail btn text %s",
+   "axiswist_press fail btn real text %s",
+   "axiswist_press setting btn real text %s",
+   "axiswist_press value title real text %s",
+   "axiswist_press test btn real text %s",
+   "axiswist_press result label real text %s",
+   "----------------ui_TwistPres_btn_event_handler twistPresFlag %d",
+   "---axis twist pres state %d, state label %p, twist pres flag %d",
+   "#17cc5f %s #",
+   "#BD1F30 %s #",
+   "axiswist_press state label real text %s",
+   "press_date : %s",
+   "----------------AxisTwistPresData twistPresFlag %d",
+   "#108020 %s#",
+   "#FF1030 %s#",
+   "#FFD15B %s#"
+  ]
+ },
+ "k1_horizontal_ui/ui_screen_camera_settings.c": {
+  "images": [],
+  "texts": [],
+  "formats": []
+ },
+ "k1_horizontal_ui/ui_Screen_Widgets.c": {
+  "images": [
+   "time_used_1.png",
+   "fila_used_1.png",
+   "print_completed.png",
+   "errorTips.png",
+   "warningTips.png"
+  ],
+  "texts": [
+   "Privacypage msgbox create success",
+   "Privacy changed msgbox create success",
+   "Lower msgbox priority1",
+   "Errormsgbox create success.",
+   "QRcodeBg msgbox close",
+   "Retry option is continue print",
+   "There is a higher error level code",
+   "Reset ErrorCode"
+  ],
+  "formats": [
+   "start wait anim: %d",
+   "end wait anim: %d",
+   "refresh the upload log ,state is %d.",
+   "%s : %d%%",
+   "production sn = %s",
+   "%s%d/%d/%02d %02d:%02d",
+   "TimePath = %s",
+   "create the print AppraisalMsgBoxBg , %p",
+   "S:%s/%s",
+   "create the printcompleted msg, %p",
+   "MsgboxImgPrint width: %d,height:%d, scale:%d",
+   "MsgboxImgPrint width: %d,height:%d",
+   "the completed msgbox, %p",
+   "errorcodeInfo,%d",
+   "hiddenbtnlist top: %p",
+   "showbtnlist top: %p",
+   "r:%d w:%d h:%d i%d",
+   "get error title string res:%d, title : %s, error : %d",
+   "wiki is:%s",
+   "send_clear_error_first %d",
+   "enter the errormsgbox.error code :%d,%d,%s",
+   "errorinfo.errorcode: %d, error msg : %s",
+   "buff:%s",
+   "2803 buff:%s",
+   "get error title res:%d, title : %s, error : %d",
+   "%s%04d",
+   "used_size = %d, total_size = %d, used_pct = %f",
+   "%.1fG/%.1fG(%d%%)",
+   "get errorcode info the errorbuff is %s",
+   "%s%04d-%s",
+   "cfs box error %d, error msg : %p",
+   "error use for url: %d, code %d, res %d",
+   "-------ypdate hot bed %d abs value real text "
+  ]
+ },
+ "k1_horizontal_ui/ui_Screen_HotBedManualAdjust.c": {
+  "images": [
+   "state_normal.png",
+   "turn_left.png",
+   "turn_right.png"
+  ],
+  "texts": [
+   "ManualBed",
+   "G1 X5 Y5 F12000",
+   "G1 X170 Y170 Z199 F6000",
+   "G1 X170 Y170 Z299 F6000",
+   "Confirmer",
+   "Welcome to Your New Creality 3D Printer",
+   "Willkommen beim Creality 3D-Drucker",
+   "Bienvenidos a la Impresora 3D de Creality",
+   "Bienvenue ",
+   "Benvenuti alla stampante Creality 3D",
+   "Yeni Creality 3D Yaz",
+   "Creality",
+   "Bitte halte den gr",
+   "Weiter",
+   "Por favor, mant",
+   "Siguiente",
+   "Veuillez vous assurer qu",
+   "Suivant",
+   "Por favor, mantenha a ",
+   "Sonraki",
+   "Creality ",
+   "I. Information we may collect",
+   "II. How we use information",
+   "III. Information retention and deletion",
+   "IV. Information security",
+   "V. Your rights",
+   "VI. International data transfer",
+   "VII. Contact Us",
+   "Nutzer",
+   "Creality-Dienste",
+   "Diese Richtlinie gilt f",
+   "I. Informationen, die wir erfassen k",
+   "Wir erheben ausschlie",
+   "II. Wie wir Informationen verwenden",
+   "Zweckbindung: Informationen werden ausschlie",
+   "III. Datenaufbewahrung und L",
+   "IV. Informationssicherheit",
+   "Wir setzen mehrschichtige Ma",
+   "Faktor",
+   "Authentifizierung"
+  ],
+  "formats": [
+   "#83868B %s #",
+   "-------hot bed adj status %d real text : %s",
+   "S:%s/%s",
+   "RefreshBedAdjustResult Press_Record:%d, result:%f",
+   "---------pos value init flag %0x, result %f",
+   "%d: #17CC5F %.3f mm#",
+   "RefreshBedAdjustResult hot bed adj prompt real text : %s",
+   "#108020 %s#",
+   "#FF1030 %s#",
+   "RefreshBedAdjustResult input_char:%s, result:%f",
+   "index : %d",
+   "RefreshBedAdjustResult hot bed adj status %d real text : %s",
+   "bedAdjustRange: %f",
+   "#FFD15B %s#",
+   "G1 X%d Y5 F12000",
+   "G1 X%d Y%d F12000",
+   "G1 X5 Y%d F12000",
+   "-------bed manual pos %c, cmd : %s",
+   "%s Chamber drying completed",
+   "%s Chamber drying canceled.",
+   "%s-Kammer-Trocknung abgebrochen.",
+   "mara %s cancelado.",
+   "chage de la chambre %s annul",
+   "Essiccazione camera %s annullata.",
+   "mara %s cancelada.",
+   "%s haznesi kurutmas",
+   "%s Chamber drying failed.",
+   "%s-Kammer-Trocknung fehlgeschlagen.",
+   "mara %s.",
+   "chage de la chambre %s.",
+   "Essiccazione camera %s non riuscita.",
+   "Ultrafast (125%)",
+   " (125%)",
+   "Standard (100%)",
+   "Standart (100%)",
+   "Stable (50%)",
+   "Dengeli (50%)",
+   "#17CC5F %d#",
+   "#17CC5F %d# model selected",
+   "#17CC5F %d# Modell Ausgew"
+  ]
+ },
+ "k1_horizontal_ui/ui_screen_multi_color_printer.c": {
+  "images": [
+   "multicolor_box_k2.png",
+   "multicolor_box_k2pro.png",
+   "img_spool_holder_Z2.png",
+   "img_spool_holder_k2.png",
+   "img_spool_holder_k2_s1.png",
+   "img_spool_holder_GS04.png",
+   "img_spool_holder_k2pro.png",
+   "img_f028_spool_holder.png",
+   "img_spool_holder.png",
+   "img_down_vector.png",
+   "color_fila_next.png",
+   "color_fila_prev.png"
+  ],
+  "texts": [],
+  "formats": [
+   "-----gcode type %s, extern type %s",
+   "%s=%s ",
+   "the multicolor match info is (%s)",
+   "the unkowncolor match info is (%s)",
+   "MaterMatchList item : %d, match mater ids : %s, mater id %d",
+   "S:%s/%s",
+   "total weight : %.3f",
+   "Change the Serveroptions:%d"
+  ]
+ },
+ "k1_horizontal_ui/ui_Screen_Devicebinding.c": {
+  "images": [],
+  "texts": [],
+  "formats": [
+   "UserImg width: %d,height:%d, scale:%d",
+   "Load cloud user information,reslut: %d",
+   "UserImg file path: %s",
+   "UserImg width: %d,height:%d",
+   "Change Server Option:%d",
+   "device binding qrcode exist,%s %s"
+  ]
+ },
+ "k1_horizontal_ui/ui_screen_ExpertBedPid.c": {
+  "images": [
+   "bed.png",
+   "wait.png"
+  ],
+  "texts": [],
+  "formats": [
+   "curBedTargetTempVal = %d",
+   "S:%s/%s"
+  ]
+ },
+ "k1_horizontal_ui/ui_Screen_MachineErrorRecords.c": {
+  "images": [],
+  "texts": [],
+  "formats": [
+   "#17CC5F %s#",
+   "#FF1030 %s#",
+   "#FFD15B %s#"
+  ]
+ },
+ "k1_horizontal_ui/ui_Screen_LaserPressureTest.c": {
+  "images": [],
+  "texts": [],
+  "formats": [
+   "%0dh%02dm"
+  ]
+ },
+ "k1_horizontal_ui/ui_Screen_RootAccountInfo.c": {
+  "images": [
+   "ui_img_dir_up.png"
+  ],
+  "texts": [
+   "Fluidd"
+  ],
+  "formats": [
+   "S:%s/%s",
+   "%s: %s",
+   "%s:4408",
+   "%s:8000",
+   "the path %s"
+  ]
+ },
+ "k1_horizontal_ui/ui.c": {
+  "images": [],
+  "texts": [],
+  "formats": [
+   "change cur page %d,pagenumber:%d"
+  ]
+ },
+ "k1_horizontal_ui/ui_Screen_ResetMachine.c": {
+  "images": [],
+  "texts": [
+   "There is material available, prompt to return the material"
+  ],
+  "formats": [
+   "reset options is %d%d%d%d.",
+   "6%d%d%d%d"
+  ]
+ },
+ "k1_horizontal_ui/ui_Screen_AboutDevice.c": {
+  "images": [
+   "ui_img_dir_up.png",
+   "img_Z2_machine.png",
+   "img_k2_machine.png",
+   "img_GS04_machine.png",
+   "img_k2pro_machine.png",
+   "img_k2_s1_machine.png",
+   "img_cfs_sn_vector.png",
+   "img_k2plus_machine.png",
+   "img_f028_machine.png"
+  ],
+  "texts": [
+   "CFS -1",
+   "CFS -2",
+   "CFS -3",
+   "CFS -4",
+   "K1 Max SE",
+   "K1 Max",
+   "K2 Plus",
+   "K2 Pro"
+  ],
+  "formats": [
+   "S:%s/%s",
+   "screen_save_value set %d",
+   "current time%Id",
+   "current time%Id, lasttime:%Id, userdata:%c",
+   "current time%d",
+   "keyboard input id: %d,mode :%d",
+   "PASSWORD: %s",
+   "K2 S1 img path: %s",
+   "production sn = %s",
+   "%.1f/%.1fGB",
+   "refresh the server info,state:%d",
+   "refresh the factoryleveldata:%s",
+   "single level data : %s,count: %d",
+   "level point count:%d",
+   "1data:%d,%d",
+   "2data:%d,%d",
+   "the path %s"
+  ]
+ },
+ "k1_horizontal_ui/ui_Screen_MachineSwitchAxisZ.c": {
+  "images": [
+   "SwitchAxisStep1.png",
+   "state_normal.png",
+   "switch_axis_test_step_dir.png",
+   "SwitchAxisStep2.png",
+   "SwitchAxisStep3.png",
+   "switch_axis_test_option_dir.png"
+  ],
+  "texts": [
+   "English",
+   "Deutsch",
+   "Italiano",
+   "Portugu",
+   "Turkish"
+  ],
+  "formats": [
+   "axiswist_press setting btn real text %s",
+   "S:%s/%s",
+   "#108020 %s#",
+   "#FF1030 %s#",
+   "#FFD15B %s#",
+   "change language btn clicked,:%s"
+  ]
+ },
+ "k1_horizontal_ui/ui_Screen_Changelanguage.c": {
+  "images": [],
+  "texts": [],
+  "formats": [
+   "change lanicked,:%d",
+   "change language :%d",
+   "the path %s",
+   "load the changelanguage. index : %d",
+   "touch %s && sync",
+   "ExpertTrafficAdd offset_z = %d !!"
+  ]
+ },
+ "k1_horizontal_ui/ui_screen_ExpertTraffic.c": {
+  "images": [
+   "Add.png",
+   "Subtract.png"
+  ],
+  "texts": [],
+  "formats": [
+   "ExpertTrafficSub traffic = %f !!",
+   "expert_set_traffic_percent traffic = %d !!",
+   "S:%s/%s"
+  ]
+ },
+ "Message/ServerMessage.c": {
+  "images": [],
+  "texts": [
+   "CR-K1 Max",
+   "K1 Max",
+   "EXIT:!!!",
+   "Stop pushing popups to the screen",
+   "Power Off Continue file name fail",
+   "This is a system upgrade restart",
+   "Error control instruction",
+   "I am display server!",
+   "User Control Get Wifi Info Ans unpack failed",
+   "User Control Scan Wifi Ans",
+   "Hotspot not scanned",
+   "User Get Upgrade Info Ans",
+   "User Get User Cxy Info Ans",
+   "No subdirectory with this id exists",
+   "The message queue has been emptied",
+   "File monitoring fails",
+   "First get the root directory file once",
+   "U disk no exist ",
+   "CFS-Pro",
+   "Material",
+   "UserGetMaterialBoxConfigAns",
+   "DisInitiativeSyncMaterialBoxConfig",
+   "Error: cannot open framebuffer device",
+   "The framebuffer device was opened successfully.",
+   "Error reading fixed information",
+   "Error reading variable information",
+   "Error: failed to map framebuffer device to memory",
+   "The framebuffer device was mapped to memory successfully."
+  ],
+  "formats": [
+   "open %s error",
+   "get file info; cache path = %s, id = %d",
+   "Get temper data = %s",
+   "Get response flag = %d, data = %s",
+   "%d\t%d\t%d",
+   "%c%c:%c%c:%c%c:%c%c:%c%c:%c%c",
+   "%s\t%s\t%s\t%s\t%d\t%s\t%s\t%f\t%f\t%s",
+   "binding qrcode path = %s",
+   "User Service qrcode path = %s",
+   "%.2f\t%.2f\t%.2f",
+   "1%.2f\t%.2f\t%.2f\t%.2f",
+   "2%d\t%d\t%d\t%d",
+   "3%.2f\t%.2f\t%.2f\t%.2f",
+   "4%d\t%d\t%d\t%d",
+   "%.2f\t%.2f\t%.2f\t%.2f\t%.2f\t%.2f",
+   "%d\t%d\t%d\t%d\t%d\t%d\t%d",
+   "1%d\t%d\t%d\t%d\t%d\t%d",
+   "0%d\t%d\t%d",
+   "8%d\t%d\t%d\t%d",
+   "5%d\t%d",
+   "SyncPrepareStep count=%d",
+   "PrepareStep index=%d, arrayValue=%d",
+   "PrepareStep index=%d",
+   "loadMaterial = %d",
+   "quitMaterial = %d",
+   "13\t%d\t%s",
+   "scanFilePro: sd = %d, udisk = %d",
+   "d%d\t%d",
+   "f%d\t%d",
+   "printRunState.beltCurTension[0] : %d",
+   "printRunState.beltCurTension[1] : %d",
+   "cutState = %d",
+   "cutPosX = %f",
+   "report consumables = %d",
+   "check_cut_pos_x; max = %f, min = %f",
+   "Cur Puase Status = %d",
+   "materialStatus_1 = %d, materialStatus_2 = %d",
+   "%.3f\t%.3f\t%.3f",
+   "%d%d%d",
+   "klipper print state = %d"
+  ]
+ },
+ "UserMain/ARM_Main.c": {
+  "images": [],
+  "texts": [
+   "EXIT:!!!",
+   "UI init finish !!!",
+   "DryBox",
+   "ModifyHwConfig",
+   "SetMaintainItem",
+   "ExportLogState",
+   "UpgradeRebootSync",
+   "DownloadGcode",
+   "FileControl",
+   "WebControlPrint",
+   "FeedInOrOut",
+   "MultiColorPrint",
+   "ModifyMaterialInfo",
+   "MaterialBoxConfig",
+   "MaterialBoxList",
+   "RefreshRfidMaterial",
+   "MultiColorList",
+   "MultipleBedTemp",
+   "UpdataErrorInfo",
+   "MutableTypeData",
+   "DelayImageInfoList",
+   "DelayImageInfo",
+   "HistoryRecordList",
+   "HistoryRecord",
+   "UpgradeInfoList",
+   "UpgradeInfo",
+   "ReportAutoLevelRes",
+   "AutoPidResult",
+   "DisControlPrint",
+   "SystemReset",
+   "SysSetting",
+   "LoadQuitMaterial",
+   "SystemSetting",
+   "LocalGcodeInfo",
+   "GetGcodeFIleList",
+   "AppControlPrint",
+   "PrintWorkInfo",
+   "MultiGsensor",
+   "MultiFan",
+   "HeaterBed"
+  ],
+  "formats": [
+   "Got signal name %s, num %d; exiting ...",
+   "ignore signal :%d",
+   "device model = %d",
+   "ui direction = %d",
+   "self test = %d",
+   "z axis direction = %d",
+   "----create heart beat pthread res %d",
+   "ai_capture %d %s%s",
+   "%s ai_capture failed! res = %s"
+  ]
+ },
+ "utils/common.c": {
+  "images": [],
+  "texts": [
+   "CFS-lite",
+   "CFS-mini",
+   "CFS-Pro"
+  ],
+  "formats": [
+   "%s capture cmd =%s, res = %s",
+   "ffmpeg -y -i '%s' '%s'",
+   "ffmpeg cmd = %s",
+   "%s ffmpeg encoding failed! res = %s",
+   "%s_%llu.jpg",
+   "capture or encoding failed! res = %s",
+   "/proc/%d/statm",
+   "%*s %ld",
+   "memery usage: %ld KB"
+  ]
+ },
+ "utils/memCheck.c": {
+  "images": [],
+  "texts": [],
+  "formats": [
+   ": %ld KB",
+   "can't open %s"
+  ]
+ },
+ "SystemCmd/SystemCmd.c": {
+  "images": [],
+  "texts": [
+   "CountProtobufMessageFieldsRecursive---------start",
+   "Popen fail",
+   "Popen timeout",
+   "Popen read fail",
+   "Popen space overflow",
+   "Match results:",
+   "Popen parameter exception",
+   "UNKNOWN"
+  ],
+  "formats": [
+   "Field \"%s\": (message) {",
+   "}  // end of \"%s\"",
+   "Field \"%s\": (int32) %d",
+   "Field \"%s\": (uint32) %u",
+   "Field \"%s\": (int64) %lld",
+   "Field \"%s\": (uint64) %llu",
+   "Field \"%s\": (float) %f",
+   "Field \"%s\": (double) %f",
+   "Field \"%s\": (bool) %s",
+   "Field \"%s\": (enum) %s (%d)",
+   "Field \"%s\": (enum) <unknown> (%d)",
+   "Field \"%s\": (string) \"%s\"",
+   "Field \"%s\": (bytes, len=%zu) ",
+   "Field \"%s\": (unhandled type %d)",
+   "CountProtobufMessageFieldsRecursive---------end, total fields: %zu",
+   "file no exists[%s] !",
+   "Match %d: start = %d, end = %d, matched string = '%s'",
+   "md5sum '%s'",
+   "get ip info obj fail, buff = %s",
+   "%Y-%m-%d %H:%M:%S",
+   "rm -rf %s*.7z && sync",
+   "rm -rf %s*.tar.gz && sync",
+   "rm -f %s",
+   "touch %s"
+  ]
+ },
+ "ConfigFile/compress_file.c": {
+  "images": [
+   "system_config.json",
+   "system_version.json",
+   "cxsw_params.json",
+   "user_print_refer.json",
+   "defData/file_icon.png",
+   "defData/file_preview.png",
+   "defData/file_print_photo.png",
+   "defData/folder_icon.png",
+   "defData/error_code_map.json",
+   "defData/SourceHanSansCN-Normal.otf",
+   "remain_material_data.json",
+   "log_config.json",
+   "upgrade_info.json",
+   "delay_image_info.json",
+   "fault_code_info.json",
+   "user_data_not_deleted.json",
+   "tb_info.json",
+   "printer_info.json",
+   "iotprint_info.json",
+   "user_info.json",
+   "print_history_record.json",
+   "local_color_match_info.json",
+   "udisk_color_match_info.json",
+   "material_box_info.json",
+   "material_modify_info.json",
+   "material_box_config.json",
+   "material_database.json",
+   "tn_data.json",
+   "usrMaterial.json",
+   "readme_system_info.json",
+   "temp_image.png",
+   "current_print_image.png",
+   "local_gcode_file_info.json",
+   "udisk_gcode_file_info.json",
+   "bind_qrcode.png",
+   "user_service_qrcode.png",
+   "print_file_name.json",
+   "mcu.bin",
+   "user_avatar.png",
+   "current_work_info.json",
+   "laser_offset_info.json",
+   "z_pos.json",
+   "device_structure_config.json",
+   "cam_detect_config.json",
+   "print_para_config.json",
+   "struct_heat_morph_info.json",
+   "multiColorData.json",
+   "material_option.json",
+   "material_dry_info.json",
+   "cam_version.json",
+   "machine_test_info.json"
+  ],
+  "texts": [
+   "PrinterUI"
+  ],
+  "formats": [
+   "read len = %d, break",
+   "%s/%s/",
+   "%s/%s/%s%s",
+   "%s/%s/%s/%s",
+   "/usr/bin/ffmpeg -framerate %d -i %s -vcodec copy -y -f mp4 %s",
+   "aplay %s",
+   "SERVER_NUM=%d /etc/init.d/webrtc restart",
+   "/usr/bin/report.sh %s",
+   "/usr/bin/7z a -bsp1 -bso0 -mmt1 -mx=1 -mhe=on %s %s %s %s %s %s %s %s %s %s %s",
+   "/usr/bin/clear_sn_mac.sh machine_sn %s",
+   "/usr/bin/clear_sn_mac.sh structure_version %d",
+   "/usr/bin/clear_sn_mac.sh customer_id %d",
+   "mkdir -p %s",
+   "system fail! res = %s"
+  ]
+ },
+ "ConfigFile/FileManager.c": {
+  "images": [],
+  "texts": [
+   "System Volume Information"
+  ],
+  "formats": [
+   "open '%s' file fail",
+   "get udisk size: %d, cal_disk_size: %d, total disk size: %lld"
+  ]
+ },
+ "ConfigFile/DiskInfo.c": {
+  "images": [],
+  "texts": [
+   "MemTotal:",
+   "MemAvailable:",
+   "Parameter abnormality",
+   "Path is not a folder"
+  ],
+  "formats": [
+   "Cannot open dir: %s",
+   "MemTotal: %lu kB",
+   "MemAvailable: %lu kB"
+  ]
+ },
+ "ConfigFile/CopyFile.c": {
+  "images": [],
+  "texts": [
+   "ProgressThread",
+   "Error opening directory"
+  ],
+  "formats": [
+   "free_size: %d MB, file_total_size: %d MB",
+   "free size is less than %dMB after copy file %s, cancle it!!!",
+   "local avaible space less than %d MB, cancle copy",
+   "%s Deleted file: %s"
+  ]
+ },
+ "utils/file_utils.cpp": {
+  "images": [],
+  "texts": [
+   "Qkkbal",
+   "QWERTYUIOP",
+   "ASDFGHJKL",
+   "ZXCVBNM"
+  ],
+  "formats": [
+   "%s Failed to delete file: %s"
+  ]
+ }
+}
