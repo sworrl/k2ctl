@@ -1,26 +1,129 @@
-import type { Status } from '../api'
+import { useEffect, useMemo, useRef, useState } from 'react'
+import { api, type Sample, type Status } from '../api'
 
-const ROWS: [string, string, number][] = [['nozzle', 'Nozzle', 300], ['bed', 'Bed', 120], ['chamber', 'Chamber', 60]]
+// One histogram per heater: the last WINDOW_S of readings in BUCKET_S columns, the
+// target as a dashed line, the live reading as the big number. History comes from the
+// backend (/api/temps/history, kept for an hour on the printer) and grows from the live
+// status while the page is open.
+const WINDOW_S = 600
+const BUCKET_S = 10
+const N = WINDOW_S / BUCKET_S
+
+type Row = { key: string; label: string; scale: number; cls: string }
+const ROWS: Row[] = [
+  { key: 'nozzle', label: 'Nozzle', scale: 300, cls: 'nozzle' },
+  { key: 'bed', label: 'Bed', scale: 120, cls: 'bed' },
+  { key: 'chamber', label: 'Chamber', scale: 60, cls: 'chamber' },
+]
+
+function useTempHistory(status: Status): Sample[] {
+  const [hist, setHist] = useState<Sample[]>([])
+  const lastT = useRef(0)
+  useEffect(() => {
+    api.tempsHistory().then(h => {
+      setHist(h.samples ?? [])
+      lastT.current = h.samples?.length ? h.samples[h.samples.length - 1].t : 0
+    }).catch(() => { /* histogram then fills from live data only */ })
+  }, [])
+  useEffect(() => {
+    const t = Math.floor(new Date(status.updated_at).getTime() / 1000)
+    if (!t || t - lastT.current < 2) return
+    lastT.current = t
+    const v: Record<string, [number, number]> = {}
+    for (const [k, tt] of Object.entries(status.temps)) v[k] = [tt.actual, tt.target]
+    const box = (status.cfs.boxes ?? []).find(b => b.type === 0)
+    if (box) v.cfs = [box.temp, box.humidity]
+    setHist(h => {
+      const cut = t - 3600
+      const next = h.length && h[0].t < cut ? h.filter(s => s.t >= cut) : h.slice()
+      next.push({ t, v })
+      return next
+    })
+  }, [status.updated_at, status.temps, status.cfs.boxes])
+  return hist
+}
+
+/** Last WINDOW_S seconds bucketed into N columns: [actual, target] per column or null. */
+function buckets(hist: Sample[], key: string, now: number): (readonly [number, number] | null)[] {
+  const out: (readonly [number, number] | null)[] = new Array(N).fill(null)
+  const start = now - WINDOW_S
+  for (const s of hist) {
+    if (s.t < start) continue
+    const i = Math.min(N - 1, Math.floor((s.t - start) / BUCKET_S))
+    const v = s.v[key]
+    if (v) out[i] = [v[0], v[1]]
+  }
+  return out
+}
+
+function Histogram({ row, hist, now, max, target }: { row: Row; hist: Sample[]; now: number; max: number; target: number }) {
+  const cols = useMemo(() => buckets(hist, row.key, now), [hist, row.key, now])
+  const [hover, setHover] = useState<number | null>(null)
+  const h = hover !== null ? cols[hover] : null
+  const ago = hover !== null ? (N - 1 - hover) * BUCKET_S : 0
+  return (
+    <div className={`histo ${row.cls}`} onMouseLeave={() => setHover(null)}>
+      {target > 0 && <i className="tline" style={{ bottom: `${Math.min(100, (target / max) * 100)}%` }} title={`target ${target.toFixed(0)}°`} />}
+      {cols.map((c, i) => (
+        <b key={i} className={`hb ${c ? '' : 'none'} ${hover === i ? 'hot' : ''}`}
+          style={{ height: c ? `${Math.max(3, Math.min(100, (c[0] / max) * 100))}%` : '3%' }}
+          onMouseEnter={() => setHover(i)} onTouchStart={() => setHover(i)} />
+      ))}
+      {h && hover !== null && (
+        <span className="tip" style={{ left: `${((hover + 0.5) / N) * 100}%` }}>
+          {h[0].toFixed(1)}°{h[1] > 0 ? ` / ${h[1].toFixed(0)}°` : ''} <small>{ago ? `${ago}s ago` : 'now'}</small>
+        </span>
+      )}
+    </div>
+  )
+}
 
 export default function TempsCard({ status, className = '' }: { status: Status; className?: string }) {
+  const hist = useTempHistory(status)
+  const now = Math.floor(Date.now() / 1000)
+  const box = (status.cfs.boxes ?? []).find(b => b.type === 0)
+  const fanName = (k: string) => k === 'part' ? 'Part fan' : k === 'aux' ? 'Aux fan' : k === 'case' ? 'Case fan' : k
   return (
-    <div className={`card ${className}`}>
-      <h2>Temperatures</h2>
-      {ROWS.map(([key, label, scale]) => {
-        const t = status.temps[key]
+    <div className={`card temps ${className}`}>
+      <h2>Temperatures <span>last 10 min</span></h2>
+      {ROWS.map(row => {
+        const t = status.temps[row.key]
         if (!t) return null
-        const max = t.max || scale
+        const max = t.max || row.scale
+        const heating = t.target > 0 && t.actual < t.target - 2
         return (
-          <div className="temp-row" key={key}>
-            <span className="name">{label}</span>
-            <div className="bar temp"><i style={{ width: `${Math.min(100, (t.actual / max) * 100)}%` }} /></div>
-            <span className="val">{t.actual.toFixed(1)}°<small>/ {t.target.toFixed(0)}°</small></span>
+          <div className="temp-row" key={row.key}>
+            <div className="name">
+              <span className={`swatch-dot ${row.cls}`} />{row.label}
+              <small>{t.target > 0 ? `${heating ? 'heating to' : 'holding'} ${t.target.toFixed(0)}°` : 'off'}</small>
+            </div>
+            <Histogram row={row} hist={hist} now={now} max={max} target={t.target} />
+            <div className="val"><span className="num">{t.actual.toFixed(1)}°</span><small>max {max}°</small></div>
           </div>
         )
       })}
-      <div className="temp-extra">
-        {Object.entries(status.fans).map(([k, v]) => <span key={k}>{k === 'part' ? 'Part fan' : k === 'aux' ? 'Aux fan' : k === 'case' ? 'Case fan' : k} <b>{v} %</b></span>)}
-        {(status.cfs.boxes ?? []).filter(b => b.type === 0).map(b => <span key={b.id}>{b.name} <b>{b.temp.toFixed(0)}° · {b.humidity.toFixed(0)} % RH</b></span>)}
+      <div className="temp-strip">
+        {Object.entries(status.fans).map(([k, v]) => (
+          <div className="tile" key={k}>
+            <span className="tl">{fanName(k)}</span>
+            <span className="tv">{v}<small> %</small></span>
+            <i className="tb"><b style={{ width: `${Math.min(100, v)}%` }} /></i>
+          </div>
+        ))}
+        {box && (
+          <>
+            <div className="tile">
+              <span className="tl">{box.name} temp</span>
+              <span className="tv">{box.temp.toFixed(0)}<small>°</small></span>
+              <i className="tb"><b style={{ width: `${Math.min(100, (box.temp / 60) * 100)}%` }} /></i>
+            </div>
+            <div className="tile">
+              <span className="tl">{box.name} humidity</span>
+              <span className="tv">{box.humidity.toFixed(0)}<small> % RH</small></span>
+              <i className={`tb ${box.humidity > 50 ? 'warn' : ''}`}><b style={{ width: `${Math.min(100, box.humidity)}%` }} /></i>
+            </div>
+          </>
+        )}
       </div>
     </div>
   )

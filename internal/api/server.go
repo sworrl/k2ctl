@@ -54,6 +54,9 @@ func (s *Server) Handler() http.Handler {
 	mux.HandleFunc("POST /api/fans/recommended", s.fansRecommended)
 	mux.HandleFunc("POST /api/gcode", s.gcode)
 	mux.HandleFunc("GET /api/history", s.history)
+	mux.HandleFunc("GET /api/temps/history", func(w http.ResponseWriter, r *http.Request) {
+		writeJSON(w, 200, map[string]any{"step_s": 2, "samples": s.Store.History()})
+	})
 	mux.HandleFunc("GET /api/version", func(w http.ResponseWriter, r *http.Request) {
 		writeJSON(w, 200, map[string]string{"version": s.Version})
 	})

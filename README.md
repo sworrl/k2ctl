@@ -45,7 +45,8 @@ gh repo clone sworrl/k2ctl ~/k2ctl && ~/k2ctl/install.sh
 
 ## What you get
 
-- Dashboard (React): camera, current job, temperatures, print controls, fans, CFS bays
+- Dashboard (React): camera, current job with a progress ring and finish time, temperature
+  histograms (last 10 min, an hour of history kept on the printer), print controls, fans, CFS bays
   with per-bay filament assignment, sensors, history.
 - Tray app (Qt 6): the same controls one click away, plus a webcam window and a sensors
   window. Backend URL and poll rate are under Settings in the tray menu.

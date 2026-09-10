@@ -121,10 +121,25 @@ type Status struct {
 	UpdatedAt time.Time      `json:"updated_at"`
 }
 
+// Sample is one point of temperature history: unix seconds plus, per key
+// (nozzle, bed, chamber), [actual, target]; "cfs" carries [temp, humidity] of
+// the first CFS unit. Kept in memory only, so it starts empty at every boot.
+type Sample struct {
+	T int64                 `json:"t"`
+	V map[string][2]float64 `json:"v"`
+}
+
+const (
+	historyStep = 2 * time.Second // at most one sample per step
+	historyKeep = 1800            // 1 h at the step above
+)
+
 type Store struct {
 	mu   sync.RWMutex
 	st   Status
 	subs map[chan struct{}]struct{}
+	hist []Sample
+	last time.Time
 }
 
 func New() *Store {
@@ -186,11 +201,41 @@ func (s *Store) Snapshot() Status {
 	return c
 }
 
+// History returns the temperature samples of the last hour, oldest first.
+func (s *Store) History() []Sample {
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	return append([]Sample(nil), s.hist...)
+}
+
+// sample appends a history point when the step has elapsed. Caller holds mu.
+func (s *Store) sample(now time.Time) {
+	if len(s.st.Temps) == 0 || now.Sub(s.last) < historyStep {
+		return
+	}
+	v := make(map[string][2]float64, len(s.st.Temps)+1)
+	for k, t := range s.st.Temps {
+		v[k] = [2]float64{t.Actual, t.Target}
+	}
+	for _, b := range s.st.CFS.Boxes {
+		if b.Type == 0 {
+			v["cfs"] = [2]float64{b.Temp, b.Humidity}
+			break
+		}
+	}
+	s.hist = append(s.hist, Sample{T: now.Unix(), V: v})
+	if len(s.hist) > historyKeep {
+		s.hist = s.hist[len(s.hist)-historyKeep:]
+	}
+	s.last = now
+}
+
 // Update applies fn under the write lock and wakes subscribers.
 func (s *Store) Update(fn func(*Status)) {
 	s.mu.Lock()
 	fn(&s.st)
 	s.st.UpdatedAt = time.Now()
+	s.sample(s.st.UpdatedAt)
 	s.mu.Unlock()
 	s.mu.RLock()
 	for ch := range s.subs {

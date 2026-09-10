@@ -24,6 +24,8 @@ export interface Status {
   device: Record<string, unknown>
   updated_at: string
 }
+export interface Sample { t: number; v: Record<string, [number, number]> }
+export interface TempsHistory { step_s: number; samples: Sample[] }
 export interface Fan { on: boolean; pct: number }
 export interface FanRec { part: number; aux: number; chamber: number; source: string }
 export interface FanCtrl { part: Fan; aux: Fan; chamber: Fan; recommended: FanRec }
@@ -53,6 +55,7 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
 export const api = {
   status: () => request<Status>('/api/status'),
   profiles: () => request<Profile[]>('/api/profiles'),
+  tempsHistory: () => request<TempsHistory>('/api/temps/history'),
   setMaterial: (box: number, slot: number, body: Record<string, unknown>) =>
     request<{ ok: boolean }>(`/api/cfs/${box}/${slot}/material`, { method: 'POST', body: JSON.stringify(body) }),
   print: (action: 'pause' | 'resume' | 'cancel') =>
@@ -124,6 +127,12 @@ export function fmtDuration(s: number): string {
   if (!s || s < 0) return '-'
   const h = Math.floor(s / 3600), m = Math.floor((s % 3600) / 60)
   return h ? `${h}h ${m.toString().padStart(2, '0')}m` : `${m}m ${Math.floor(s % 60).toString().padStart(2, '0')}s`
+}
+
+/** Clock time h:mm for "done at", from seconds left. */
+export function fmtClock(secondsFromNow: number): string {
+  if (!secondsFromNow || secondsFromNow < 0) return '-'
+  return new Date(Date.now() + secondsFromNow * 1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
 }
 
 export function baseName(p: string): string {

@@ -7,6 +7,18 @@ const FANS: { key: FanKey; name: string; hint: string }[] = [
   { key: 'chamber', name: 'Chamber fan', hint: 'case / exhaust · M106 P1' },
 ]
 
+function FanGlyph({ pct, on }: { pct: number; on: boolean }) {
+  const spin = on && pct > 0
+  return (
+    <svg className={`fanglyph ${spin ? 'spin' : ''}`} viewBox="0 0 24 24" width={26} height={26} aria-hidden
+      style={{ animationDuration: spin ? `${(2.6 - (pct / 100) * 2.2).toFixed(2)}s` : undefined }}>
+      <circle cx={12} cy={12} r={11} fill="none" stroke="var(--line-2)" strokeWidth={1.2} />
+      {[0, 120, 240].map(d => <path key={d} d="M12 12 C16 10 17 5 13 3.5 C12.4 6 12 9 12 12 Z" fill={spin ? 'var(--accent)' : 'var(--muted)'} transform={`rotate(${d} 12 12)`} />)}
+      <circle cx={12} cy={12} r={2.2} fill={spin ? 'var(--accent)' : 'var(--muted)'} />
+    </svg>
+  )
+}
+
 function Toggle({ on, disabled, onChange, label }: { on: boolean; disabled?: boolean; onChange: (v: boolean) => void; label: string }) {
   return (
     <label className={`switch ${on ? 'on' : ''}`} title={`${label}: ${on ? 'on' : 'off'}`}>
@@ -48,6 +60,7 @@ export default function FansCard({ status, className = '' }: { status: Status; c
             <div key={key} className={`fan-row ${f.on ? 'on' : 'off'}`}>
               <div className="fan-name">
                 <Toggle on={f.on} disabled={busy !== null} label={name} onChange={(v) => void setOn(key, v)} />
+                <FanGlyph pct={shown} on={f.on} />
                 <div><b>{name}</b><br /><small>{hint}</small></div>
               </div>
               <input type="range" min={0} max={100} step={5} value={shown} disabled={busy !== null} style={{ ['--fill' as string]: `${shown}%` }}
