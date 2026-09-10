@@ -5,6 +5,7 @@ import (
 	"embed"
 	"encoding/json"
 	"fmt"
+	"io"
 	"io/fs"
 	"log"
 	"net/http"
@@ -54,6 +55,8 @@ func (s *Server) Handler() http.Handler {
 	mux.HandleFunc("POST /api/fans/recommended", s.fansRecommended)
 	mux.HandleFunc("POST /api/gcode", s.gcode)
 	mux.HandleFunc("GET /api/history", s.history)
+	mux.HandleFunc("GET /api/files", s.files)
+	mux.HandleFunc("GET /api/files/gcode", s.gcodeFile)
 	mux.HandleFunc("GET /api/temps/history", func(w http.ResponseWriter, r *http.Request) {
 		writeJSON(w, 200, map[string]any{"step_s": 2, "samples": s.Store.History()})
 	})
@@ -391,6 +394,44 @@ func (s *Server) gcode(w http.ResponseWriter, r *http.Request) {
 	}
 	s.Log.Printf("gcode: %s", body.Script)
 	writeJSON(w, 200, map[string]bool{"ok": true})
+}
+
+// files lists the gcode files on the printer (newest first).
+func (s *Server) files(w http.ResponseWriter, r *http.Request) {
+	fl, err := s.Moon.Files()
+	if err != nil {
+		fail(w, 502, err)
+		return
+	}
+	if fl == nil {
+		fl = []moonraker.File{}
+	}
+	writeJSON(w, 200, fl)
+}
+
+// gcodeFile streams one gcode file from the printer so the dashboard's viewer can
+// read it from the same origin (no CORS, no mixed content over HTTPS).
+func (s *Server) gcodeFile(w http.ResponseWriter, r *http.Request) {
+	p := r.URL.Query().Get("path")
+	if p == "" {
+		fail(w, 400, fmt.Errorf("path is required"))
+		return
+	}
+	resp, err := s.Moon.Open(p, r.Header.Get("Range"))
+	if err != nil {
+		fail(w, 502, err)
+		return
+	}
+	defer resp.Body.Close()
+	for _, h := range []string{"Content-Length", "Content-Range", "Accept-Ranges", "Last-Modified", "ETag"} {
+		if v := resp.Header.Get(h); v != "" {
+			w.Header().Set(h, v)
+		}
+	}
+	w.Header().Set("Content-Type", "text/plain; charset=utf-8")
+	w.Header().Set("Cache-Control", "private, max-age=3600")
+	w.WriteHeader(resp.StatusCode)
+	_, _ = io.Copy(w, resp.Body)
 }
 
 func (s *Server) history(w http.ResponseWriter, r *http.Request) {

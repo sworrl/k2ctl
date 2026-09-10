@@ -7,6 +7,7 @@ import CfsCard from './components/CfsCard'
 import ControlsCard from './components/ControlsCard'
 import FansCard from './components/FansCard'
 import SensorsCard from './components/SensorsCard'
+import ModelCard from './components/ModelCard'
 import SlotDialog from './components/SlotDialog'
 
 export default function App() {
@@ -46,6 +47,7 @@ export default function App() {
             <TempsCard status={status} />
             <ControlsCard status={status} />
           </div>
+          <ModelCard status={status} className="span-12" />
           <FansCard status={status} className="span-12" />
           <CfsCard status={status} className="span-12" onPick={(box, slot) => setEditing({ box, slot })} />
           {(status.errors ?? []).length > 0 && (

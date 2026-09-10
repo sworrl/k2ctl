@@ -24,6 +24,7 @@ export interface Status {
   device: Record<string, unknown>
   updated_at: string
 }
+export interface GFile { path: string; size: number; modified: number }
 export interface Sample { t: number; v: Record<string, [number, number]> }
 export interface TempsHistory { step_s: number; samples: Sample[] }
 export interface Fan { on: boolean; pct: number }
@@ -56,6 +57,7 @@ export const api = {
   status: () => request<Status>('/api/status'),
   profiles: () => request<Profile[]>('/api/profiles'),
   tempsHistory: () => request<TempsHistory>('/api/temps/history'),
+  files: () => request<GFile[]>('/api/files'),
   setMaterial: (box: number, slot: number, body: Record<string, unknown>) =>
     request<{ ok: boolean }>(`/api/cfs/${box}/${slot}/material`, { method: 'POST', body: JSON.stringify(body) }),
   print: (action: 'pause' | 'resume' | 'cancel') =>

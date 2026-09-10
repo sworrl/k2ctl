@@ -11,6 +11,7 @@ import (
 	"log"
 	"net/http"
 	"net/url"
+	"sort"
 	"strings"
 	"time"
 
@@ -113,6 +114,40 @@ func (c *Client) GCode(script string) error {
 func (c *Client) Pause() error  { return c.post("/printer/print/pause", nil, nil) }
 func (c *Client) Resume() error { return c.post("/printer/print/resume", nil, nil) }
 func (c *Client) Cancel() error { return c.post("/printer/print/cancel", nil, nil) }
+
+// File is one entry of the printer's gcodes root.
+type File struct {
+	Path     string  `json:"path"`
+	Size     int64   `json:"size"`
+	Modified float64 `json:"modified"`
+}
+
+// Files lists the gcode files on the printer, newest first.
+func (c *Client) Files() ([]File, error) {
+	var r result[[]File]
+	if err := c.get("/server/files/list?root=gcodes", &r); err != nil {
+		return nil, err
+	}
+	sort.Slice(r.Result, func(i, j int) bool { return r.Result[i].Modified > r.Result[j].Modified })
+	return r.Result, nil
+}
+
+// Open streams a gcode file from the printer. The caller closes the body.
+// Range headers pass through so a viewer can resume or sample.
+func (c *Client) Open(path string, rangeHdr string) (*http.Response, error) {
+	if strings.Contains(path, "..") {
+		return nil, fmt.Errorf("bad path")
+	}
+	req, err := http.NewRequest("GET", c.base+"/server/files/gcodes/"+url.PathEscape(path), nil)
+	if err != nil {
+		return nil, err
+	}
+	if rangeHdr != "" {
+		req.Header.Set("Range", rangeHdr)
+	}
+	// No client timeout here: a 100 MB gcode over Wi-Fi takes longer than 8 s.
+	return (&http.Client{}).Do(req)
+}
 
 func (c *Client) History(limit int) (any, error) {
 	var r result[any]
