@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
 import CameraCard from './components/CameraCard'
+import '@fontsource-variable/space-grotesk'
 import './styles.css'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(

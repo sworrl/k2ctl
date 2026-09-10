@@ -59,7 +59,7 @@ export default function App() {
         <div className="grid"><CameraCard className="span-12" /></div>
       )}
 
-      <div className="foot"><img src="/logo.png" alt="Falcon Technix" /> k2ctl by Falcon Technix</div>
+      <div className="foot"><a href="https://falcontechnix.com" target="_blank" rel="noreferrer"><img src="/ft-logo.webp" alt="Falcon Technix" /></a><span>k2ctl</span><span>a Falcon Technix tool</span></div>
 
       {editing && status && (
         <SlotDialog box={editing.box} slot={editing.slot} profiles={profiles} printing={jobState === 'printing'}
