@@ -99,12 +99,37 @@ type FanCtrl struct {
 	Recommended FanRec `json:"recommended"`
 }
 
+// Chamber is everything the printer knows about chamber climate. The stock K2 has a
+// thermistor and an exhaust fan with a temperature threshold, no heater; Heater is
+// filled in only when Klipper has a heater_generic for the chamber (the K2 Plus PTC or
+// a user mod), so the UI can tell "cannot heat" from "heater is off".
+type Chamber struct {
+	Temp       float64 `json:"temp"`
+	MinSeen    float64 `json:"min_seen"`
+	MaxSeen    float64 `json:"max_seen"`
+	FanOn      bool    `json:"fan_on"`      // exhaust/filter fan currently running
+	FanSpeed   float64 `json:"fan_speed"`   // 0..1 as Klipper reports it
+	FanTarget  float64 `json:"fan_target"`  // threshold: fan runs above this (M141 S)
+	FanEnabled bool    `json:"fan_enabled"` // SET_TEMPERATURE_FAN_SWITCH state, when known
+	Heater     *Heater `json:"heater,omitempty"`
+}
+
+// Heater is a Klipper heater_generic (present only when a chamber heater is fitted).
+type Heater struct {
+	Name   string  `json:"name"`
+	Temp   float64 `json:"temp"`
+	Target float64 `json:"target"`
+	Power  float64 `json:"power"` // 0..1 duty
+	Max    float64 `json:"max"`
+}
+
 type Status struct {
 	Printer Printer         `json:"printer"`
 	Temps   map[string]Temp `json:"temps"`
 	Job     Job             `json:"job"`
 	CFS     CFS             `json:"cfs"`
 	Light   bool            `json:"light"`
+	Chamber Chamber         `json:"chamber"`
 	Fans    map[string]int  `json:"fans"` // part|case|aux -> percent (printer's own reading)
 	FanOn   map[string]bool `json:"fan_on"`
 	// FanCtrl is filled in by the API layer (needs the profile catalog).
@@ -179,6 +204,10 @@ func (s *Store) Snapshot() Status {
 		c.Sources[k] = v
 	}
 	c.Errors = append([]string{}, s.st.Errors...) // never nil: the UI does errors.length
+	if s.st.Chamber.Heater != nil {
+		h := *s.st.Chamber.Heater
+		c.Chamber.Heater = &h
+	}
 	c.Sensors = make(map[string]map[string]any, len(s.st.Sensors))
 	for k, v := range s.st.Sensors {
 		c.Sensors[k] = v // values are replaced wholesale, never mutated in place

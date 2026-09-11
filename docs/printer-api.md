@@ -165,3 +165,37 @@ with a token instead; this one does not.
 OpenWrt 21.02 (procd init, `/etc/init.d/*`), ARMv7 (armv7l, 2 cores, ~500 MB RAM), user data on
 `/mnt/UDISK` (`printer_data/gcodes`, `printer_data/config`, logs). `k2ctl` is a static Go binary
 (GOARCH=arm GOARM=7) installed to `/mnt/UDISK/k2ctl` and started by `/etc/init.d/k2ctl`.
+
+## Chamber
+
+Mapped 2026-09-11 on the K2 (F021). There is **no chamber heater** on this model. What
+exists:
+
+- `temperature_sensor chamber_temp`: EPCOS 100K thermistor on the toolboard (`PC5`).
+- `temperature_fan chamber_fan`: the exhaust/filter fan (`multi_pin filter_fan` = PB1+PB3,
+  the same pins as `output_pin fan1`) under Klipper's watermark control, default target
+  35 °C, `max_delta` 0.3. Above the target the fan runs, below it stops. This loop is what
+  the touchscreen's "chamber" number and the socket's `targetBoxTemp` (max 60) set.
+- `M141 S<n>` (and `M191`, which just calls `M141`) is Creality's macro over that fan:
+  `S0` disables the loop and stops the fan, any other value enables it and sets the target.
+  A running print's start gcode sets it from the filament profile.
+- `output_pin ptc_power` (`PB2`, value 1) is in the config with nothing referencing it, and
+  Klipper's `fan_feedback` has a `QUERY_PTC_FAN_CHECK`; both are leftovers of the shared
+  K2 Plus config, where that pin powers the PTC chamber heater.
+
+k2ctl: `status.chamber` (`temp`, `min_seen`, `max_seen`, `fan_on`, `fan_speed`,
+`fan_target`, and `heater` when a `heater_generic` named chamber exists) and
+`POST /api/chamber` with `{"fan_threshold": n}` (sends `M141 S<n>`) and/or `{"heat": n}`
+(sends `SET_HEATER_TEMPERATURE` to that heater; 409 `no_heater` when there is none).
+
+### Adding a chamber heater
+
+Klipper needs a `[heater_generic chamber]` with its own `heater_pin`, a sensor (the
+existing `chamber_temp` thermistor can be shared through `duplicate_pin_override`, or a
+second thermistor), `control: watermark` or `pid`, `min_temp`/`max_temp`, and a
+`[verify_heater chamber]` with a slow `heating_gain`. The mainboard's `ptc_power` pin
+(PB2) is the natural switch if the mod is a K2 Plus-style PTC on a relay; a mains PTC
+needs its own SSR, a thermal fuse, and its fan tied to the heater (K2 Plus does this with
+`fan0` on the nozzle board, see `printer_params.cfg` `fan0_pin: PC6 # PTC Fan`). k2ctl picks
+the new heater up on its next Moonraker object scan (restart k2ctl after the Klipper
+restart) and the dashboard's heater control appears on its own.

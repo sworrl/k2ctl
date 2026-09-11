@@ -8,6 +8,7 @@ import ControlsCard from './components/ControlsCard'
 import FansCard from './components/FansCard'
 import SensorsCard from './components/SensorsCard'
 import ModelCard from './components/ModelCard'
+import ChamberCard from './components/ChamberCard'
 import SlotDialog from './components/SlotDialog'
 
 export default function App() {
@@ -48,7 +49,8 @@ export default function App() {
             <ControlsCard status={status} />
           </div>
           <ModelCard status={status} className="span-12" />
-          <FansCard status={status} className="span-12" />
+          <ChamberCard status={status} className="span-6" />
+          <FansCard status={status} className="span-6" />
           <CfsCard status={status} className="span-12" onPick={(box, slot) => setEditing({ box, slot })} />
           {(status.errors ?? []).length > 0 && (
             <div className="card span-12"><h2>Device errors</h2><div className="errors">{(status.errors ?? []).map((e, i) => <div key={i}>{e}</div>)}</div></div>

@@ -195,7 +195,10 @@ func (c *Client) poll() error {
 			}
 		}
 		for _, o := range all {
-			if strings.Contains(o, "chamber") && (strings.HasPrefix(o, "heater_generic") || strings.HasPrefix(o, "temperature_sensor")) {
+			if strings.Contains(o, "chamber") && (strings.HasPrefix(o, "heater_generic") || strings.HasPrefix(o, "temperature_sensor") || strings.HasPrefix(o, "temperature_fan")) {
+				c.objs = append(c.objs, o)
+			}
+			if o == "configfile" {
 				c.objs = append(c.objs, o)
 			}
 			if isSensorObject(o) {
@@ -238,10 +241,45 @@ func (c *Client) poll() error {
 		if hb, ok := st["heater_bed"]; ok {
 			s.Temps["bed"] = mergeTemp(s.Temps["bed"], hb)
 		}
+		s.Chamber.Heater = nil
 		for name, obj := range st {
-			if strings.Contains(name, "chamber") {
-				s.Temps["chamber"] = mergeTemp(s.Temps["chamber"], obj)
+			if !strings.Contains(name, "chamber") {
+				continue
 			}
+			switch {
+			case strings.HasPrefix(name, "temperature_sensor"):
+				s.Temps["chamber"] = mergeTemp(s.Temps["chamber"], obj)
+				s.Chamber.Temp = num(obj["temperature"])
+				s.Chamber.MinSeen = num(obj["measured_min_temp"])
+				s.Chamber.MaxSeen = num(obj["measured_max_temp"])
+			case strings.HasPrefix(name, "temperature_fan"):
+				s.Chamber.FanSpeed = num(obj["speed"])
+				s.Chamber.FanOn = s.Chamber.FanSpeed > 0
+				s.Chamber.FanTarget = num(obj["target"])
+				if s.Chamber.Temp == 0 {
+					s.Chamber.Temp = num(obj["temperature"])
+				}
+			case strings.HasPrefix(name, "heater_generic"):
+				h := &state.Heater{Name: strings.TrimPrefix(name, "heater_generic "), Temp: num(obj["temperature"]), Target: num(obj["target"]), Power: num(obj["power"])}
+				if cf, ok := st["configfile"]; ok {
+					if cfg, ok := cf["config"].(map[string]any); ok {
+						if sec, ok := cfg[name].(map[string]any); ok {
+							h.Max = num(sec["max_temp"])
+						}
+					}
+				}
+				s.Chamber.Heater = h
+				// a real heater's target is the chamber setpoint
+				t := s.Temps["chamber"]
+				t.Target = h.Target
+				s.Temps["chamber"] = t
+			}
+		}
+		if s.Chamber.Heater == nil {
+			// no heater: the "target" the socket reports is the exhaust threshold, not a setpoint
+			t := s.Temps["chamber"]
+			t.Target = 0
+			s.Temps["chamber"] = t
 		}
 		if ps, ok := st["print_stats"]; ok {
 			if v, ok := ps["state"].(string); ok && v != "" {

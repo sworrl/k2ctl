@@ -55,6 +55,7 @@ func (s *Server) Handler() http.Handler {
 	mux.HandleFunc("POST /api/fans/recommended", s.fansRecommended)
 	mux.HandleFunc("POST /api/gcode", s.gcode)
 	mux.HandleFunc("GET /api/history", s.history)
+	mux.HandleFunc("POST /api/chamber", s.setChamber)
 	mux.HandleFunc("GET /api/files", s.files)
 	mux.HandleFunc("GET /api/files/gcode", s.gcodeFile)
 	mux.HandleFunc("GET /api/temps/history", func(w http.ResponseWriter, r *http.Request) {
@@ -394,6 +395,58 @@ func (s *Server) gcode(w http.ResponseWriter, r *http.Request) {
 	}
 	s.Log.Printf("gcode: %s", body.Script)
 	writeJSON(w, 200, map[string]bool{"ok": true})
+}
+
+// setChamber takes {"fan_threshold": n} (exhaust fan runs above n °C; 0 turns the loop
+// off, Creality's M141) and/or {"heat": n} (heater_generic setpoint; 409 when no heater
+// is fitted). Both go through Klipper gcode so the touchscreen and slicer stay in sync.
+func (s *Server) setChamber(w http.ResponseWriter, r *http.Request) {
+	var body struct {
+		FanThreshold *float64 `json:"fan_threshold"`
+		Heat         *float64 `json:"heat"`
+	}
+	if err := json.NewDecoder(r.Body).Decode(&body); err != nil {
+		fail(w, 400, err)
+		return
+	}
+	snap := s.Store.Snapshot()
+	var cmds []string
+	if body.FanThreshold != nil {
+		t := *body.FanThreshold
+		if t < 0 || t > 80 {
+			fail(w, 400, fmt.Errorf("fan_threshold must be 0..80"))
+			return
+		}
+		cmds = append(cmds, fmt.Sprintf("M141 S%d", int(t)))
+	}
+	if body.Heat != nil {
+		h := snap.Chamber.Heater
+		if h == nil {
+			writeJSON(w, 409, map[string]any{"error": "no chamber heater is fitted", "no_heater": true})
+			return
+		}
+		t := *body.Heat
+		max := h.Max
+		if max <= 0 {
+			max = 80
+		}
+		if t < 0 || t > max {
+			fail(w, 400, fmt.Errorf("heat must be 0..%.0f", max))
+			return
+		}
+		cmds = append(cmds, fmt.Sprintf("SET_HEATER_TEMPERATURE HEATER=%s TARGET=%d", h.Name, int(t)))
+	}
+	if len(cmds) == 0 {
+		fail(w, 400, fmt.Errorf("nothing to set"))
+		return
+	}
+	for _, c := range cmds {
+		if err := s.Moon.GCode(c); err != nil {
+			fail(w, 502, err)
+			return
+		}
+	}
+	writeJSON(w, 200, map[string]any{"ok": true, "sent": cmds})
 }
 
 // files lists the gcode files on the printer (newest first).

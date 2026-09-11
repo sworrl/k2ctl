@@ -6,9 +6,12 @@ export interface Slot {
   min_temp: number; max_temp: number; pressure: number; percent: number; selected: boolean; state: number; editable: boolean
 }
 export interface Box { id: number; name: string; type: number; state: number; temp: number; humidity: number; serial?: string; slots: Slot[] }
+export interface ChamberHeater { name: string; temp: number; target: number; power: number; max: number }
+export interface Chamber { temp: number; min_seen: number; max_seen: number; fan_on: boolean; fan_speed: number; fan_target: number; fan_enabled: boolean; heater?: ChamberHeater }
 export interface Status {
   printer: { hostname: string; name: string; model: string; state: string; raw_state: number; connected: boolean; klipper?: string; firmware?: string }
   temps: Record<string, Temp>
+  chamber: Chamber
   job: { file: string; state: string; progress: number; layer: number; total_layers: number; time_left_s: number; elapsed_s: number; started_at?: number }
   cfs: { connected: boolean; enabled: boolean; boxes: Box[]; tool_map?: Record<string, string>; active?: string }
   light: boolean
@@ -58,6 +61,9 @@ export const api = {
   profiles: () => request<Profile[]>('/api/profiles'),
   tempsHistory: () => request<TempsHistory>('/api/temps/history'),
   files: () => request<GFile[]>('/api/files'),
+  /** fan_threshold: exhaust fan runs above this (M141); heat: heater_generic setpoint when fitted */
+  setChamber: (body: { fan_threshold?: number; heat?: number }) =>
+    request<{ ok: boolean; sent: string[] }>('/api/chamber', { method: 'POST', body: JSON.stringify(body) }),
   setMaterial: (box: number, slot: number, body: Record<string, unknown>) =>
     request<{ ok: boolean }>(`/api/cfs/${box}/${slot}/material`, { method: 'POST', body: JSON.stringify(body) }),
   print: (action: 'pause' | 'resume' | 'cancel') =>
