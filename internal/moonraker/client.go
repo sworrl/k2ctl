@@ -292,7 +292,7 @@ func (c *Client) poll() error {
 			if v, ok := ps["print_duration"].(float64); ok && v > 0 {
 				s.Job.Elapsed = int(v)
 			}
-			if info, ok := ps["info"].(map[string]any); ok {
+			if info, ok := ps["info"].(map[string]any); ok && !s.Sources["cxws"] {
 				if v, ok := info["current_layer"].(float64); ok {
 					s.Job.Layer = int(v)
 				}
@@ -301,9 +301,19 @@ func (c *Client) poll() error {
 				}
 			}
 		}
-		if ds, ok := st["display_status"]; ok {
-			if v, ok := ds["progress"].(float64); ok && (v > 0 || s.Job.State == "printing") {
-				s.Job.Progress = v * 100
+		// Progress: the device socket's printProgress is the printer's own number and
+		// wins whenever it is live. Moonraker's display_status.progress is the slicer's
+		// M73 estimate, which Creality Print only emits every few percent and which
+		// stalls late in a job; fall back to virtual_sdcard's byte position instead.
+		if !s.Sources["cxws"] {
+			if vs, ok := st["virtual_sdcard"]; ok {
+				if v, ok := vs["progress"].(float64); ok && (v > 0 || s.Job.State == "printing") {
+					s.Job.Progress = v * 100
+				}
+			} else if ds, ok := st["display_status"]; ok {
+				if v, ok := ds["progress"].(float64); ok && (v > 0 || s.Job.State == "printing") {
+					s.Job.Progress = v * 100
+				}
 			}
 		}
 		if s.Job.State == "standby" || s.Job.State == "complete" || s.Job.State == "cancelled" {

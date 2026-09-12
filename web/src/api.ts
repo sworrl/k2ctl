@@ -137,10 +137,20 @@ export function fmtDuration(s: number): string {
   return h ? `${h}h ${m.toString().padStart(2, '0')}m` : `${m}m ${Math.floor(s % 60).toString().padStart(2, '0')}s`
 }
 
-/** Clock time h:mm for "done at", from seconds left. */
-export function fmtClock(secondsFromNow: number): string {
-  if (!secondsFromNow || secondsFromNow < 0) return '-'
-  return new Date(Date.now() + secondsFromNow * 1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+/** 24-hour clock HH:MM for a Date, unix seconds, or seconds from now. */
+export function fmtClock(when: number | Date, fromNow = false): string {
+  let d: Date
+  if (when instanceof Date) d = when
+  else if (fromNow) { if (!when || when < 0) return '-'; d = new Date(Date.now() + when * 1000) }
+  else { if (!when) return '-'; d = new Date(when * 1000) }
+  return `${d.getHours().toString().padStart(2, '0')}:${d.getMinutes().toString().padStart(2, '0')}`
+}
+
+/** Duration in a fixed h:mm:ss form so the digits do not jump around. */
+export function fmtHMS(s: number): string {
+  if (!s || s < 0) return '-'
+  const h = Math.floor(s / 3600), m = Math.floor((s % 3600) / 60), sec = Math.floor(s % 60)
+  return `${h}:${m.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`
 }
 
 export function baseName(p: string): string {

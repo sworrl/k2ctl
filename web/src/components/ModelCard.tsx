@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
-import { api, baseName, fmtDuration, type GFile, type Status } from '../api'
+import { api, baseName, fmtHMS, type GFile, type Status } from '../api'
 import type { ParseResult, WorkerMsg } from '../gcode.worker'
 
 // 3D preview of a gcode file on the printer: extrusion toolpaths as lines, drag to
@@ -211,7 +211,7 @@ export default function ModelCard({ status, className = '' }: { status: Status; 
                 <dt>Footprint</dt><dd>{(result.bbox[3] - result.bbox[0]).toFixed(0)} x {(result.bbox[4] - result.bbox[1]).toFixed(0)} mm</dd>
                 {h?.filamentMm ? <><dt>Filament</dt><dd>{(h.filamentMm / 1000).toFixed(2)} m</dd></> : null}
                 {h?.time ? <><dt>Sliced time</dt><dd>{h.time}</dd></> : null}
-                {printingThis && <><dt>Left</dt><dd>{fmtDuration(status.job.time_left_s)}</dd></>}
+                {printingThis && <><dt>Left</dt><dd>{fmtHMS(status.job.time_left_s)}</dd></>}
                 <dt>Segments</dt><dd>{(result.pos.length / 6).toLocaleString()}{result.truncated ? ' (cut)' : ''}</dd>
               </dl>
               <div className="model-legend">{legend.map(l => <span key={l.name}><i style={{ background: l.color }} />{l.name}</span>)}</div>

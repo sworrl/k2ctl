@@ -12,6 +12,7 @@
 #include <QRegularExpression>
 #include <QPainter>
 #include <QSettings>
+#include <QDateTime>
 #include <QLinearGradient>
 #include <QInputDialog>
 #include <QSpinBox>
@@ -20,10 +21,15 @@
 #include "camerawindow.h"
 #include "sensorswindow.h"
 
+// Durations as h:mm:ss and clock times as 24-hour HH:mm, everywhere.
 static QString fmtDur(int s) {
     if (s <= 0) return "-";
-    const int h = s / 3600, m = (s % 3600) / 60;
-    return h ? QString("%1h %2m").arg(h).arg(m, 2, 10, QChar('0')) : QString("%1m").arg(m);
+    const int h = s / 3600, m = (s % 3600) / 60, sec = s % 60;
+    return QString("%1:%2:%3").arg(h).arg(m, 2, 10, QChar('0')).arg(sec, 2, 10, QChar('0'));
+}
+static QString doneAt(int secondsLeft) {
+    if (secondsLeft <= 0) return "-";
+    return QDateTime::currentDateTime().addSecs(secondsLeft).toString("HH:mm");
 }
 
 TrayApp::TrayApp(QObject *parent) : QObject(parent) {
@@ -115,7 +121,7 @@ QString TrayApp::stateSummary() const {
     };
     QString s = job.value("state").toString("standby");
     if (s == "printing" || s == "paused")
-        s += QString(" %1% · %2 left").arg(job.value("progress").toDouble(), 0, 'f', 0).arg(fmtDur(job.value("time_left_s").toInt()));
+        s += QString(" %1% · %2 left · done %3").arg(job.value("progress").toDouble(), 0, 'f', 1).arg(fmtDur(job.value("time_left_s").toInt())).arg(doneAt(job.value("time_left_s").toInt()));
     return s + " · nozzle " + t("nozzle") + " · bed " + t("bed");
 }
 

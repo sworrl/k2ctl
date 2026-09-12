@@ -1,4 +1,4 @@
-import { baseName, fmtClock, fmtDuration, type Status } from '../api'
+import { baseName, fmtClock, fmtHMS, type Status } from '../api'
 
 function Ring({ pct }: { pct: number }) {
   const r = 34, c = 2 * Math.PI * r
@@ -8,7 +8,7 @@ function Ring({ pct }: { pct: number }) {
       <circle cx={42} cy={42} r={r} fill="none" stroke="var(--panel-3)" strokeWidth={7} />
       <circle cx={42} cy={42} r={r} fill="none" stroke="var(--accent)" strokeWidth={7} strokeLinecap="round"
         strokeDasharray={`${(c * p) / 100} ${c}`} transform="rotate(-90 42 42)" style={{ transition: 'stroke-dasharray .6s' }} />
-      <text x={42} y={47} textAnchor="middle" className="ring-num">{p.toFixed(0)}%</text>
+      <text x={42} y={47} textAnchor="middle" className="ring-num">{p.toFixed(p >= 99.5 ? 0 : 1)}%</text>
     </svg>
   )
 }
@@ -31,8 +31,8 @@ export default function JobCard({ status, className = '' }: { status: Status; cl
             <Ring pct={j.progress} />
             <div className="job-text">
               <div className="job-file" title={j.file}>{baseName(j.file)}</div>
-              <div className="job-eta"><b>{fmtDuration(j.time_left_s)}</b> left, done about <b>{fmtClock(j.time_left_s)}</b></div>
-              <div className="job-sub">{fmtDuration(j.elapsed_s)} elapsed</div>
+              <div className="job-eta"><b>{fmtHMS(j.time_left_s)}</b> left, done about <b>{fmtClock(j.time_left_s, true)}</b></div>
+              <div className="job-sub">{fmtHMS(j.elapsed_s)} elapsed{j.started_at ? `, started ${fmtClock(j.started_at)}` : ''}</div>
             </div>
           </div>
           <div className="job-layer">
