@@ -56,6 +56,10 @@ func (s *Server) Handler() http.Handler {
 	mux.HandleFunc("POST /api/gcode", s.gcode)
 	mux.HandleFunc("GET /api/history", s.history)
 	mux.HandleFunc("POST /api/chamber", s.setChamber)
+	mux.HandleFunc("GET /api/motion", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Cache-Control", "no-store")
+		writeJSON(w, 200, map[string]any{"now": time.Now(), "samples": s.Moon.Motion()})
+	})
 	mux.HandleFunc("GET /api/files", s.files)
 	mux.HandleFunc("GET /api/files/gcode", s.gcodeFile)
 	mux.HandleFunc("GET /api/temps/history", func(w http.ResponseWriter, r *http.Request) {

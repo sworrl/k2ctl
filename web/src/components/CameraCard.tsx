@@ -94,7 +94,6 @@ export default function CameraCard({ full = false, className = '' }: { full?: bo
         <div ref={frameRef} className={`camera-frame ${full ? 'full' : ''}`}>
           <video ref={videoRef} autoPlay playsInline muted />
           <i className="hud-corner tl" /><i className="hud-corner tr" /><i className="hud-corner bl" /><i className="hud-corner br" />
-          <i className="scanlines" />
           {state === 'connected' && <span className="rec"><i />LIVE</span>}
           {state !== 'connected' && <div className="camera-waiting"><span className="radar" />{state}</div>}
           <div className="camera-top">

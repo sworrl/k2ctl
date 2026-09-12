@@ -26,6 +26,7 @@ type Client struct {
 	objs    []string
 	sensors []string
 	tick    int
+	motion  motion
 }
 
 // Base returns the Moonraker base URL (used to derive the printer host for other services).

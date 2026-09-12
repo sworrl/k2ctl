@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
-import { api, baseName, fmtHMS, type GFile, type Status } from '../api'
+import { api, baseName, fmtHMS, type GFile, type MotionSample, type Status } from '../api'
 import type { ParseResult, WorkerMsg } from '../gcode.worker'
 import { reducedMotion } from '../motion'
 
@@ -20,6 +20,24 @@ const TYPE_COLORS: Record<string, string> = {
 const TOOL_FALLBACK = ['#3ddc84', '#2b8cff', '#ffb000', '#ff4d6d', '#b56cff', '#3dd6ff', '#ffffff', '#8d98aa']
 
 type Mode = 'tool' | 'type'
+
+// Live nozzle tracking. Klipper pushes an interpolated position about 4 times a second.
+// Guessing ahead along the last heading overshoots on every direction change (infill
+// turns many times a second), so instead the marker is drawn a fixed DELAY behind real
+// time, interpolated between the two samples that bracket that moment. It is always on
+// the true path and glides through corners; the cost is a little over half a second of
+// lag, less than the camera has. Klipper eventtimes space the samples; wall clocks only
+// place "now".
+type Track = {
+  samples: MotionSample[]
+  shown: THREE.Vector3      // where the marker is drawn
+  latestT: number           // eventtime of the newest sample
+  latestWall: number        // performance.now() when it arrived
+  active: boolean
+  trail: number[]           // recent shown positions, newest last, 3 floats each
+}
+const DELAY = 0.65 // seconds behind real time
+const TRAIL = 90
 
 // Per-segment color with fake tube lighting: a line's brightness follows how its
 // direction sits against a fixed light, the way slicers shade extrusions, so walls facing
@@ -79,7 +97,7 @@ export default function ModelCard({ status, className = '' }: { status: Status; 
   const [layer, setLayer] = useState(0)
   const [follow, setFollow] = useState(true)
   const mount = useRef<HTMLDivElement>(null)
-  const three = useRef<{ renderer: THREE.WebGLRenderer; scene: THREE.Scene; camera: THREE.PerspectiveCamera; controls: OrbitControls; lines?: THREE.LineSegments; glow?: THREE.LineSegments; bbox?: number[]; nozzle: THREE.Group; frame: () => void; fit: () => void } | null>(null)
+  const three = useRef<{ renderer: THREE.WebGLRenderer; scene: THREE.Scene; camera: THREE.PerspectiveCamera; controls: OrbitControls; lines?: THREE.LineSegments; glow?: THREE.LineSegments; bbox?: number[]; nozzle: THREE.Group; trail: THREE.Line; track: Track; frame: () => void; fit: () => void } | null>(null)
 
   const jobFile = status.job.file
   const printingThis = !!path && path === jobFile && (status.job.state === 'printing' || status.job.state === 'paused')
@@ -123,6 +141,15 @@ export default function ModelCard({ status, className = '' }: { status: Status; 
     drop.name = 'drop'
     nozzle.add(core, halo, drop); nozzle.visible = false
     scene.add(nozzle)
+    // fading trail behind the nozzle
+    const trailGeo = new THREE.BufferGeometry()
+    trailGeo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(TRAIL * 3), 3))
+    trailGeo.setAttribute('color', new THREE.BufferAttribute(new Float32Array(TRAIL * 3), 3))
+    trailGeo.setDrawRange(0, 0)
+    const trail = new THREE.Line(trailGeo, new THREE.LineBasicMaterial({ vertexColors: true, transparent: true, opacity: .9, blending: THREE.AdditiveBlending, depthWrite: false }))
+    trail.frustumCulled = false
+    scene.add(trail)
+    const track: Track = { samples: [], shown: new THREE.Vector3(), latestT: 0, latestWall: 0, active: false, trail: [] }
     let raf = 0, dirty = true, idleSince = performance.now(), t0 = performance.now()
     const frame = () => { dirty = true }
     const motion = !reducedMotion()
@@ -138,6 +165,39 @@ export default function ModelCard({ status, className = '' }: { status: Status; 
         else controls.autoRotate = false
         if (nozzle.visible) { const k = 1 + 0.35 * Math.sin((now - t0) / 260); halo.scale.setScalar(k); (halo.material as THREE.MeshBasicMaterial).opacity = .18 + .22 * (2 - k); moved = true }
       }
+      // nozzle follow: render DELAY behind real time, interpolated between real samples
+      if (track.active && track.samples.length) {
+        const ss = track.samples
+        const renderT = track.latestT + (now - track.latestWall) / 1000 - DELAY
+        let a = ss[0], b = ss[0]
+        for (let i = 0; i < ss.length; i++) { if (ss[i].t <= renderT) a = ss[i]; if (ss[i].t >= renderT) { b = ss[i]; break } b = ss[i] }
+        const span = b.t - a.t
+        const f = span > 1e-6 ? Math.max(0, Math.min(1, (renderT - a.t) / span)) : 1
+        track.shown.set(a.x + (b.x - a.x) * f, a.y + (b.y - a.y) * f, a.z + (b.z - a.z) * f)
+        nozzle.position.set(track.shown.x, track.shown.y, track.shown.z + 0.3)
+        const dropLine = nozzle.getObjectByName('drop') as THREE.Line | undefined
+        if (dropLine) dropLine.scale.set(1, 1, Math.max(0.01, track.shown.z + 0.3))
+        nozzle.visible = true
+        // trail
+        const tr = track.trail
+        const lastIdx = tr.length - 3
+        if (lastIdx < 0 || Math.hypot(tr[lastIdx] - track.shown.x, tr[lastIdx + 1] - track.shown.y, tr[lastIdx + 2] - track.shown.z) > 0.15) {
+          tr.push(track.shown.x, track.shown.y, track.shown.z + 0.25)
+          if (tr.length > TRAIL * 3) tr.splice(0, tr.length - TRAIL * 3)
+          const pa = trail.geometry.getAttribute('position') as THREE.BufferAttribute
+          const ca = trail.geometry.getAttribute('color') as THREE.BufferAttribute
+          const n = tr.length / 3
+          for (let i = 0; i < n; i++) {
+            pa.setXYZ(i, tr[i * 3], tr[i * 3 + 1], tr[i * 3 + 2])
+            const f = (i + 1) / n
+            ca.setXYZ(i, 0.13 * f, 0.83 * f, 0.93 * f)
+          }
+          pa.needsUpdate = true; ca.needsUpdate = true
+          trail.geometry.setDrawRange(0, n)
+        }
+        moved = true
+      } else if (nozzle.visible) { nozzle.visible = false; trail.geometry.setDrawRange(0, 0); track.trail.length = 0; moved = true }
+      ;(loop as unknown as { prev: number }).prev = now
       if (dirty || moved) { renderer.render(scene, camera); dirty = false }
     }
     const fit = () => {
@@ -160,7 +220,7 @@ export default function ModelCard({ status, className = '' }: { status: Status; 
     })
     ro.observe(el)
     controls.addEventListener('change', frame)
-    three.current = { renderer, scene, camera, controls, nozzle, frame, fit }
+    three.current = { renderer, scene, camera, controls, nozzle, trail, track, frame, fit }
     fit(); loop()
     return () => {
       cancelAnimationFrame(raf); ro.disconnect(); controls.dispose(); renderer.dispose()
@@ -219,18 +279,33 @@ export default function ModelCard({ status, className = '' }: { status: Status; 
     t.lines.geometry.setDrawRange(0, drawCount(result, layer)); t.frame()
   }, [layer, result])
 
-  // nozzle marker follows the live toolhead while this file prints
+  // live nozzle: poll the motion samples 4x a second while this file prints
   useEffect(() => {
     const t = three.current
     if (!t) return
-    const m = /X:\s*(-?[\d.]+)\s*Y:\s*(-?[\d.]+)\s*Z:\s*(-?[\d.]+)/.exec(status.position || '')
-    if (!printingThis || !m) { t.nozzle.visible = false; t.frame(); return }
-    const x = Number(m[1]), y = Number(m[2]), z = Number(m[3])
-    t.nozzle.position.set(x, y, z + 0.3)
-    const drop = t.nozzle.getObjectByName('drop') as THREE.Line | undefined
-    if (drop) drop.scale.set(1, 1, Math.max(0.01, z + 0.3))
-    t.nozzle.visible = true; t.frame()
-  }, [status.position, printingThis])
+    if (!printingThis) { t.track.active = false; return }
+    let stop = false
+    const tick = async () => {
+      if (stop) return
+      try {
+        const r = await api.motion()
+        const tr = t.track
+        const fresh = r.samples.filter(s => s.t > tr.latestT)
+        if (fresh.length) {
+          tr.samples = tr.samples.concat(fresh).slice(-16)
+          const s = fresh[fresh.length - 1]
+          if (!tr.active) { tr.shown.set(s.x, s.y, s.z); tr.active = true }
+          // the newest sample was true at its eventtime; it reached us a little later,
+          // so place its wall time back by that lag
+          const lagMs = Math.max(0, Math.min(500, Date.now() - new Date(s.at).getTime()))
+          tr.latestT = s.t; tr.latestWall = performance.now() - lagMs
+        }
+      } catch { /* keep the last estimate */ }
+      if (!stop) timer = window.setTimeout(tick, 250)
+    }
+    let timer = window.setTimeout(tick, 0)
+    return () => { stop = true; clearTimeout(timer); t.track.active = false }
+  }, [printingThis])
 
   const legend = useMemo(() => {
     if (!result) return []

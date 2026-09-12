@@ -55,6 +55,7 @@ func main() {
 	mc := moonraker.New(*moon, store, logger)
 	go cxc.Run(ctx)
 	go mc.Run(ctx, *poll)
+	go mc.RunMotion(ctx)
 
 	srv := &http.Server{
 		Addr:              *listen,

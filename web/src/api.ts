@@ -27,6 +27,7 @@ export interface Status {
   device: Record<string, unknown>
   updated_at: string
 }
+export interface MotionSample { t: number; at: string; x: number; y: number; z: number; v: number }
 export interface GFile { path: string; size: number; modified: number }
 export interface Sample { t: number; v: Record<string, [number, number]> }
 export interface TempsHistory { step_s: number; samples: Sample[] }
@@ -61,6 +62,7 @@ export const api = {
   profiles: () => request<Profile[]>('/api/profiles'),
   tempsHistory: () => request<TempsHistory>('/api/temps/history'),
   files: () => request<GFile[]>('/api/files'),
+  motion: () => request<{ now: string; samples: MotionSample[] }>('/api/motion'),
   /** fan_threshold: exhaust fan runs above this (M141); heat: heater_generic setpoint when fitted */
   setChamber: (body: { fan_threshold?: number; heat?: number }) =>
     request<{ ok: boolean; sent: string[] }>('/api/chamber', { method: 'POST', body: JSON.stringify(body) }),
