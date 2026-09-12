@@ -35,9 +35,57 @@ type Track = {
   latestWall: number        // performance.now() when it arrived
   active: boolean
   trail: number[]           // recent shown positions, newest last, 3 floats each
+  // path following: the marker runs along the sliced extrusion segments at the printer's
+  // feed speed; each Klipper sample re-syncs it to the nearest point on the current layer
+  onPath: boolean
+  layer: number             // layer index the cursor is on
+  cum: Float32Array | null  // cumulative length at the start of each segment of that layer
+  segIdx: number            // absolute segment index of the cursor
+  along: number             // path length from the layer start to the cursor, mm
+  err: number               // remaining correction (target - along) to bleed in, mm
+  speed: number             // mm/s from the last sample
 }
 const DELAY = 0.65 // seconds behind real time
-const TRAIL = 90
+const SYNC_MAX_DIST = 1.6 // mm: a sample farther than this from any extrusion is a travel move
+
+// per-result lookup tables: where each layer starts and its Z
+type Layers = { start: Int32Array; z: Float32Array }
+function layerTables(r: ParseResult): Layers {
+  const start = new Int32Array(r.layers + 1), z = new Float32Array(r.layers)
+  let cur = -1
+  for (let i = 0; i < r.layer.length; i++) {
+    const L = r.layer[i]
+    if (L !== cur) { for (let k = cur + 1; k <= L; k++) { start[k] = i; z[k] = r.pos[i * 6 + 5] } cur = L }
+  }
+  for (let k = cur + 1; k <= r.layers; k++) start[k] = r.layer.length
+  return { start, z }
+}
+function cumFor(r: ParseResult, lt: Layers, L: number): Float32Array {
+  const a = lt.start[L], b = lt.start[L + 1]
+  const cum = new Float32Array(b - a + 1)
+  const p = r.pos
+  for (let i = a; i < b; i++) {
+    const j = i * 6
+    cum[i - a + 1] = cum[i - a] + Math.hypot(p[j + 3] - p[j], p[j + 4] - p[j + 1], p[j + 5] - p[j + 2])
+  }
+  return cum
+}
+/** Nearest point on the layer's extrusions to (x, y): segment index, param, distance. */
+function nearestOnLayer(r: ParseResult, lt: Layers, L: number, x: number, y: number): { i: number; u: number; d: number } {
+  const a = lt.start[L], b = lt.start[L + 1], p = r.pos
+  let best = { i: a, u: 0, d: Infinity }
+  for (let i = a; i < b; i++) {
+    const j = i * 6
+    const x1 = p[j], y1 = p[j + 1], x2 = p[j + 3], y2 = p[j + 4]
+    const dx = x2 - x1, dy = y2 - y1
+    const l2 = dx * dx + dy * dy
+    const u = l2 > 1e-9 ? Math.max(0, Math.min(1, ((x - x1) * dx + (y - y1) * dy) / l2)) : 0
+    const d = Math.hypot(x1 + dx * u - x, y1 + dy * u - y)
+    if (d < best.d) best = { i, u, d }
+  }
+  return best
+}
+const TRAIL = 48
 
 // Per-segment color with fake tube lighting: a line's brightness follows how its
 // direction sits against a fixed light, the way slicers shade extrusions, so walls facing
@@ -97,7 +145,7 @@ export default function ModelCard({ status, className = '' }: { status: Status; 
   const [layer, setLayer] = useState(0)
   const [follow, setFollow] = useState(true)
   const mount = useRef<HTMLDivElement>(null)
-  const three = useRef<{ renderer: THREE.WebGLRenderer; scene: THREE.Scene; camera: THREE.PerspectiveCamera; controls: OrbitControls; lines?: THREE.LineSegments; glow?: THREE.LineSegments; bbox?: number[]; nozzle: THREE.Group; trail: THREE.Line; track: Track; frame: () => void; fit: () => void } | null>(null)
+  const three = useRef<{ renderer: THREE.WebGLRenderer; scene: THREE.Scene; camera: THREE.PerspectiveCamera; controls: OrbitControls; lines?: THREE.LineSegments; glow?: THREE.LineSegments; bbox?: number[]; nozzle: THREE.Group; trail: THREE.Line; track: Track; result?: ParseResult; layers?: Layers; liveLayer?: (l: number, seg: number) => void; frame: () => void; fit: () => void } | null>(null)
 
   const jobFile = status.job.file
   const printingThis = !!path && path === jobFile && (status.job.state === 'printing' || status.job.state === 'paused')
@@ -149,7 +197,7 @@ export default function ModelCard({ status, className = '' }: { status: Status; 
     const trail = new THREE.Line(trailGeo, new THREE.LineBasicMaterial({ vertexColors: true, transparent: true, opacity: .9, blending: THREE.AdditiveBlending, depthWrite: false }))
     trail.frustumCulled = false
     scene.add(trail)
-    const track: Track = { samples: [], shown: new THREE.Vector3(), latestT: 0, latestWall: 0, active: false, trail: [] }
+    const track: Track = { samples: [], shown: new THREE.Vector3(), latestT: 0, latestWall: 0, active: false, trail: [], onPath: false, layer: -1, cum: null, segIdx: 0, along: 0, err: 0, speed: 0 }
     let raf = 0, dirty = true, idleSince = performance.now(), t0 = performance.now()
     const frame = () => { dirty = true }
     const motion = !reducedMotion()
@@ -165,23 +213,46 @@ export default function ModelCard({ status, className = '' }: { status: Status; 
         else controls.autoRotate = false
         if (nozzle.visible) { const k = 1 + 0.35 * Math.sin((now - t0) / 260); halo.scale.setScalar(k); (halo.material as THREE.MeshBasicMaterial).opacity = .18 + .22 * (2 - k); moved = true }
       }
-      // nozzle follow: render DELAY behind real time, interpolated between real samples
+      // nozzle follow. On the path: advance along the sliced segments at feed speed,
+      // bleeding in the correction from the last sample. Off the path (a travel move, or
+      // no model loaded): render DELAY behind real time between real samples.
       if (track.active && track.samples.length) {
-        const ss = track.samples
-        const renderT = track.latestT + (now - track.latestWall) / 1000 - DELAY
-        let a = ss[0], b = ss[0]
-        for (let i = 0; i < ss.length; i++) { if (ss[i].t <= renderT) a = ss[i]; if (ss[i].t >= renderT) { b = ss[i]; break } b = ss[i] }
-        const span = b.t - a.t
-        const f = span > 1e-6 ? Math.max(0, Math.min(1, (renderT - a.t) / span)) : 1
-        track.shown.set(a.x + (b.x - a.x) * f, a.y + (b.y - a.y) * f, a.z + (b.z - a.z) * f)
+        const res = three.current?.result, lt = three.current?.layers
+        const dtf = Math.min(0.1, (now - ((loop as unknown as { prev: number }).prev || now)) / 1000)
+        if (track.onPath && res && lt && track.cum) {
+          const cum = track.cum, a = lt.start[track.layer], b = lt.start[track.layer + 1]
+          const fix = track.err * (1 - Math.exp(-dtf / 0.3))
+          track.err -= fix
+          track.along = Math.max(0, Math.min(cum[cum.length - 1], track.along + Math.max(0, track.speed * dtf + fix)))
+          // find the segment holding `along` (cursor moves forward mostly, so scan from here)
+          let k = track.segIdx - a
+          while (k > 0 && cum[k] > track.along) k--
+          while (k < cum.length - 2 && cum[k + 1] < track.along) k++
+          track.segIdx = a + k
+          const j = track.segIdx * 6, p = res.pos
+          const segLen = cum[k + 1] - cum[k]
+          const u = segLen > 1e-6 ? (track.along - cum[k]) / segLen : 1
+          track.shown.set(p[j] + (p[j + 3] - p[j]) * u, p[j + 1] + (p[j + 4] - p[j + 1]) * u, p[j + 2] + (p[j + 5] - p[j + 2]) * u)
+          if (three.current?.liveLayer) three.current.liveLayer(track.layer, track.segIdx)
+          void b
+        } else {
+          const ss = track.samples
+          const renderT = track.latestT + (now - track.latestWall) / 1000 - DELAY
+          let sa = ss[0], sb = ss[0]
+          for (let i = 0; i < ss.length; i++) { if (ss[i].t <= renderT) sa = ss[i]; if (ss[i].t >= renderT) { sb = ss[i]; break } sb = ss[i] }
+          const span = sb.t - sa.t
+          const f = span > 1e-6 ? Math.max(0, Math.min(1, (renderT - sa.t) / span)) : 1
+          track.shown.set(sa.x + (sb.x - sa.x) * f, sa.y + (sb.y - sa.y) * f, sa.z + (sb.z - sa.z) * f)
+        }
         nozzle.position.set(track.shown.x, track.shown.y, track.shown.z + 0.3)
         const dropLine = nozzle.getObjectByName('drop') as THREE.Line | undefined
         if (dropLine) dropLine.scale.set(1, 1, Math.max(0.01, track.shown.z + 0.3))
         nozzle.visible = true
-        // trail
+        // trail: only while laying down filament, so travel moves never draw chords
         const tr = track.trail
+        if (!track.onPath && tr.length) { tr.length = 0; trail.geometry.setDrawRange(0, 0) }
         const lastIdx = tr.length - 3
-        if (lastIdx < 0 || Math.hypot(tr[lastIdx] - track.shown.x, tr[lastIdx + 1] - track.shown.y, tr[lastIdx + 2] - track.shown.z) > 0.15) {
+        if (track.onPath && (lastIdx < 0 || Math.hypot(tr[lastIdx] - track.shown.x, tr[lastIdx + 1] - track.shown.y, tr[lastIdx + 2] - track.shown.z) > 0.15)) {
           tr.push(track.shown.x, track.shown.y, track.shown.z + 0.25)
           if (tr.length > TRAIL * 3) tr.splice(0, tr.length - TRAIL * 3)
           const pa = trail.geometry.getAttribute('position') as THREE.BufferAttribute
@@ -263,12 +334,16 @@ export default function ModelCard({ status, className = '' }: { status: Status; 
       glow.renderOrder = -1
       t.scene.add(glow, lines); t.lines = lines; t.glow = glow; t.bbox = result.bbox
     }
+    t.result = result ?? undefined
+    t.layers = result ? layerTables(result) : undefined
+    t.track.onPath = false; t.track.cum = null; t.track.layer = -1
     t.fit()
   }, [result, mode])
 
   // follow the printer's layer while this file prints
   useEffect(() => {
     if (!result || !printingThis || !follow) return
+    if (three.current?.track.onPath) return
     const l = Math.max(0, Math.min(result.layers - 1, status.job.layer - 1))
     setLayer(l)
   }, [status.job.layer, printingThis, follow, result])
@@ -276,8 +351,22 @@ export default function ModelCard({ status, className = '' }: { status: Status; 
   useEffect(() => {
     const t = three.current
     if (!t?.lines || !result) return
-    t.lines.geometry.setDrawRange(0, drawCount(result, layer)); t.frame()
-  }, [layer, result])
+    if (!(printingThis && follow && t.track.onPath)) t.lines.geometry.setDrawRange(0, drawCount(result, layer))
+    t.frame()
+  }, [layer, result, printingThis, follow])
+
+  // while following a live print on the path, the model grows with the nozzle
+  useEffect(() => {
+    const t = three.current
+    if (!t) return
+    let lastL = -1, lastSeg = -1
+    t.liveLayer = (l, seg) => {
+      if (!printingThis || !follow || !t.lines) return
+      if (seg !== lastSeg) { t.lines.geometry.setDrawRange(0, (seg + 1) * 2); lastSeg = seg }
+      if (l !== lastL) { lastL = l; setLayer(l) }
+    }
+    return () => { t.liveLayer = undefined }
+  }, [printingThis, follow])
 
   // live nozzle: poll the motion samples 4x a second while this file prints
   useEffect(() => {
@@ -295,10 +384,26 @@ export default function ModelCard({ status, className = '' }: { status: Status; 
           tr.samples = tr.samples.concat(fresh).slice(-16)
           const s = fresh[fresh.length - 1]
           if (!tr.active) { tr.shown.set(s.x, s.y, s.z); tr.active = true }
-          // the newest sample was true at its eventtime; it reached us a little later,
-          // so place its wall time back by that lag
           const lagMs = Math.max(0, Math.min(500, Date.now() - new Date(s.at).getTime()))
           tr.latestT = s.t; tr.latestWall = performance.now() - lagMs
+          tr.speed = s.v
+          // sync to the sliced path: pick the layer by Z, then the nearest extrusion
+          const res = t.result, lt = t.layers
+          if (res && lt && res.layers > 0) {
+            let L = -1, bestDz = 0.35
+            for (let k = 0; k < res.layers; k++) { const dz = Math.abs(lt.z[k] - s.z); if (dz < bestDz) { bestDz = dz; L = k } }
+            if (L >= 0) {
+              const near = nearestOnLayer(res, lt, L, s.x, s.y)
+              if (near.d <= SYNC_MAX_DIST) {
+                if (L !== tr.layer || !tr.cum) { tr.layer = L; tr.cum = cumFor(res, lt, L); tr.along = 0; tr.err = 0; tr.segIdx = lt.start[L]; tr.trail.length = 0 }
+                const k = near.i - lt.start[L]
+                const target = tr.cum[k] + (tr.cum[k + 1] - tr.cum[k]) * near.u + s.v * (lagMs / 1000)
+                if (!tr.onPath || Math.abs(target - tr.along) > 25) { tr.along = target; tr.err = 0; tr.segIdx = near.i; tr.trail.length = 0 }
+                else tr.err = target - tr.along
+                tr.onPath = true
+              } else tr.onPath = false
+            } else tr.onPath = false
+          } else tr.onPath = false
         }
       } catch { /* keep the last estimate */ }
       if (!stop) timer = window.setTimeout(tick, 250)
