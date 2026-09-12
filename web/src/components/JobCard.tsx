@@ -1,5 +1,6 @@
 import { baseName, fmtClock, fmtHMS, type Status } from '../api'
 import { useTween } from '../motion'
+import { useCountdown } from './Fx'
 
 function Ring({ pct }: { pct: number }) {
   const r = 36, c = 2 * Math.PI * r
@@ -16,6 +17,7 @@ function Ring({ pct }: { pct: number }) {
       </defs>
       <circle cx={46} cy={46} r={r} fill="none" stroke="var(--panel-3)" strokeWidth={7} />
       <circle cx={46} cy={46} r={r + 5} fill="none" stroke="var(--line)" strokeWidth={1} strokeDasharray="2 5" className="ring-orbit" />
+      <circle cx={46} cy={46} r={r - 8} fill="none" stroke="url(#ringg)" strokeWidth={1} strokeDasharray="12 40" opacity={.5} className="ring-orbit-2" />
       <circle cx={46} cy={46} r={r} fill="none" stroke="url(#ringg)" strokeWidth={7} strokeLinecap="round" filter="url(#ringglow)" opacity={.55}
         strokeDasharray={`${(c * p) / 100} ${c}`} transform="rotate(-90 46 46)" />
       <circle cx={46} cy={46} r={r} fill="none" stroke="url(#ringg)" strokeWidth={7} strokeLinecap="round"
@@ -28,6 +30,7 @@ function Ring({ pct }: { pct: number }) {
 
 export default function JobCard({ status, className = '' }: { status: Status; className?: string }) {
   const j = status.job
+  const left = useCountdown(j.time_left_s, status.updated_at)
   const idle = !j.file || j.state === 'standby'
   const layers = j.total_layers > 0 ? (j.layer / j.total_layers) * 100 : 0
   return (
@@ -44,7 +47,7 @@ export default function JobCard({ status, className = '' }: { status: Status; cl
             <Ring pct={j.progress} />
             <div className="job-text">
               <div className="job-file" title={j.file}>{baseName(j.file)}</div>
-              <div className="job-eta"><b>{fmtHMS(j.time_left_s)}</b> left, done about <b>{fmtClock(j.time_left_s, true)}</b></div>
+              <div className="job-eta"><b className="tick">{fmtHMS(left)}</b> left, done about <b>{fmtClock(left, true)}</b></div>
               <div className="job-sub">{fmtHMS(j.elapsed_s)} elapsed{j.started_at ? `, started ${fmtClock(j.started_at)}` : ''}</div>
             </div>
           </div>

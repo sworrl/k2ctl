@@ -7,7 +7,7 @@ import { useTween } from '../motion'
 // backend (/api/temps/history, kept for an hour on the printer) and grows from the live
 // status while the page is open.
 const WINDOW_S = 600
-const BUCKET_S = 10
+const BUCKET_S = 15
 const N = WINDOW_S / BUCKET_S
 
 type Row = { key: string; label: string; scale: number; cls: string }
@@ -62,6 +62,33 @@ function Readout({ v, digits = 1, suffix = '' }: { v: number; digits?: number; s
   return <>{t.toFixed(digits)}{suffix}</>
 }
 
+function Gauge({ value, target, max, cls }: { value: number; target: number; max: number; cls: string }) {
+  const v = useTween(value, 600)
+  const r = 26, cx = 32, cy = 34
+  const a0 = Math.PI * 0.75, a1 = Math.PI * 2.25 // 270 degree sweep from bottom-left, clockwise
+  const ang = (f: number) => a0 + (a1 - a0) * Math.max(0, Math.min(1, f))
+  const pt = (f: number, rr = r) => [cx + rr * Math.cos(ang(f)), cy + rr * Math.sin(ang(f))] as const
+  const arc = (f0: number, f1: number, rr = r) => {
+    const [x0, y0] = pt(f0, rr), [x1, y1] = pt(f1, rr)
+    const large = (ang(f1) - ang(f0)) > Math.PI ? 1 : 0
+    return `M${x0.toFixed(2)},${y0.toFixed(2)} A${rr},${rr} 0 ${large} 1 ${x1.toFixed(2)},${y1.toFixed(2)}`
+  }
+  const f = v / max, ft = target / max
+  const [nx, ny] = pt(f, r - 4)
+  const [tx, ty] = pt(ft, r + 5)
+  const ticks = Array.from({ length: 10 }, (_, i) => i / 9)
+  return (
+    <svg className={`gauge ${cls}`} width={64} height={64} viewBox="0 0 64 64" aria-hidden>
+      <path d={arc(0, 1)} fill="none" stroke="var(--panel-3)" strokeWidth={5} strokeLinecap="round" />
+      {ticks.map(t => { const [x0, y0] = pt(t, r - 7), [x1, y1] = pt(t, r - 9.5); return <line key={t} x1={x0} y1={y0} x2={x1} y2={y1} stroke="var(--grid)" strokeWidth={1} /> })}
+      {f > 0.01 && <path d={arc(0, f)} fill="none" stroke="var(--series)" strokeWidth={5} strokeLinecap="round" className="gauge-arc" />}
+      {target > 0 && <circle cx={tx} cy={ty} r={2.2} fill="var(--text)" className="gauge-target" />}
+      <line x1={cx} y1={cy} x2={nx} y2={ny} stroke="#fff" strokeWidth={1.6} strokeLinecap="round" className="gauge-needle" />
+      <circle cx={cx} cy={cy} r={3} fill="var(--series)" />
+    </svg>
+  )
+}
+
 function Histogram({ row, hist, now, max, target }: { row: Row; hist: Sample[]; now: number; max: number; target: number }) {
   const cols = useMemo(() => buckets(hist, row.key, now), [hist, row.key, now])
   const [hover, setHover] = useState<number | null>(null)
@@ -103,7 +130,7 @@ export default function TempsCard({ status, className = '' }: { status: Status; 
               <span className={`swatch-dot ${row.cls}`} />{row.label}
               <small>{t.target > 0 ? `${heating ? 'heating to' : 'holding'} ${t.target.toFixed(0)}°` : 'off'}</small>
             </div>
-            <Histogram row={row} hist={hist} now={now} max={max} target={t.target} />
+            <div className="temp-mid"><Gauge value={t.actual} target={t.target} max={max} cls={row.cls} /><Histogram row={row} hist={hist} now={now} max={max} target={t.target} /></div>
             <div className="val"><span className="num"><Readout v={t.actual} suffix="°" /></span><small>max {max}°</small></div>
           </div>
         )

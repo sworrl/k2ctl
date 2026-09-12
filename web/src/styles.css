@@ -113,15 +113,15 @@ h1, h2, h3 { font-family: var(--display); letter-spacing: .01em; }
 .kv dd { margin: 0; text-align: right; font-family: var(--mono); font-variant-numeric: tabular-nums; font-size: 12px; }
 
 /* temps: one histogram per heater */
-.temp-row { display: grid; grid-template-columns: 92px 1fr auto; align-items: center; gap: 12px; padding: 9px 0; border-bottom: 1px solid var(--line); }
+.temp-row { display: grid; grid-template-columns: 84px minmax(0, 1fr) auto; align-items: center; gap: 12px; padding: 9px 0; border-bottom: 1px solid var(--line); }
 .temp-row:last-of-type { border-bottom: 0; }
 .temp-row .name { color: var(--text); font-size: 13px; font-weight: 600; display: grid; gap: 3px; }
 .temp-row .name small { color: var(--dim); font-weight: 500; font-size: 10px; font-family: var(--mono); letter-spacing: .04em; text-transform: uppercase; }
 .swatch-dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; margin-right: 7px; vertical-align: 1px; box-shadow: 0 0 6px currentColor; }
 .swatch-dot.nozzle { background: var(--s-nozzle); color: var(--s-nozzle); } .swatch-dot.bed { background: var(--s-bed); color: var(--s-bed); } .swatch-dot.chamber { background: var(--s-chamber); color: var(--s-chamber); }
-.temp-row .val { font-family: var(--display); font-size: 26px; font-weight: 700; line-height: 1; min-width: 92px; text-align: right; display: grid; justify-items: end; gap: 4px; font-variant-numeric: tabular-nums; letter-spacing: -.01em; }
+.temp-row .val { font-family: var(--display); font-size: 24px; font-weight: 700; line-height: 1; min-width: 78px; text-align: right; display: grid; justify-items: end; gap: 4px; font-variant-numeric: tabular-nums; letter-spacing: -.01em; }
 .temp-row .val small { font-family: var(--mono); font-size: 10px; font-weight: 500; color: var(--dim); letter-spacing: .06em; text-transform: uppercase; }
-.histo { position: relative; display: flex; align-items: flex-end; gap: 2px; height: 46px; min-width: 0; padding-bottom: 1px; border-bottom: 1px solid var(--grid); }
+.histo { position: relative; display: flex; align-items: flex-end; gap: 1px; height: 46px; min-width: 0; padding-bottom: 1px; border-bottom: 1px solid var(--grid); }
 .histo .hb { flex: 1 1 0; min-width: 1px; border-radius: 2px 2px 0 0; background: var(--series, var(--accent)); opacity: .85; transition: height .4s; }
 .histo .hb.none { background: var(--grid); opacity: .5; }
 .histo .hb.hot { opacity: 1; outline: 2px solid var(--panel); outline-offset: -1px; }
@@ -412,4 +412,99 @@ input[type=range]:hover::-webkit-slider-thumb { transform: scale(1.15); box-shad
 @media (prefers-reduced-motion: reduce) {
   .backdrop { display: none; }
   .card::before, .job::before, .model::before, .bar > i::after, .ch-gauge .fill::after, .btn::after { display: none !important; }
+}
+
+
+/* ===== glitz pass 2 ===== */
+
+/* hero header: aurora band with the printer name and a big status word */
+.hero { position: sticky; top: 0; z-index: 20; margin: 0 calc(-1 * clamp(12px, 2vw, 24px)); padding: 0 clamp(12px, 2vw, 24px); overflow: hidden; border-bottom: 1px solid var(--line); background: rgba(5, 7, 13, .72); backdrop-filter: blur(14px) saturate(140%); animation: rise .5s cubic-bezier(.2, .8, .2, 1) both; }
+.hero-inner { display: flex; align-items: center; gap: 16px; padding: 12px 0; position: relative; z-index: 2; }
+.hero .appicon { width: 46px; height: 46px; border-radius: 12px; box-shadow: 0 0 0 1px var(--line-2), 0 0 24px rgba(34, 211, 238, .35); animation: iconfloat 5s ease-in-out infinite; }
+@keyframes iconfloat { 0%, 100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-3px) rotate(-2deg); } }
+.hero .who { flex: 1; min-width: 0; }
+.hero h1 { margin: 0; font-size: clamp(20px, 2.6vw, 28px); font-weight: 700; letter-spacing: -.01em; line-height: 1.05; }
+.hero .sub { color: var(--muted); font-family: var(--mono); font-size: 11px; letter-spacing: .04em; margin-top: 3px; }
+.hero-aurora { position: absolute; inset: -40% -10%; z-index: 0; pointer-events: none; filter: blur(40px) saturate(160%); opacity: .55; }
+.hero-aurora i { position: absolute; width: 55%; height: 120%; border-radius: 50%; mix-blend-mode: screen; }
+.hero-aurora i:nth-child(1) { left: -10%; top: -20%; background: radial-gradient(closest-side, rgba(34, 211, 238, .55), transparent); animation: aur1 14s ease-in-out infinite; }
+.hero-aurora i:nth-child(2) { left: 30%; top: 0; background: radial-gradient(closest-side, rgba(181, 108, 255, .45), transparent); animation: aur2 18s ease-in-out infinite; }
+.hero-aurora i:nth-child(3) { left: 60%; top: -30%; background: radial-gradient(closest-side, rgba(255, 77, 109, .35), transparent); animation: aur3 16s ease-in-out infinite; }
+@keyframes aur1 { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(18%, 12%) scale(1.2); } }
+@keyframes aur2 { 0%, 100% { transform: translate(0, 0) scale(1.1); } 50% { transform: translate(-16%, -10%) scale(.9); } }
+@keyframes aur3 { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(-10%, 18%) scale(1.25); } }
+.hero.printing .hero-aurora { opacity: .85; }
+.hero-energy { position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: var(--spectrum); background-size: 200% 100%; opacity: .8; z-index: 3; }
+.hero.printing .hero-energy { animation: sweep 4s linear infinite; height: 3px; box-shadow: 0 0 14px rgba(34, 211, 238, .6); }
+.hero-state { display: grid; justify-items: end; gap: 2px; margin-left: auto; }
+.hero-state .word { font-family: var(--display); font-weight: 700; font-size: clamp(18px, 2.4vw, 26px); letter-spacing: .14em; text-transform: uppercase; line-height: 1; color: var(--muted); transition: color .3s; animation: wordin .5s cubic-bezier(.2, .8, .2, 1) both; }
+@keyframes wordin { from { opacity: 0; transform: translateY(8px); letter-spacing: .3em; } }
+.hero-state[data-state=printing] .word { color: var(--accent); text-shadow: 0 0 12px rgba(34, 211, 238, .8), 0 0 40px rgba(34, 211, 238, .35); animation: wordin .5s cubic-bezier(.2, .8, .2, 1) both, glowword 2.2s ease-in-out infinite; }
+@keyframes glowword { 50% { text-shadow: 0 0 20px rgba(34, 211, 238, 1), 0 0 60px rgba(34, 211, 238, .5); } }
+.hero-state[data-state=paused] .word { color: var(--warn); text-shadow: 0 0 12px rgba(251, 191, 36, .7); }
+.hero-state[data-state=complete] .word { color: var(--ok); text-shadow: 0 0 12px rgba(52, 211, 153, .7); }
+.hero-state[data-state=error] .word, .hero-state[data-state=offline] .word, .hero-state[data-state=nolink] .word { color: var(--bad); text-shadow: 0 0 12px rgba(248, 113, 113, .7); }
+.hero-pct { font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: .1em; }
+.hero-pct small { font-size: 9px; margin-left: 1px; }
+@media (max-width: 720px) { .hero-state .word { font-size: 14px; } .hero .appicon { width: 38px; height: 38px; } }
+
+/* cursor spotlight */
+.spotlight { position: fixed; left: 0; top: 0; width: 600px; height: 600px; border-radius: 50%; pointer-events: none; z-index: 0; background: radial-gradient(closest-side, rgba(34, 211, 238, .10), rgba(181, 108, 255, .04) 55%, transparent 75%); mix-blend-mode: screen; will-change: transform; }
+
+/* glass cards with a cursor-following sheen and an animated gradient edge on every card */
+.card { background: linear-gradient(178deg, color-mix(in srgb, var(--panel) 88%, var(--text) 12%), color-mix(in srgb, var(--panel) 96%, transparent) 42%); backdrop-filter: blur(10px); transform-style: preserve-3d; will-change: transform; }
+.card::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; z-index: 0; opacity: 0; transition: opacity .35s;
+  background: radial-gradient(420px circle at var(--gx, 50%) var(--gy, 50%), rgba(34, 211, 238, .12), rgba(181, 108, 255, .05) 40%, transparent 65%); }
+.card.tilting::after { opacity: 1; }
+.card > * { position: relative; z-index: 1; }
+.card:not(.live):not(.job):not(.camera):not(.model)::before { content: ""; position: absolute; inset: -1px; border-radius: inherit; padding: 1px; pointer-events: none; z-index: 0; opacity: .5;
+  background: conic-gradient(from var(--ang, 0deg), transparent 0 70%, rgba(34, 211, 238, .55) 84%, rgba(181, 108, 255, .45) 92%, transparent 100%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; animation: orbit 9s linear infinite; }
+.card:nth-child(odd)::before { animation-delay: -4s; }
+.card:hover::before { opacity: 1; }
+
+/* radial gauges next to each histogram */
+.temp-mid { display: grid; grid-template-columns: 64px 1fr; gap: 6px; align-items: center; min-width: 0; }
+.gauge { flex: none; --series: var(--accent); filter: drop-shadow(0 0 4px color-mix(in srgb, var(--series) 60%, transparent)); }
+.gauge.nozzle { --series: var(--s-nozzle); } .gauge.bed { --series: var(--s-bed); } .gauge.chamber { --series: var(--s-chamber); }
+.gauge-arc { filter: drop-shadow(0 0 3px var(--series)); }
+.gauge-needle { filter: drop-shadow(0 0 2px #fff); }
+.gauge-target { animation: pulse 1.6s ease-in-out infinite; }
+@media (max-width: 720px) { .temp-mid { grid-template-columns: 56px 1fr; } }
+
+/* job: seconds ticking, second orbit */
+.job-eta b.tick { display: inline-block; min-width: 7.2ch; }
+.ring-orbit-2 { animation: spinslow 9s linear infinite reverse; transform-origin: 46px 46px; }
+.job-big, .ring { filter: drop-shadow(0 0 10px rgba(34, 211, 238, .45)); }
+
+/* toasts */
+.toasts { position: fixed; right: 18px; bottom: 18px; z-index: 50; display: grid; gap: 8px; pointer-events: none; }
+.toast { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: var(--radius-s); border: 1px solid var(--line-2); background: rgba(11, 16, 24, .9); backdrop-filter: blur(10px); color: var(--text); font-family: var(--display); font-weight: 600; font-size: 13px; box-shadow: 0 10px 30px rgba(0, 0, 0, .5); animation: toastin .5s cubic-bezier(.2, .8, .2, 1) both, toastout .4s ease-in 5.5s both; }
+.toast i { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 8px var(--accent); animation: pulse 1.2s ease-in-out infinite; }
+.toast.complete { border-color: var(--ok); } .toast.complete i { background: var(--ok); box-shadow: 0 0 8px var(--ok); }
+.toast.paused { border-color: var(--warn); } .toast.paused i { background: var(--warn); box-shadow: 0 0 8px var(--warn); }
+.toast.error, .toast.cancelled { border-color: var(--bad); } .toast.error i, .toast.cancelled i { background: var(--bad); box-shadow: 0 0 8px var(--bad); }
+@keyframes toastin { from { opacity: 0; transform: translateX(30px) scale(.96); } }
+@keyframes toastout { to { opacity: 0; transform: translateY(10px); } }
+.confetti { position: fixed; inset: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 60; }
+
+/* fans: breeze streaks behind a running fan row */
+.fan-row.on { position: relative; overflow: hidden; }
+.fan-row.on::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(100deg, transparent 0 18px, rgba(34, 211, 238, .06) 18px 22px); background-size: 200% 100%; animation: breeze 1.4s linear infinite; }
+@keyframes breeze { to { background-position: -80px 0; } }
+
+/* filament bays: spool spokes and rainbow drift */
+.spool::before { content: ""; position: absolute; inset: 0; background: conic-gradient(from 0deg, rgba(255, 255, 255, .0) 0 20deg, rgba(255, 255, 255, .18) 20deg 24deg, transparent 24deg 90deg, rgba(255, 255, 255, .18) 90deg 94deg, transparent 94deg 180deg, rgba(255, 255, 255, .18) 180deg 184deg, transparent 184deg 270deg, rgba(255, 255, 255, .18) 270deg 274deg, transparent 274deg 360deg); z-index: 1; pointer-events: none; }
+.spool.spin::before { animation: spinslow 2.4s linear infinite; }
+.slot:hover { box-shadow: 0 0 0 1px var(--accent) inset, 0 0 22px rgba(34, 211, 238, .25); }
+
+/* model: neon frame */
+.model-view { box-shadow: inset 0 0 0 1px rgba(34, 211, 238, .12), inset 0 0 80px rgba(34, 211, 238, .06); }
+.shell.printing .model-view { box-shadow: inset 0 0 0 1px rgba(34, 211, 238, .25), inset 0 0 120px rgba(34, 211, 238, .12); }
+
+/* sensors: neon summary */
+.sensors summary:hover { color: var(--accent); text-shadow: 0 0 8px rgba(34, 211, 238, .6); }
+
+@media (prefers-reduced-motion: reduce) {
+  .spotlight, .hero-aurora, .card::before, .card::after, .fan-row.on::after, .spool::before { display: none !important; }
 }

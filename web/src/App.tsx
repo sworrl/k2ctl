@@ -11,6 +11,7 @@ import ModelCard from './components/ModelCard'
 import ChamberCard from './components/ChamberCard'
 import Backdrop from './components/Backdrop'
 import SlotDialog from './components/SlotDialog'
+import { Spotlight, Toasts, Confetti, CardTilt } from './components/Fx'
 
 export default function App() {
   const { status, live, error } = useStatus()
@@ -26,19 +27,30 @@ export default function App() {
   return (
     <div className={`shell ${jobState}`}>
       <Backdrop active={jobState === 'printing'} />
-      <div className={`topbar ${jobState === 'printing' ? 'printing' : ''}`}>
-        <img className="appicon" src="/favicon.png" alt="k2ctl" />
-        <div className="who">
-          <h1 className="shine">{p?.name || p?.hostname || 'K2'}</h1>
-          <div className="sub">{p?.model || 'Creality K2'}{p?.klipper ? ` · Klipper ${p.klipper}` : ''}</div>
+      <Spotlight />
+      <CardTilt />
+      <Confetti fire={jobState === 'complete'} />
+      <Toasts state={jobState} file={status?.job.file || ''} />
+      <header className={`hero ${jobState}`}>
+        <div className="hero-aurora" aria-hidden><i /><i /><i /></div>
+        <div className="hero-inner">
+          <img className="appicon" src="/favicon.png" alt="k2ctl" />
+          <div className="who">
+            <h1 className="shine">{p?.name || p?.hostname || 'K2'}</h1>
+            <div className="sub">{p?.model || 'Creality K2'}{p?.klipper ? ` · Klipper ${p.klipper}` : ''}</div>
+          </div>
+          <div className="hero-state" data-state={status ? (online ? jobState : 'offline') : 'nolink'}>
+            <span className="word">{status ? (online ? jobState : 'offline') : 'no link'}</span>
+            {jobState === 'printing' && status && <span className="hero-pct">{status.job.progress.toFixed(0)}<small>%</small></span>}
+          </div>
+          <span className="pill quiet hide-sm" title="Moonraker / device socket / live updates">
+            <i className={`dot ${status?.sources.moonraker ? 'on' : ''}`} /> Moonraker
+            <i className={`dot ${status?.sources.cxws ? 'on' : ''}`} /> Device
+            <i className={`dot ${live ? 'on' : ''}`} /> Live
+          </span>
         </div>
-        <span className={`pill ${status ? (online ? jobState : 'offline') : 'offline'}`}>{status ? (online ? jobState : 'offline') : 'no link'}</span>
-        <span className="pill quiet hide-sm" title="Moonraker / device socket / live updates">
-          <i className={`dot ${status?.sources.moonraker ? 'on' : ''}`} /> Moonraker
-          <i className={`dot ${status?.sources.cxws ? 'on' : ''}`} /> Device
-          <i className={`dot ${live ? 'on' : ''}`} /> Live
-        </span>
-      </div>
+        <div className="hero-energy" aria-hidden />
+      </header>
 
       {error && <div className="banner"><i className="spin" /> {status ? 'Lost the backend, retrying' : 'Waiting for the backend'}: {error}</div>}
 

@@ -1,6 +1,10 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js'
+import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js'
+import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js'
+import { OutputPass } from 'three/examples/jsm/postprocessing/OutputPass.js'
 import { api, baseName, fmtHMS, type GFile, type MotionSample, type Status } from '../api'
 import type { ParseResult, WorkerMsg } from '../gcode.worker'
 import { reducedMotion } from '../motion'
@@ -158,10 +162,12 @@ export default function ModelCard({ status, className = '' }: { status: Status; 
   useEffect(() => {
     const el = mount.current
     if (!el) return
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'low-power' })
-    renderer.setPixelRatio(Math.min(2, window.devicePixelRatio))
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false, powerPreference: 'high-performance' })
+    renderer.setPixelRatio(Math.min(1.5, window.devicePixelRatio))
+    renderer.setClearColor(0x03050a, 1)
     el.appendChild(renderer.domElement)
     const scene = new THREE.Scene()
+    scene.fog = new THREE.Fog(0x03050a, 700, 1600)
     const camera = new THREE.PerspectiveCamera(40, 1, 1, 4000)
     camera.up.set(0, 0, 1)
     const controls = new OrbitControls(camera, renderer.domElement)
@@ -180,6 +186,24 @@ export default function ModelCard({ status, className = '' }: { status: Status; 
     const plate = new THREE.Mesh(new THREE.PlaneGeometry(BED, BED), new THREE.MeshBasicMaterial({ color: 0x0b1018, transparent: true, opacity: .55, side: THREE.DoubleSide }))
     plate.position.set(BED / 2, BED / 2, -0.05)
     scene.add(plate)
+    // infinite floor grid fading into fog, for depth
+    const floor = new THREE.GridHelper(2400, 120, 0x0e7490, 0x0c1420)
+    ;(floor.material as THREE.Material).transparent = true; (floor.material as THREE.Material).opacity = .35
+    floor.rotation.x = Math.PI / 2; floor.position.set(BED / 2, BED / 2, -0.2)
+    scene.add(floor)
+    // laser scan plane that sweeps up through the model
+    // sized to the model's footprint once one is loaded (see fit)
+    const scan = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), new THREE.MeshBasicMaterial({ color: 0x22d3ee, transparent: true, opacity: .05, side: THREE.DoubleSide, depthWrite: false, blending: THREE.AdditiveBlending }))
+    scan.position.set(BED / 2, BED / 2, 0); scan.visible = false
+    const scanEdge = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.PlaneGeometry(1, 1)), new THREE.LineBasicMaterial({ color: 0x22d3ee, transparent: true, opacity: .22 }))
+    scan.add(scanEdge)
+    scene.add(scan)
+    // post: bloom
+    const composer = new EffectComposer(renderer)
+    composer.addPass(new RenderPass(scene, camera))
+    const bloom = new UnrealBloomPass(new THREE.Vector2(1, 1), 0.55, 0.6, 0.72)
+    composer.addPass(bloom)
+    composer.addPass(new OutputPass())
     // nozzle marker: a bright dot with a pulsing halo and a drop line to the bed
     const nozzle = new THREE.Group()
     const core = new THREE.Mesh(new THREE.SphereGeometry(1.4, 12, 12), new THREE.MeshBasicMaterial({ color: 0xffffff }))
@@ -199,6 +223,7 @@ export default function ModelCard({ status, className = '' }: { status: Status; 
     scene.add(trail)
     const track: Track = { samples: [], shown: new THREE.Vector3(), latestT: 0, latestWall: 0, active: false, trail: [], onPath: false, layer: -1, cum: null, segIdx: 0, along: 0, err: 0, speed: 0 }
     let raf = 0, dirty = true, idleSince = performance.now(), t0 = performance.now()
+    let intro = { from: new THREE.Vector3(), to: new THREE.Vector3(), start: 0, dur: 1600, on: false }
     const frame = () => { dirty = true }
     const motion = !reducedMotion()
     controls.addEventListener('start', () => { idleSince = Infinity })
@@ -269,7 +294,22 @@ export default function ModelCard({ status, className = '' }: { status: Status; 
         moved = true
       } else if (nozzle.visible) { nozzle.visible = false; trail.geometry.setDrawRange(0, 0); track.trail.length = 0; moved = true }
       ;(loop as unknown as { prev: number }).prev = now
-      if (dirty || moved) { renderer.render(scene, camera); dirty = false }
+      if (motion && intro.on) {
+        const k = Math.min(1, (now - intro.start) / intro.dur), e = 1 - Math.pow(1 - k, 3)
+        camera.position.lerpVectors(intro.from, intro.to, e); camera.lookAt(controls.target); moved = true
+        if (k >= 1) intro.on = false
+      }
+      if (motion && three.current?.lines && three.current.bbox && three.current.bbox[3] > three.current.bbox[0]) {
+        const b = three.current.bbox
+        const top = b[5] + 3
+        const ph = ((now - t0) % 7000) / 7000
+        scan.visible = true
+        scan.scale.set(b[3] - b[0] + 16, b[4] - b[1] + 16, 1)
+        scan.position.set((b[0] + b[3]) / 2, (b[1] + b[4]) / 2, -1 + (top + 1) * ph)
+        ;(scan.material as THREE.MeshBasicMaterial).opacity = .05 * Math.sin(Math.PI * ph)
+        moved = true
+      } else scan.visible = false
+      if (dirty || moved) { composer.render(); dirty = false }
     }
     const fit = () => {
       const t = three.current
@@ -281,20 +321,22 @@ export default function ModelCard({ status, className = '' }: { status: Status; 
         dist = Math.max(80, Math.hypot(b[3] - b[0], b[4] - b[1], b[5] - b[2]) * 1.5)
       }
       controls.target.copy(target)
-      camera.position.set(target.x - dist * 0.55, target.y - dist * 0.7, target.z + dist * 0.55)
+      const dest = new THREE.Vector3(target.x - dist * 0.55, target.y - dist * 0.7, target.z + dist * 0.55)
+      if (motion) { intro = { from: new THREE.Vector3(target.x + dist * 1.2, target.y - dist * 2.2, target.z + dist * 1.6), to: dest, start: performance.now(), dur: 1600, on: true }; camera.position.copy(intro.from) }
+      else camera.position.copy(dest)
       camera.lookAt(target); controls.update(); frame()
     }
     const ro = new ResizeObserver(() => {
       const w = el.clientWidth, h = el.clientHeight
       if (!w || !h) return
-      renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix(); frame()
+      renderer.setSize(w, h, false); composer.setSize(w, h); bloom.resolution.set(w, h); camera.aspect = w / h; camera.updateProjectionMatrix(); frame()
     })
     ro.observe(el)
     controls.addEventListener('change', frame)
     three.current = { renderer, scene, camera, controls, nozzle, trail, track, frame, fit }
     fit(); loop()
     return () => {
-      cancelAnimationFrame(raf); ro.disconnect(); controls.dispose(); renderer.dispose()
+      cancelAnimationFrame(raf); ro.disconnect(); controls.dispose(); composer.dispose(); renderer.dispose()
       el.removeChild(renderer.domElement); three.current = null
     }
   }, [])
