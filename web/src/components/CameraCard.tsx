@@ -93,7 +93,10 @@ export default function CameraCard({ full = false, className = '' }: { full?: bo
       {enabled ? (
         <div ref={frameRef} className={`camera-frame ${full ? 'full' : ''}`}>
           <video ref={videoRef} autoPlay playsInline muted />
-          {state !== 'connected' && <div className="camera-waiting">{state}</div>}
+          <i className="hud-corner tl" /><i className="hud-corner tr" /><i className="hud-corner bl" /><i className="hud-corner br" />
+          <i className="scanlines" />
+          {state === 'connected' && <span className="rec"><i />LIVE</span>}
+          {state !== 'connected' && <div className="camera-waiting"><span className="radar" />{state}</div>}
           <div className="camera-top">
             <h2>Camera</h2>
             <label className="chk" title="Hide the camera on this browser"><input type="checkbox" checked={enabled} onChange={e => setEnabled(e.target.checked)} /> show</label>

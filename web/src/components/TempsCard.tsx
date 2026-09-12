@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { api, type Sample, type Status } from '../api'
+import { useTween } from '../motion'
 
 // One histogram per heater: the last WINDOW_S of readings in BUCKET_S columns, the
 // target as a dashed line, the live reading as the big number. History comes from the
@@ -56,6 +57,11 @@ function buckets(hist: Sample[], key: string, now: number): (readonly [number, n
   return out
 }
 
+function Readout({ v, digits = 1, suffix = '' }: { v: number; digits?: number; suffix?: string }) {
+  const t = useTween(v, 500)
+  return <>{t.toFixed(digits)}{suffix}</>
+}
+
 function Histogram({ row, hist, now, max, target }: { row: Row; hist: Sample[]; now: number; max: number; target: number }) {
   const cols = useMemo(() => buckets(hist, row.key, now), [hist, row.key, now])
   const [hover, setHover] = useState<number | null>(null)
@@ -65,7 +71,7 @@ function Histogram({ row, hist, now, max, target }: { row: Row; hist: Sample[]; 
     <div className={`histo ${row.cls}`} onMouseLeave={() => setHover(null)}>
       {target > 0 && <i className="tline" style={{ bottom: `${Math.min(100, (target / max) * 100)}%` }} title={`target ${target.toFixed(0)}°`} />}
       {cols.map((c, i) => (
-        <b key={i} className={`hb ${c ? '' : 'none'} ${hover === i ? 'hot' : ''}`}
+        <b key={i} className={`hb ${c ? '' : 'none'} ${hover === i ? 'hot' : ''} ${i === N - 1 && c ? 'live' : ''}`}
           style={{ height: c ? `${Math.max(3, Math.min(100, (c[0] / max) * 100))}%` : '3%' }}
           onMouseEnter={() => setHover(i)} onTouchStart={() => setHover(i)} />
       ))}
@@ -98,7 +104,7 @@ export default function TempsCard({ status, className = '' }: { status: Status; 
               <small>{t.target > 0 ? `${heating ? 'heating to' : 'holding'} ${t.target.toFixed(0)}°` : 'off'}</small>
             </div>
             <Histogram row={row} hist={hist} now={now} max={max} target={t.target} />
-            <div className="val"><span className="num">{t.actual.toFixed(1)}°</span><small>max {max}°</small></div>
+            <div className="val"><span className="num"><Readout v={t.actual} suffix="°" /></span><small>max {max}°</small></div>
           </div>
         )
       })}
@@ -106,7 +112,7 @@ export default function TempsCard({ status, className = '' }: { status: Status; 
         {Object.entries(status.fans).map(([k, v]) => (
           <div className="tile" key={k}>
             <span className="tl">{fanName(k)}</span>
-            <span className="tv">{v}<small> %</small></span>
+            <span className="tv"><Readout v={v} digits={0} /><small> %</small></span>
             <i className="tb"><b style={{ width: `${Math.min(100, v)}%` }} /></i>
           </div>
         ))}
@@ -114,12 +120,12 @@ export default function TempsCard({ status, className = '' }: { status: Status; 
           <>
             <div className="tile">
               <span className="tl">{box.name} temp</span>
-              <span className="tv">{box.temp.toFixed(0)}<small>°</small></span>
+              <span className="tv"><Readout v={box.temp} digits={0} /><small>°</small></span>
               <i className="tb"><b style={{ width: `${Math.min(100, (box.temp / 60) * 100)}%` }} /></i>
             </div>
             <div className="tile">
               <span className="tl">{box.name} humidity</span>
-              <span className="tv">{box.humidity.toFixed(0)}<small> % RH</small></span>
+              <span className="tv"><Readout v={box.humidity} digits={0} /><small> % RH</small></span>
               <i className={`tb ${box.humidity > 50 ? 'warn' : ''}`}><b style={{ width: `${Math.min(100, box.humidity)}%` }} /></i>
             </div>
           </>

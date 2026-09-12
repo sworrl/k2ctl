@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { api, type Status } from '../api'
+import { useTween } from '../motion'
 
 // Chamber climate. The stock K2 has a thermistor and an exhaust/filter fan on a
 // temperature threshold (Creality's M141), no heater. When a heater_generic for the
@@ -22,6 +23,7 @@ export default function ChamberCard({ status, className = '' }: { status: Status
   const [dragH, setDragH] = useState(false)
   useEffect(() => { if (!dragT && !busy) setThr(c?.fan_target || 35) }, [c?.fan_target, dragT, busy])
   useEffect(() => { if (!dragH && !busy) setHeat(c?.heater?.target || 0) }, [c?.heater?.target, dragH, busy])
+  const shown = useTween(c?.temp ?? 0, 500)
   if (!c) return null
 
   const run = async (label: string, body: { fan_threshold?: number; heat?: number }) => {
@@ -40,7 +42,7 @@ export default function ChamberCard({ status, className = '' }: { status: Status
     <div className={`card chamber ${className}`}>
       <h2>Chamber <span>{state}</span></h2>
       <div className="ch-top">
-        <div className="ch-big"><span className="num">{c.temp.toFixed(1)}°</span><small>seen {c.min_seen.toFixed(0)}° to {c.max_seen.toFixed(0)}° since boot</small></div>
+        <div className="ch-big"><span className="num">{shown.toFixed(1)}°</span><small>seen {c.min_seen.toFixed(0)}° to {c.max_seen.toFixed(0)}° since boot</small></div>
         <div className="ch-gauge" aria-hidden>
           <i className="fill" style={{ width: pctOf(c.temp) }} />
           <i className="mark thr" style={{ left: pctOf(c.fan_target) }} title={`exhaust fan above ${c.fan_target.toFixed(0)}°`} />

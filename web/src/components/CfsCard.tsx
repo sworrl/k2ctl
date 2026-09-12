@@ -23,7 +23,7 @@ export default function CfsCard({ status, onPick, className = '' }: { status: St
                 <button key={s.id} className={`slot ${s.selected ? 'active' : ''} ${s.state === 0 ? 'empty' : ''}`} onClick={() => onPick(box, s)}
                   style={{ ['--slot-color' as string]: (s.colors?.length ?? 0) > 1 ? swatchStyle(s.colors) : (s.color || 'var(--line-2)'), ['--swatch' as string]: swatchStyle(s.colors, s.color) }}
                   title={`${s.vendor} ${s.name} (${s.type}) ${s.min_temp}-${s.max_temp}°C PA ${s.pressure}${(s.colors?.length ?? 0) > 1 ? ' · rainbow: shifts as used' : ''}`}>
-                  <span className="spool" aria-hidden="true"><i /></span>
+                  <span className={`spool ${s.selected && status.job.state === 'printing' ? 'spin' : ''}`} aria-hidden="true"><i /><em /></span>
                   <span className="label">{s.label}{s.selected && <span className="badge">FEEDING</span>}</span>
                   <span className="name">{s.name || 'empty'}</span>
                   <span className="meta">{[s.vendor, s.type].filter(Boolean).join(' · ')}{s.type ? ` · ${s.min_temp}-${s.max_temp}°` : ''}</span>

@@ -3,6 +3,7 @@ import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { api, baseName, fmtHMS, type GFile, type Status } from '../api'
 import type { ParseResult, WorkerMsg } from '../gcode.worker'
+import { reducedMotion } from '../motion'
 
 // 3D preview of a gcode file on the printer: extrusion toolpaths as lines, drag to
 // rotate, wheel to zoom, right-drag to pan. Colored by slicer tool (the filament colors
@@ -20,11 +21,18 @@ const TOOL_FALLBACK = ['#3ddc84', '#2b8cff', '#ffb000', '#ff4d6d', '#b56cff', '#
 
 type Mode = 'tool' | 'type'
 
+// Per-segment color with fake tube lighting: a line's brightness follows how its
+// direction sits against a fixed light, the way slicers shade extrusions, so walls facing
+// different ways get different tones and a dense model reads as a shape, not a blob.
+// A mild height ramp adds depth, and infill sits a little darker than walls.
+const LX = 0.62, LY = 0.30, LZ = 0.72 // normalized light direction
 function colorsFor(r: ParseResult, mode: Mode): Float32Array {
   const n = r.pos.length / 6
   const out = new Float32Array(n * 6)
   const c = new THREE.Color()
   const cache = new Map<number, [number, number, number]>()
+  const p = r.pos
+  const z0 = r.bbox[2], z1 = Math.max(r.bbox[5], z0 + 1)
   for (let i = 0; i < n; i++) {
     const key = mode === 'tool' ? r.tool[i] : 1000 + r.type[i]
     let rgb = cache.get(key)
@@ -34,7 +42,19 @@ function colorsFor(r: ParseResult, mode: Mode): Float32Array {
         : (TYPE_COLORS[r.types[r.type[i]]] || '#8d98aa')
       c.set(hex); rgb = [c.r, c.g, c.b]; cache.set(key, rgb)
     }
-    out.set(rgb, i * 6); out.set(rgb, i * 6 + 3)
+    const j = i * 6
+    let dx = p[j + 3] - p[j], dy = p[j + 4] - p[j + 1], dz = p[j + 5] - p[j + 2]
+    const len = Math.hypot(dx, dy, dz) || 1
+    dx /= len; dy /= len; dz /= len
+    // the tube's shading depends on the direction perpendicular to travel; use the
+    // horizontal normal (-dy, dx) against the light for the wall tone
+    const facing = Math.abs(-dy * LX + dx * LY) * 0.75 + Math.abs(dz) * 0.25
+    let shade = 0.45 + 0.55 * facing
+    shade *= 0.82 + 0.18 * ((p[j + 5] - z0) / (z1 - z0))
+    const t = r.types[r.type[i]] || ''
+    if (mode === 'tool' && (t.includes('infill') || t.includes('Infill'))) shade *= 0.72
+    const R = Math.min(1, rgb[0] * shade), G = Math.min(1, rgb[1] * shade), B = Math.min(1, rgb[2] * shade)
+    out[j] = R; out[j + 1] = G; out[j + 2] = B; out[j + 3] = R; out[j + 4] = G; out[j + 5] = B
   }
   return out
 }
@@ -59,7 +79,7 @@ export default function ModelCard({ status, className = '' }: { status: Status; 
   const [layer, setLayer] = useState(0)
   const [follow, setFollow] = useState(true)
   const mount = useRef<HTMLDivElement>(null)
-  const three = useRef<{ renderer: THREE.WebGLRenderer; scene: THREE.Scene; camera: THREE.PerspectiveCamera; controls: OrbitControls; lines?: THREE.LineSegments; bbox?: number[]; frame: () => void; fit: () => void } | null>(null)
+  const three = useRef<{ renderer: THREE.WebGLRenderer; scene: THREE.Scene; camera: THREE.PerspectiveCamera; controls: OrbitControls; lines?: THREE.LineSegments; glow?: THREE.LineSegments; bbox?: number[]; nozzle: THREE.Group; frame: () => void; fit: () => void } | null>(null)
 
   const jobFile = status.job.file
   const printingThis = !!path && path === jobFile && (status.job.state === 'printing' || status.job.state === 'paused')
@@ -82,18 +102,42 @@ export default function ModelCard({ status, className = '' }: { status: Status; 
     controls.enableDamping = true; controls.dampingFactor = 0.1
     controls.maxPolarAngle = Math.PI / 2 + 0.05
     // bed: 262 x 262 grid in the XY plane, 10 mm cells, origin at the front-left corner
-    const grid = new THREE.GridHelper(BED, BED / 10, 0x34405a, 0x263042)
+    const grid = new THREE.GridHelper(BED, BED / 10, 0x22d3ee, 0x1a2536)
+    ;(grid.material as THREE.Material).transparent = true; (grid.material as THREE.Material).opacity = .55
     grid.rotation.x = Math.PI / 2
     grid.position.set(BED / 2, BED / 2, 0)
     scene.add(grid)
-    const edge = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.PlaneGeometry(BED, BED)), new THREE.LineBasicMaterial({ color: 0x5b6678 }))
+    const edge = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.PlaneGeometry(BED, BED)), new THREE.LineBasicMaterial({ color: 0x22d3ee, transparent: true, opacity: .8 }))
     edge.position.set(BED / 2, BED / 2, 0)
     scene.add(edge)
-    let raf = 0, dirty = true
+    // bed plate: faint glass so the model reads as sitting on something
+    const plate = new THREE.Mesh(new THREE.PlaneGeometry(BED, BED), new THREE.MeshBasicMaterial({ color: 0x0b1018, transparent: true, opacity: .55, side: THREE.DoubleSide }))
+    plate.position.set(BED / 2, BED / 2, -0.05)
+    scene.add(plate)
+    // nozzle marker: a bright dot with a pulsing halo and a drop line to the bed
+    const nozzle = new THREE.Group()
+    const core = new THREE.Mesh(new THREE.SphereGeometry(1.4, 12, 12), new THREE.MeshBasicMaterial({ color: 0xffffff }))
+    const halo = new THREE.Mesh(new THREE.SphereGeometry(3.2, 12, 12), new THREE.MeshBasicMaterial({ color: 0x22d3ee, transparent: true, opacity: .35, depthWrite: false }))
+    halo.name = 'halo'
+    const drop = new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(0, 0, 0), new THREE.Vector3(0, 0, -1)]), new THREE.LineBasicMaterial({ color: 0x22d3ee, transparent: true, opacity: .35 }))
+    drop.name = 'drop'
+    nozzle.add(core, halo, drop); nozzle.visible = false
+    scene.add(nozzle)
+    let raf = 0, dirty = true, idleSince = performance.now(), t0 = performance.now()
     const frame = () => { dirty = true }
+    const motion = !reducedMotion()
+    controls.addEventListener('start', () => { idleSince = Infinity })
+    controls.addEventListener('end', () => { idleSince = performance.now() })
     const loop = () => {
       raf = requestAnimationFrame(loop)
-      const moved = controls.update()
+      const now = performance.now()
+      let moved = controls.update()
+      if (motion) {
+        // slow auto-orbit after 8 s idle; the pulse on the nozzle halo always runs
+        if (now - idleSince > 8000) { controls.autoRotate = true; controls.autoRotateSpeed = 0.35; moved = controls.update() || moved }
+        else controls.autoRotate = false
+        if (nozzle.visible) { const k = 1 + 0.35 * Math.sin((now - t0) / 260); halo.scale.setScalar(k); (halo.material as THREE.MeshBasicMaterial).opacity = .18 + .22 * (2 - k); moved = true }
+      }
       if (dirty || moved) { renderer.render(scene, camera); dirty = false }
     }
     const fit = () => {
@@ -116,7 +160,7 @@ export default function ModelCard({ status, className = '' }: { status: Status; 
     })
     ro.observe(el)
     controls.addEventListener('change', frame)
-    three.current = { renderer, scene, camera, controls, frame, fit }
+    three.current = { renderer, scene, camera, controls, nozzle, frame, fit }
     fit(); loop()
     return () => {
       cancelAnimationFrame(raf); ro.disconnect(); controls.dispose(); renderer.dispose()
@@ -145,12 +189,19 @@ export default function ModelCard({ status, className = '' }: { status: Status; 
     const t = three.current
     if (!t) return
     if (t.lines) { t.scene.remove(t.lines); t.lines.geometry.dispose(); (t.lines.material as THREE.Material).dispose(); t.lines = undefined }
+    if (t.glow) { t.scene.remove(t.glow); (t.glow.material as THREE.Material).dispose(); t.glow = undefined }
     if (result && result.pos.length) {
       const g = new THREE.BufferGeometry()
       g.setAttribute('position', new THREE.BufferAttribute(result.pos, 3))
       g.setAttribute('color', new THREE.BufferAttribute(colorsFor(result, mode), 3))
       const lines = new THREE.LineSegments(g, new THREE.LineBasicMaterial({ vertexColors: true }))
-      t.scene.add(lines); t.lines = lines; t.bbox = result.bbox
+      // additive ghost of the same geometry gives a cheap bloom without post-processing;
+      // dense models stack the additive passes, so fade it with segment count
+      const n = result.pos.length / 6
+      const glowOpacity = Math.max(0.03, Math.min(0.25, 0.25 * (150000 / n)))
+      const glow = new THREE.LineSegments(g, new THREE.LineBasicMaterial({ vertexColors: true, transparent: true, opacity: glowOpacity, blending: THREE.AdditiveBlending, depthWrite: false }))
+      glow.renderOrder = -1
+      t.scene.add(glow, lines); t.lines = lines; t.glow = glow; t.bbox = result.bbox
     }
     t.fit()
   }, [result, mode])
@@ -167,6 +218,19 @@ export default function ModelCard({ status, className = '' }: { status: Status; 
     if (!t?.lines || !result) return
     t.lines.geometry.setDrawRange(0, drawCount(result, layer)); t.frame()
   }, [layer, result])
+
+  // nozzle marker follows the live toolhead while this file prints
+  useEffect(() => {
+    const t = three.current
+    if (!t) return
+    const m = /X:\s*(-?[\d.]+)\s*Y:\s*(-?[\d.]+)\s*Z:\s*(-?[\d.]+)/.exec(status.position || '')
+    if (!printingThis || !m) { t.nozzle.visible = false; t.frame(); return }
+    const x = Number(m[1]), y = Number(m[2]), z = Number(m[3])
+    t.nozzle.position.set(x, y, z + 0.3)
+    const drop = t.nozzle.getObjectByName('drop') as THREE.Line | undefined
+    if (drop) drop.scale.set(1, 1, Math.max(0.01, z + 0.3))
+    t.nozzle.visible = true; t.frame()
+  }, [status.position, printingThis])
 
   const legend = useMemo(() => {
     if (!result) return []

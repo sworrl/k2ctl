@@ -9,6 +9,7 @@ import FansCard from './components/FansCard'
 import SensorsCard from './components/SensorsCard'
 import ModelCard from './components/ModelCard'
 import ChamberCard from './components/ChamberCard'
+import Backdrop from './components/Backdrop'
 import SlotDialog from './components/SlotDialog'
 
 export default function App() {
@@ -23,11 +24,12 @@ export default function App() {
   const online = !!status && (status.sources.moonraker || status.sources.cxws)
 
   return (
-    <div className="shell">
+    <div className={`shell ${jobState}`}>
+      <Backdrop active={jobState === 'printing'} />
       <div className={`topbar ${jobState === 'printing' ? 'printing' : ''}`}>
         <img className="appicon" src="/favicon.png" alt="k2ctl" />
         <div className="who">
-          <h1>{p?.name || p?.hostname || 'K2'}</h1>
+          <h1 className="shine">{p?.name || p?.hostname || 'K2'}</h1>
           <div className="sub">{p?.model || 'Creality K2'}{p?.klipper ? ` · Klipper ${p.klipper}` : ''}</div>
         </div>
         <span className={`pill ${status ? (online ? jobState : 'offline') : 'offline'}`}>{status ? (online ? jobState : 'offline') : 'no link'}</span>

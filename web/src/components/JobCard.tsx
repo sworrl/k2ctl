@@ -1,14 +1,27 @@
 import { baseName, fmtClock, fmtHMS, type Status } from '../api'
+import { useTween } from '../motion'
 
 function Ring({ pct }: { pct: number }) {
-  const r = 34, c = 2 * Math.PI * r
-  const p = Math.min(100, Math.max(0, pct))
+  const r = 36, c = 2 * Math.PI * r
+  const p = Math.min(100, Math.max(0, useTween(pct, 900)))
+  const a = (p / 100) * 2 * Math.PI - Math.PI / 2
+  const hx = 46 + r * Math.cos(a), hy = 46 + r * Math.sin(a)
   return (
-    <svg className="ring" width={84} height={84} viewBox="0 0 84 84" aria-hidden>
-      <circle cx={42} cy={42} r={r} fill="none" stroke="var(--panel-3)" strokeWidth={7} />
-      <circle cx={42} cy={42} r={r} fill="none" stroke="var(--accent)" strokeWidth={7} strokeLinecap="round"
-        strokeDasharray={`${(c * p) / 100} ${c}`} transform="rotate(-90 42 42)" style={{ transition: 'stroke-dasharray .6s' }} />
-      <text x={42} y={47} textAnchor="middle" className="ring-num">{p.toFixed(p >= 99.5 ? 0 : 1)}%</text>
+    <svg className="ring" width={92} height={92} viewBox="0 0 92 92" aria-hidden>
+      <defs>
+        <linearGradient id="ringg" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stopColor="#22d3ee" /><stop offset=".5" stopColor="#2b8cff" /><stop offset="1" stopColor="#b56cff" />
+        </linearGradient>
+        <filter id="ringglow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.2" /></filter>
+      </defs>
+      <circle cx={46} cy={46} r={r} fill="none" stroke="var(--panel-3)" strokeWidth={7} />
+      <circle cx={46} cy={46} r={r + 5} fill="none" stroke="var(--line)" strokeWidth={1} strokeDasharray="2 5" className="ring-orbit" />
+      <circle cx={46} cy={46} r={r} fill="none" stroke="url(#ringg)" strokeWidth={7} strokeLinecap="round" filter="url(#ringglow)" opacity={.55}
+        strokeDasharray={`${(c * p) / 100} ${c}`} transform="rotate(-90 46 46)" />
+      <circle cx={46} cy={46} r={r} fill="none" stroke="url(#ringg)" strokeWidth={7} strokeLinecap="round"
+        strokeDasharray={`${(c * p) / 100} ${c}`} transform="rotate(-90 46 46)" />
+      {p > 0.5 && p < 99.5 && <circle cx={hx} cy={hy} r={5} fill="#fff" className="ring-head" />}
+      <text x={46} y={51} textAnchor="middle" className="ring-num">{p.toFixed(p >= 99.5 ? 0 : 1)}%</text>
     </svg>
   )
 }

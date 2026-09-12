@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { api, type FanCtrl, type FanKey, type Status } from '../api'
+import { useTween } from '../motion'
 
 const FANS: { key: FanKey; name: string; hint: string }[] = [
   { key: 'part', name: 'Part fan', hint: 'model cooling · M106 P0' },
@@ -18,6 +19,8 @@ function FanGlyph({ pct, on }: { pct: number; on: boolean }) {
     </svg>
   )
 }
+
+function Pct({ v }: { v: number }) { const t = useTween(v, 400); return <>{Math.round(t)}</> }
 
 function Toggle({ on, disabled, onChange, label }: { on: boolean; disabled?: boolean; onChange: (v: boolean) => void; label: string }) {
   return (
@@ -69,7 +72,7 @@ export default function FansCard({ status, className = '' }: { status: Status; c
                 onMouseUp={(e) => void setPct(key, Number((e.target as HTMLInputElement).value))}
                 onTouchEnd={(e) => void setPct(key, Number((e.target as HTMLInputElement).value))}
                 onKeyUp={(e) => { if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End', 'PageUp', 'PageDown'].includes(e.key)) void setPct(key, Number((e.target as HTMLInputElement).value)) }} />
-              <div className="val">{shown}<small> %</small></div>
+              <div className="val"><Pct v={shown} /><small> %</small></div>
             </div>
           )
         })}
