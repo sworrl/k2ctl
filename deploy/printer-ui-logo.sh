@@ -5,8 +5,10 @@
 #   deploy/printer-ui-logo.sh [ip]            apply
 #   deploy/printer-ui-logo.sh [ip] --revert   restore Creality's camera icon
 set -euo pipefail
-IP="${1:-192.168.13.215}"; MODE="${2:-apply}"
 HERE="$(cd "$(dirname "$0")" && pwd)"
+[ -f "$HERE/local.env" ] && . "$HERE/local.env"
+IP="${1:-${K2_IP:-}}"; MODE="${2:-apply}"
+[ -n "$IP" ] || { echo "printer IP needed: pass it, or set K2_IP in deploy/local.env (see local.env.example)" >&2; exit 2; }
 R=/etc/sysConfig/UIResource/K1; B=/mnt/UDISK/k2ctl/ui-backup; F=img_new_camera.png
 SSH=(ssh -o BatchMode=yes -o StrictHostKeyChecking=accept-new -o ConnectTimeout=8 "root@$IP")
 if [ "$MODE" = "--revert" ]; then

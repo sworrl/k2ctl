@@ -1,11 +1,13 @@
 #!/bin/bash
 # Deploy k2ctl to the K2 over SSH.
-#   deploy/deploy.sh [printer-ip]
+#   deploy/deploy.sh [printer-ip]      (default: K2_IP from deploy/local.env)
 # Needs root SSH on the printer (Settings > Root account on the touchscreen shows
 # the password). Export K2_ROOT_PW to avoid the prompts (uses sshpass).
 set -euo pipefail
-IP="${1:-192.168.13.215}"
 HERE="$(cd "$(dirname "$0")" && pwd)"
+[ -f "$HERE/local.env" ] && . "$HERE/local.env"
+IP="${1:-${K2_IP:-}}"
+[ -n "$IP" ] || { echo "printer IP needed: pass it, or set K2_IP in deploy/local.env (see local.env.example)" >&2; exit 2; }
 ROOT="$(cd "$HERE/.." && pwd)"
 BIN="$ROOT/build/k2ctl-armv7"
 [ -x "$BIN" ] || { echo "build first: make web arm" >&2; exit 1; }

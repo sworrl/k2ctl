@@ -195,19 +195,25 @@ func (lg *Ledger) Settings() Settings {
 	return lg.set
 }
 
-// SetSettings replaces the settings (zero fields keep their current value) and reprices every job.
+// SetSettings updates the settings (zero fields keep their current value) and reprices every job.
 func (lg *Ledger) SetSettings(s Settings) Settings {
 	lg.mu.Lock()
 	defer lg.mu.Unlock()
-	if s.PricePerKg != nil {
-		norm := map[string]float64{}
-		for k, v := range s.PricePerKg {
-			if k = strings.ToUpper(strings.TrimSpace(k)); k != "" && v > 0 {
-				norm[k] = v
-			}
-		}
-		s.PricePerKg = norm
+	// Price table: the types sent are set, a price of 0 removes a type, the rest stay.
+	table := map[string]float64{}
+	for k, v := range lg.set.PricePerKg {
+		table[k] = v
 	}
+	for k, v := range s.PricePerKg {
+		if k = strings.ToUpper(strings.TrimSpace(k)); k == "" {
+			continue
+		} else if v > 0 {
+			table[k] = v
+		} else {
+			delete(table, k)
+		}
+	}
+	s.PricePerKg = table
 	lg.set = mergeSettings(lg.set, s)
 	lg.priceAllLocked()
 	lg.saveLocked()

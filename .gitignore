@@ -7,3 +7,4 @@ internal/api/dist/assets/
 re/bin/
 re/lib/
 re/strings.txt
+deploy/local.env

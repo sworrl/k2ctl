@@ -15,6 +15,7 @@ set -euo pipefail
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$HERE"
 
+[ -f "$HERE/deploy/local.env" ] && . "$HERE/deploy/local.env"
 PRINTER="${K2_IP:-}"
 PASSWORD="${K2_ROOT_PW:-}"
 DO_DESKTOP=1
@@ -47,7 +48,7 @@ ask()  { local v; if [ -r /dev/tty ]; then read -r -p "$1" v </dev/tty; else rea
 asks() { local v; if [ -r /dev/tty ]; then read -r -s -p "$1" v </dev/tty; else read -r -s -p "$1" v; fi; echo >&2; printf '%s' "$v"; }
 
 need_packages() {
-  echo git curl ca-certificates build-essential cmake sshpass golang-go nodejs npm qt6-base-dev qt6-webengine-dev
+  echo git curl ca-certificates build-essential cmake sshpass golang-go nodejs npm qt6-base-dev qt6-webengine-dev unzip
 }
 
 # ---------- uninstall ----------
@@ -55,6 +56,7 @@ if [ "$UNINSTALL" = 1 ]; then
   say "removing the tray app from this desktop"
   pkill -x k2ctl-tray 2>/dev/null || true
   rm -f "$HOME/.local/bin/k2ctl-tray" "$HOME/.local/share/applications/k2ctl-tray.desktop" \
+        "$HOME/.local/share/applications/k2ctl-cost.desktop" \
         "$HOME/.config/autostart/k2ctl-tray.desktop"
   for s in 32 48 64 128 256 512; do rm -f "$HOME/.local/share/icons/hicolor/${s}x${s}/apps/k2ctl.png"; done
   echo "tray removed. Your settings file ~/.config/k2ctl/tray.conf is still there; delete it if you want."
@@ -134,6 +136,8 @@ fi
 if [ "$DO_PRINTER" = 1 ]; then
   say "installing on the printer at $PRINTER"
   K2_ROOT_PW="$PASSWORD" deploy/deploy.sh "$PRINTER"
+  # Remember the address for later updates and the optional deploy/ scripts.
+  [ -f deploy/local.env ] || printf 'K2_IP=%s\n' "$PRINTER" > deploy/local.env
   # deploy.sh enables /etc/init.d/k2ctl, so it comes back after every printer reboot.
 fi
 
@@ -143,6 +147,8 @@ if [ "$DO_DESKTOP" = 1 ]; then
   mkdir -p "$HOME/.local/bin" "$HOME/.local/share/applications"
   install -m 755 tray/build/k2ctl-tray "$HOME/.local/bin/k2ctl-tray"
   sed "s|^Exec=.*|Exec=$HOME/.local/bin/k2ctl-tray|" tray/k2ctl-tray.desktop > "$HOME/.local/share/applications/k2ctl-tray.desktop"
+  # "Open with > K2 print cost" for .gcode and .3mf files
+  sed "s|^Exec=.*|Exec=$HOME/.local/bin/k2ctl-tray --cost %F|" tray/k2ctl-cost.desktop > "$HOME/.local/share/applications/k2ctl-cost.desktop"
   for s in 32 48 64 128 256 512; do
     d="$HOME/.local/share/icons/hicolor/${s}x${s}/apps"; mkdir -p "$d"
     cp "assets/k2ctl-icon-${s}.png" "$d/k2ctl.png"

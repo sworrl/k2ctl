@@ -1,11 +1,17 @@
 #!/bin/bash
-# Copy the Let's Encrypt certificate for k2ctl.falcontechnix.com to the printer and
+# Copy a Let's Encrypt certificate for the printer's LAN hostname to the printer and
 # restart k2ctl so it serves HTTPS on :443. Runs as root (certbot deploy hook, or
 # `sudo deploy/push-cert.sh`); the SSH hop uses the desktop user's key.
+# Settings: K2_IP, K2_CERT_NAME, K2_SSH_USER, from the environment or deploy/local.env.
+# A certificate only makes the browser happy on your LAN. It does NOT make k2ctl safe to
+# put on the internet; see the warning in README.md.
 set -euo pipefail
-IP="${K2_IP:-192.168.13.215}"
-NAME="${K2_CERT_NAME:-k2ctl.falcontechnix.com}"
-SSH_USER="${K2_SSH_USER:-reaver}"
+HERE="$(cd "$(dirname "$0")" && pwd)"
+[ -f "$HERE/local.env" ] && . "$HERE/local.env"
+IP="${K2_IP:-}"
+NAME="${K2_CERT_NAME:-${RENEWED_LINEAGE:+$(basename "$RENEWED_LINEAGE")}}"
+SSH_USER="${K2_SSH_USER:-${SUDO_USER:-}}"
+[ -n "$IP" ] && [ -n "$NAME" ] && [ -n "$SSH_USER" ] || { echo "need K2_IP, K2_CERT_NAME and K2_SSH_USER (deploy/local.env, see local.env.example)" >&2; exit 2; }
 LIVE="/etc/letsencrypt/live/$NAME"
 [ -r "$LIVE/fullchain.pem" ] || { echo "no certificate at $LIVE (run as root)" >&2; exit 1; }
 tmp="$(mktemp -d)"; trap 'rm -rf "$tmp"' EXIT

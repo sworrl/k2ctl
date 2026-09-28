@@ -6,7 +6,10 @@
 # there does not work: Monitor treats it as a dead process and restart-loops. Idempotent; rerun
 # after a firmware update. Revert: deploy/install-443.sh --revert
 set -euo pipefail
-IP="${K2_IP:-192.168.13.215}"; HERE="$(cd "$(dirname "$0")" && pwd)"
+HERE="$(cd "$(dirname "$0")" && pwd)"
+[ -f "$HERE/local.env" ] && . "$HERE/local.env"
+IP="${K2_IP:-}"
+[ -n "$IP" ] || { echo "printer IP needed: pass it, or set K2_IP in deploy/local.env (see local.env.example)" >&2; exit 2; }
 SSH=(ssh -o BatchMode=yes -o StrictHostKeyChecking=accept-new -o ConnectTimeout=8 "root@$IP")
 SCP=(scp -O -q -o BatchMode=yes)
 if [ "${1:-}" = "--revert" ]; then
@@ -30,8 +33,11 @@ for i in 1 2 3 4 5 6 7 8 9 10; do sleep 2; netstat -tln 2>/dev/null | grep -q ":
 sleep 2
 echo "--- listeners:"; netstat -tlnp 2>/dev/null | grep -E ":(80|443|8443|9999|8085) "
 echo "--- shim in web-server: $(tr "\0" "\n" < /proc/$(pidof web-server | awk "{print \$1}")/maps 2>/dev/null | grep -c bindshim) (>0 = loaded)"'
-NAME=k2ctl.falcontechnix.com
+NAME="${K2_CERT_NAME:-}"   # the printer's hostname on your LAN, when you have a cert for it
 sleep 20   # let Monitor prove it is not restart-looping
 "${SSH[@]}" 'echo "--- Monitor restarts of web-server in the last minute: $(grep -c "web-server" /mnt/UDISK/creality/userdata/log/Monitor.log 2>/dev/null | tail -1) total; recent:"; tail -3 /mnt/UDISK/creality/userdata/log/Monitor.log | cut -c1-120'
-if curl -s -m 8 --resolve "$NAME:443:$IP" "https://$NAME/api/version" >/dev/null; then echo "k2ctl is on https://$NAME"; else echo "k2ctl did not answer on 443" >&2; exit 1; fi
+if [ -n "$NAME" ]; then
+  if curl -s -m 8 --resolve "$NAME:443:$IP" "https://$NAME/api/version" >/dev/null; then echo "k2ctl is on https://$NAME"; else echo "k2ctl did not answer on 443" >&2; exit 1; fi
+elif curl -sk -m 8 "https://$IP/api/version" >/dev/null; then echo "k2ctl answers on https://$IP (no K2_CERT_NAME set, certificate not checked)"
+else echo "k2ctl did not answer on 443" >&2; exit 1; fi
 curl -sk -m 6 -o /dev/null -w "creality https on 8443 -> HTTP %{http_code}\n" "https://$IP:8443/" || true
