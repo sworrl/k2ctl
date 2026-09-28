@@ -8,6 +8,9 @@ USE_PROCD=1
 K2CTL_DIR=/mnt/UDISK/k2ctl
 
 start_service() {
+    # /mnt/UDISK mounts late at boot. The command line (and the TLS decision) is fixed when
+    # this runs, so wait for the disk or k2ctl comes up HTTP-only until the next restart.
+    for i in $(seq 1 60); do [ -x "$K2CTL_DIR/k2ctl" ] && break; sleep 2; done
     TLS_ARGS=""
     if [ -f "$K2CTL_DIR/tls/fullchain.pem" ] && [ -f "$K2CTL_DIR/tls/privkey.pem" ]; then
         TLS_ARGS="-tls-listen :443 -tls-cert $K2CTL_DIR/tls/fullchain.pem -tls-key $K2CTL_DIR/tls/privkey.pem"
