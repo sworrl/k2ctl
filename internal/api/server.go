@@ -8,6 +8,7 @@ import (
 	"io"
 	"io/fs"
 	"log"
+	"math"
 	"net/http"
 	"os"
 	"path"
@@ -18,6 +19,7 @@ import (
 	"github.com/gorilla/websocket"
 
 	"github.com/sworrl/k2ctl/internal/cxws"
+	"github.com/sworrl/k2ctl/internal/jobs"
 	"github.com/sworrl/k2ctl/internal/moonraker"
 	"github.com/sworrl/k2ctl/internal/profiles"
 	"github.com/sworrl/k2ctl/internal/state"
@@ -32,6 +34,7 @@ type Server struct {
 	Moon    *moonraker.Client
 	Catalog *profiles.Catalog
 	Bays    *profiles.Bays // per-bay overrides (multi-color spools); may be nil
+	Jobs    *jobs.Ledger   // print ledger with costs; may be nil
 	WebDir  string
 	Version string
 	Log     *log.Logger
@@ -55,6 +58,11 @@ func (s *Server) Handler() http.Handler {
 	mux.HandleFunc("POST /api/fans/recommended", s.fansRecommended)
 	mux.HandleFunc("POST /api/gcode", s.gcode)
 	mux.HandleFunc("GET /api/history", s.history)
+	mux.HandleFunc("GET /api/jobs", s.jobList)
+	mux.HandleFunc("GET /api/jobs/{id}/thumb", s.jobThumb)
+	mux.HandleFunc("GET /api/costs/settings", s.costSettings)
+	mux.HandleFunc("POST /api/costs/settings", s.setCostSettings)
+	mux.HandleFunc("POST /api/costs/estimate", s.costEstimate)
 	mux.HandleFunc("POST /api/chamber", s.setChamber)
 	mux.HandleFunc("GET /api/motion", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Cache-Control", "no-store")
@@ -105,6 +113,7 @@ func (s *Server) status(w http.ResponseWriter, r *http.Request) {
 func (s *Server) snapshot() state.Status {
 	snap := s.Store.Snapshot()
 	snap.FanCtrl = s.fanCtrl(snap)
+	checkProgress(&snap.Job)
 	for bi := range snap.CFS.Boxes {
 		box := &snap.CFS.Boxes[bi]
 		for si := range box.Slots {
@@ -125,6 +134,26 @@ func (s *Server) snapshot() state.Status {
 		}
 	}
 	return snap
+}
+
+// checkProgress guards against the device socket's job numbers going wrong. On
+// 2026-09-27 a Moonraker-started job showed 119 %, then 74 % with an hour left,
+// one hour into a 6h41 print while the file position said 15 %. When the socket's
+// progress is impossible or far from the file position, the file position wins,
+// time left is projected from it, and the socket's layer counts are dropped.
+func checkProgress(j *state.Job) {
+	if j.State != "printing" && j.State != "paused" {
+		return
+	}
+	fp := j.FileProgress
+	if fp <= 0 || (j.Progress <= 100 && math.Abs(j.Progress-fp) <= 25) {
+		return
+	}
+	j.Progress = fp
+	j.Layer, j.TotalLayers = 0, 0
+	if fp >= 1 && j.PrintS > 0 {
+		j.TimeLeft = int(j.PrintS * (100 - fp) / fp)
+	}
 }
 
 func (s *Server) ws(w http.ResponseWriter, r *http.Request) {
@@ -502,6 +531,79 @@ func (s *Server) history(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	writeJSON(w, 200, h)
+}
+
+// jobList is the print ledger, newest first, with totals and the settings the costs used.
+func (s *Server) jobList(w http.ResponseWriter, r *http.Request) {
+	if s.Jobs == nil {
+		fail(w, 503, fmt.Errorf("job ledger is off"))
+		return
+	}
+	js, t := s.Jobs.List()
+	w.Header().Set("Cache-Control", "no-store")
+	writeJSON(w, 200, map[string]any{"settings": s.Jobs.Settings(), "totals": t, "jobs": js})
+}
+
+// jobThumb serves the slicer thumbnail cached from the job's gcode.
+func (s *Server) jobThumb(w http.ResponseWriter, r *http.Request) {
+	if s.Jobs == nil {
+		http.NotFound(w, r)
+		return
+	}
+	p := s.Jobs.ThumbPath(r.PathValue("id"))
+	if p == "" {
+		http.NotFound(w, r)
+		return
+	}
+	w.Header().Set("Cache-Control", "public, max-age=86400")
+	http.ServeFile(w, r, p)
+}
+
+func (s *Server) costSettings(w http.ResponseWriter, r *http.Request) {
+	if s.Jobs == nil {
+		fail(w, 503, fmt.Errorf("job ledger is off"))
+		return
+	}
+	writeJSON(w, 200, s.Jobs.Settings())
+}
+
+// setCostSettings takes any subset of the settings; omitted or zero fields keep their value.
+func (s *Server) setCostSettings(w http.ResponseWriter, r *http.Request) {
+	if s.Jobs == nil {
+		fail(w, 503, fmt.Errorf("job ledger is off"))
+		return
+	}
+	var body jobs.Settings
+	if err := json.NewDecoder(r.Body).Decode(&body); err != nil {
+		fail(w, 400, err)
+		return
+	}
+	set := s.Jobs.SetSettings(body)
+	s.Log.Printf("costs: settings %+v", set)
+	writeJSON(w, 200, set)
+}
+
+// costEstimate prices a sliced file before it is printed. Body: {"name": "...",
+// "head": first ~600 kB, "tail": last ~80 kB} of the gcode as text; whole small files
+// can go in "head" alone.
+func (s *Server) costEstimate(w http.ResponseWriter, r *http.Request) {
+	if s.Jobs == nil {
+		fail(w, 503, fmt.Errorf("job ledger is off"))
+		return
+	}
+	var body struct {
+		Name string `json:"name"`
+		Head string `json:"head"`
+		Tail string `json:"tail"`
+	}
+	if err := json.NewDecoder(http.MaxBytesReader(w, r.Body, 4<<20)).Decode(&body); err != nil {
+		fail(w, 400, err)
+		return
+	}
+	if body.Tail == "" {
+		body.Tail = body.Head
+	}
+	writeJSON(w, 200, s.Jobs.Estimate(body.Name, []byte(body.Head), []byte(body.Tail)))
 }
 
 // static serves the web UI from WebDir when set, otherwise the embedded build,

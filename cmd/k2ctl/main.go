@@ -17,6 +17,7 @@ import (
 
 	"github.com/sworrl/k2ctl/internal/api"
 	"github.com/sworrl/k2ctl/internal/cxws"
+	"github.com/sworrl/k2ctl/internal/jobs"
 	"github.com/sworrl/k2ctl/internal/moonraker"
 	"github.com/sworrl/k2ctl/internal/profiles"
 	"github.com/sworrl/k2ctl/internal/state"
@@ -34,6 +35,7 @@ func main() {
 	tlsListen := flag.String("tls-listen", "", "also serve HTTPS on this address, e.g. :8443 (needs -tls-cert and -tls-key)")
 	tlsCert := flag.String("tls-cert", "", "PEM certificate chain for -tls-listen")
 	tlsKey := flag.String("tls-key", "", "PEM private key for -tls-listen")
+	jobsPath := flag.String("jobs", "", "print ledger with filament and power costs (default: jobs.json next to -profiles)")
 	flag.Parse()
 
 	logger := log.New(os.Stderr, "k2ctl ", log.LstdFlags)
@@ -57,9 +59,15 @@ func main() {
 	go mc.Run(ctx, *poll)
 	go mc.RunMotion(ctx)
 
+	if *jobsPath == "" {
+		*jobsPath = filepath.Join(filepath.Dir(*prof), "jobs.json")
+	}
+	ledger := jobs.Open(*jobsPath, mc, cat, logger)
+	go ledger.Run(ctx.Done())
+
 	srv := &http.Server{
 		Addr:              *listen,
-		Handler:           (&api.Server{Store: store, CX: cxc, Moon: mc, Catalog: cat, Bays: bays, WebDir: *webDir, Version: version, Log: logger}).Handler(),
+		Handler:           (&api.Server{Store: store, CX: cxc, Moon: mc, Catalog: cat, Bays: bays, Jobs: ledger, WebDir: *webDir, Version: version, Log: logger}).Handler(),
 		ReadHeaderTimeout: 10 * time.Second,
 	}
 	var tlsSrv *http.Server

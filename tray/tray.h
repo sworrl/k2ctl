@@ -10,6 +10,7 @@
 
 class SensorsWindow;
 class CameraWindow;
+class CostWindow;
 
 class TrayApp : public QObject {
     Q_OBJECT
@@ -28,6 +29,7 @@ private:
     void openDashboard();
     void openCamera();
     void openSensors();
+    void openCost();
     QIcon stateIcon() const;
     QString stateSummary() const;
 
@@ -42,4 +44,5 @@ private:
     QUrl m_mjpeg;
     SensorsWindow *m_sensors = nullptr;
     CameraWindow *m_camera = nullptr;
+    CostWindow *m_cost = nullptr;
 };

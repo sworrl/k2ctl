@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=K2 print cost
+Comment=Price a sliced print (filament and electricity) with the K2's k2ctl
+Exec=k2ctl-tray --cost %F
+Icon=k2ctl
+Terminal=false
+Categories=Utility;
+MimeType=text/x-gcode;model/3mf;application/vnd.ms-package.3dmanufacturing-3dmodel+xml;
+NoDisplay=false

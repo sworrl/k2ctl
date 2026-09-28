@@ -41,6 +41,20 @@ export interface Profile {
   cfs?: { ok: boolean; reason?: string }; warnings?: string[]; dry?: { temp_c: number; hours: number }
 }
 
+export interface JobMaterial { type: string; name?: string; color?: string; density: number; mm: number; g: number; gcode_price_kg?: number; price_kg: number; cost: number; source: string }
+export interface Job {
+  id: string; file: string; title: string; status: string; start: number; end?: number; total_s: number; print_s: number
+  filament_mm: number; bed_c: number; nozzle_c: number; slicer_s?: number; height_mm?: number; thumb: boolean; exists: boolean
+  materials: JobMaterial[]; meter: { secs: number; bed_duty_s: number; hot_duty_s: number }
+  g: number; kwh: number; filament_cost: number; energy_cost: number; cost: number; measured_pct: number
+}
+export interface CostSettings {
+  currency: string; kwh_price: number; hotend_w: number; bed_w: number; base_w: number; ambient_c: number; default_kg: number
+  price_per_kg: Record<string, number>
+}
+export interface JobTotals { jobs: number; g: number; kwh: number; filament_cost: number; energy_cost: number; cost: number; hours: number }
+export interface JobLedger { settings: CostSettings; totals: JobTotals; jobs: Job[] }
+
 /** Error thrown by request(); carries the HTTP status and the JSON body (e.g. cfs_incompatible). */
 export class ApiError extends Error {
   status: number; body: Record<string, unknown>
@@ -77,6 +91,9 @@ export const api = {
     request<FanCtrl>('/api/fans', { method: 'POST', body: JSON.stringify(body) }),
   fansRecommended: (profile?: string) =>
     request<{ ok: boolean; applied: FanRec; fans: FanCtrl }>('/api/fans/recommended', { method: 'POST', body: JSON.stringify(profile ? { profile } : {}) }),
+  jobs: () => request<JobLedger>('/api/jobs'),
+  setCostSettings: (body: Partial<CostSettings>) =>
+    request<CostSettings>('/api/costs/settings', { method: 'POST', body: JSON.stringify(body) }),
   gcode: (script: string) => request<{ ok: boolean }>('/api/gcode', { method: 'POST', body: JSON.stringify({ script }) }),
 }
 

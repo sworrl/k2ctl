@@ -446,13 +446,17 @@ input[type=range]:hover::-webkit-slider-thumb { transform: scale(1.15); box-shad
 .hero-state[data-state=error] .word, .hero-state[data-state=offline] .word, .hero-state[data-state=nolink] .word { color: var(--bad); text-shadow: 0 0 12px rgba(248, 113, 113, .7); }
 .hero-pct { font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: .1em; }
 .hero-pct small { font-size: 9px; margin-left: 1px; }
-@media (max-width: 720px) { .hero-state .word { font-size: 14px; } .hero .appicon { width: 38px; height: 38px; } }
+.hero .sub { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+@media (max-width: 720px) { .hero-state .word { font-size: 14px; } .hero .appicon { width: 38px; height: 38px; } .hero .hide-sm { display: none; } .hero-inner { gap: 12px; } }
 
 /* cursor spotlight */
 .spotlight { position: fixed; left: 0; top: 0; width: 600px; height: 600px; border-radius: 50%; pointer-events: none; z-index: 0; background: radial-gradient(closest-side, rgba(34, 211, 238, .10), rgba(181, 108, 255, .04) 55%, transparent 75%); mix-blend-mode: screen; will-change: transform; }
 
 /* glass cards with a cursor-following sheen and an animated gradient edge on every card */
-.card { background: linear-gradient(178deg, color-mix(in srgb, var(--panel) 88%, var(--text) 12%), color-mix(in srgb, var(--panel) 96%, transparent) 42%); backdrop-filter: blur(10px); transform-style: preserve-3d; will-change: transform; }
+/* No backdrop blur on cards: with the particle canvas animating behind them it forced a
+   re-blur of every card on every frame, which is what made scrolling lag. */
+.card { background: linear-gradient(178deg, color-mix(in srgb, var(--panel) 88%, var(--text) 12%), var(--panel) 42%); transform-style: preserve-3d; }
+.card.tilting { will-change: transform; }
 .card::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; z-index: 0; opacity: 0; transition: opacity .35s;
   background: radial-gradient(420px circle at var(--gx, 50%) var(--gy, 50%), rgba(34, 211, 238, .12), rgba(181, 108, 255, .05) 40%, transparent 65%); }
 .card.tilting::after { opacity: 1; }
@@ -508,3 +512,55 @@ input[type=range]:hover::-webkit-slider-thumb { transform: scale(1.15); box-shad
 @media (prefers-reduced-motion: reduce) {
   .spotlight, .hero-aurora, .card::before, .card::after, .fan-row.on::after, .spool::before { display: none !important; }
 }
+
+/* print library */
+.lib-totals { display: flex; flex-wrap: wrap; align-items: stretch; gap: 10px; margin-bottom: 12px; }
+.lib-totals > div { flex: 1 1 140px; padding: 10px 12px; border: 1px solid var(--line); border-radius: var(--radius-s); background: var(--input); display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.lib-totals small { font-family: var(--mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--dim); }
+.lib-totals b { font-size: 18px; font-weight: 700; }
+.lib-totals em { font-style: normal; font-family: var(--mono); font-size: 11px; color: var(--muted); }
+.lib-totals .lib-big { border-color: var(--accent-dim); background: linear-gradient(180deg, var(--accent-bg), transparent); }
+.lib-totals .lib-big b { font-size: 24px; color: var(--accent); text-shadow: 0 0 14px rgba(34, 211, 238, .35); }
+.lib-totals > .btn { align-self: center; }
+.lib-tools { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 12px; }
+.lib-tools .seg { display: flex; gap: 6px; flex-wrap: wrap; }
+.lib-tools .seg .btn { text-transform: capitalize; }
+.lib-tools .search { flex: 1 1 200px; width: auto; margin: 0; min-height: 30px; padding: 5px 10px; }
+.lib-sort { min-height: 30px; padding: 4px 8px; border-radius: var(--radius-s); border: 1px solid var(--line-2); background: var(--input); color: var(--text); }
+.lib-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 12px; }
+.lib-tile { content-visibility: auto; contain-intrinsic-size: auto 280px; display: flex; flex-direction: column; padding: 0; text-align: left; color: var(--text); cursor: pointer; border: 1px solid var(--line); border-radius: var(--radius-s); background: var(--panel-2); overflow: hidden; min-width: 0; transition: border-color var(--t), transform var(--t), box-shadow var(--t); }
+.lib-tile:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0, 0, 0, .4), 0 0 12px rgba(34, 211, 238, .15); }
+.lib-tile.in_progress { border-color: var(--accent-dim); box-shadow: 0 0 12px rgba(34, 211, 238, .2); }
+.lib-thumb { position: relative; aspect-ratio: 1; background: radial-gradient(circle at 50% 40%, var(--panel-3), var(--bg-deep)); }
+.lib-thumb img { position: absolute; inset: 8%; width: 84%; height: 84%; object-fit: contain; }
+.lib-tile:not(.completed):not(.in_progress) .lib-thumb img { opacity: .55; filter: grayscale(.6); }
+.lib-noimg { position: absolute; inset: 30%; border-radius: 50%; opacity: .5; }
+.lib-thumb .pill { position: absolute; left: 8px; top: 8px; padding: 3px 8px; font-size: 9.5px; background: rgba(3, 5, 10, .75); }
+.lib-cost { position: absolute; right: 8px; bottom: 8px; padding: 3px 8px; border-radius: var(--pill); background: rgba(3, 5, 10, .8); border: 1px solid var(--line-2); font-size: 13px; font-weight: 700; color: var(--accent); }
+.lib-meta { padding: 9px 10px 10px; display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.lib-title { font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.lib-line { font-family: var(--mono); font-size: 10.5px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: flex; align-items: center; gap: 6px; }
+.lib-line.dim { color: var(--dim); }
+.lib-sw { display: inline-flex; flex: none; }
+.lib-sw i, .lib-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; border: 1px solid var(--line-2); }
+.lib-sw i + i { margin-left: -3px; }
+.lib-more { display: flex; justify-content: center; margin-top: 12px; }
+.lib-detail { display: grid; grid-template-columns: 220px 1fr; gap: 16px; align-items: start; }
+.lib-detail > img { width: 100%; border-radius: var(--radius-s); background: radial-gradient(circle, var(--panel-3), var(--bg-deep)); border: 1px solid var(--line); }
+.lib-kv { display: grid; grid-template-columns: auto 1fr; gap: 5px 14px; font-size: 13px; }
+.lib-kv > span { color: var(--dim); font-family: var(--mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; padding-top: 2px; }
+.lib-kv > b { font-weight: 500; }
+.lib-file { font-family: var(--mono); font-size: 11px; word-break: break-all; color: var(--muted); }
+.lib-mats { width: 100%; margin-top: 14px; border-collapse: collapse; font-size: 12.5px; }
+.lib-mats th { text-align: left; font-family: var(--mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--dim); font-weight: 600; padding: 4px 6px; border-bottom: 1px solid var(--line); }
+.lib-mats td { padding: 6px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.lib-mats small { display: block; color: var(--dim); font-size: 11px; }
+.lib-form { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
+.lib-field { display: flex; flex-direction: column; gap: 4px; }
+.lib-field > span { font-family: var(--mono); font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.lib-field input { min-height: 34px; padding: 6px 10px; border-radius: var(--radius-s); border: 1px solid var(--line-2); background: var(--input); color: var(--text); }
+.lib-field input:focus { outline: none; border-color: var(--accent); }
+.lib-field small { color: var(--dim); font-size: 11px; }
+.lib-h4 { margin: 16px 0 8px; font-family: var(--mono); font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--dim); }
+.lib-note { color: var(--muted); font-size: 12px; margin: 12px 0 0; }
+@media (max-width: 720px) { .lib-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 9px; } .lib-detail { grid-template-columns: 1fr; } .lib-detail > img { max-width: 220px; } }

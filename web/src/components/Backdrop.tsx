@@ -29,6 +29,7 @@ export default function Backdrop({ active = false }: { active?: boolean }) {
     const frame = (t: number) => {
       if (!running) return
       raf = requestAnimationFrame(frame)
+      if (t - last < 32) return // 30 fps is plenty for drifting motes
       const dt = Math.min(0.05, (t - last) / 1000); last = t
       const want = activeRef.current ? 140 : 70
       while (ps.length < want) { const p = spawn(); p.y = Math.random() * h; p.life = Math.random() * p.max; ps.push(p) }

@@ -306,6 +306,14 @@ func (c *Client) poll() error {
 		// wins whenever it is live. Moonraker's display_status.progress is the slicer's
 		// M73 estimate, which Creality Print only emits every few percent and which
 		// stalls late in a job; fall back to virtual_sdcard's byte position instead.
+		if vs, ok := st["virtual_sdcard"]; ok {
+			if v, ok := vs["progress"].(float64); ok {
+				s.Job.FileProgress = v * 100
+			}
+		}
+		if ps, ok := st["print_stats"]; ok {
+			s.Job.PrintS = num(ps["print_duration"])
+		}
 		if !s.Sources["cxws"] {
 			if vs, ok := st["virtual_sdcard"]; ok {
 				if v, ok := vs["progress"].(float64); ok && (v > 0 || s.Job.State == "printing") {
@@ -433,4 +441,27 @@ func isSensorObject(name string) bool {
 		}
 	}
 	return false
+}
+
+// HistJob is one entry of Moonraker's job history.
+type HistJob struct {
+	JobID         string         `json:"job_id"`
+	Filename      string         `json:"filename"`
+	Status        string         `json:"status"`
+	StartTime     float64        `json:"start_time"`
+	EndTime       *float64       `json:"end_time"`
+	TotalDuration float64        `json:"total_duration"`
+	PrintDuration float64        `json:"print_duration"`
+	FilamentUsed  float64        `json:"filament_used"`
+	Exists        bool           `json:"exists"`
+	Metadata      map[string]any `json:"metadata"`
+}
+
+// HistoryPage returns up to limit jobs, newest first, skipping the first start.
+func (c *Client) HistoryPage(start, limit int) ([]HistJob, error) {
+	var r result[struct {
+		Jobs []HistJob `json:"jobs"`
+	}]
+	err := c.get(fmt.Sprintf("/server/history/list?start=%d&limit=%d&order=desc", start, limit), &r)
+	return r.Result.Jobs, err
 }

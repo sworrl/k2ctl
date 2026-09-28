@@ -63,6 +63,10 @@ type Job struct {
 	TimeLeft    int     `json:"time_left_s"`
 	Elapsed     int     `json:"elapsed_s"`
 	StartedAt   int64   `json:"started_at,omitempty"`
+	// FileProgress is Moonraker's byte position in the gcode (0..100), kept apart so
+	// the API can check the device socket's progress against it.
+	FileProgress float64 `json:"file_progress"`
+	PrintS       float64 `json:"-"` // Moonraker print_duration, for the fallback time-left
 }
 
 type Printer struct {

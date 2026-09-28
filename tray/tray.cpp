@@ -19,6 +19,7 @@
 #include <QWidgetAction>
 
 #include "camerawindow.h"
+#include "costwindow.h"
 #include "sensorswindow.h"
 
 // Durations as h:mm:ss and clock times as 24-hour HH:mm, everywhere.
@@ -214,6 +215,7 @@ void TrayApp::rebuildMenu() {
 
     m_menu.addAction("Webcam…", this, &TrayApp::openCamera);
     m_menu.addAction("Sensors monitor…", this, &TrayApp::openSensors);
+    m_menu.addAction("Estimate print cost…", this, &TrayApp::openCost);
     m_menu.addAction("Open dashboard", this, &TrayApp::openDashboard);
     m_menu.addAction("Settings…", this, &TrayApp::openSettings);
     m_menu.addSeparator();
@@ -343,6 +345,12 @@ void TrayApp::openSensors() {
     m_sensors->show();
     m_sensors->raise();
     m_sensors->activateWindow();
+}
+
+void TrayApp::openCost() {
+    if (!m_cost) m_cost = new CostWindow;
+    m_cost->setBackend(m_api.baseUrl());
+    m_cost->browse();
 }
 
 void TrayApp::openCamera() {

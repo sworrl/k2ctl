@@ -18,6 +18,7 @@ add_executable(k2ctl-tray
   sensorswindow.h sensorswindow.cpp
   sensorgraphic.h sensorgraphic.cpp
   camerawindow.h camerawindow.cpp
+  costwindow.h costwindow.cpp
   k2ctl-tray.qrc
 )
 target_link_libraries(k2ctl-tray PRIVATE Qt6::Widgets Qt6::Network)
@@ -31,4 +32,4 @@ endif()
 
 include(GNUInstallDirs)
 install(TARGETS k2ctl-tray RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
-install(FILES k2ctl-tray.desktop DESTINATION ${CMAKE_INSTALL_DATADIR}/applications)
+install(FILES k2ctl-tray.desktop k2ctl-cost.desktop DESTINATION ${CMAKE_INSTALL_DATADIR}/applications)

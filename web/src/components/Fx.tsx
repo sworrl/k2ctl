@@ -10,8 +10,12 @@ export function Spotlight() {
     if (reducedMotion() || matchMedia('(pointer: coarse)').matches) return
     const el = ref.current!
     let x = innerWidth / 2, y = innerHeight / 3, tx = x, ty = y, raf = 0
-    const move = (e: PointerEvent) => { tx = e.clientX; ty = e.clientY }
-    const loop = () => { raf = requestAnimationFrame(loop); x += (tx - x) * .12; y += (ty - y) * .12; el.style.transform = `translate(${x - 300}px, ${y - 300}px)` }
+    // Runs only while the light is still catching up with the pointer.
+    const loop = () => {
+      x += (tx - x) * .12; y += (ty - y) * .12; el.style.transform = `translate(${x - 300}px, ${y - 300}px)`
+      raf = Math.abs(tx - x) + Math.abs(ty - y) > 0.5 ? requestAnimationFrame(loop) : 0
+    }
+    const move = (e: PointerEvent) => { tx = e.clientX; ty = e.clientY; if (!raf) raf = requestAnimationFrame(loop) }
     addEventListener('pointermove', move, { passive: true }); loop()
     return () => { removeEventListener('pointermove', move); cancelAnimationFrame(raf) }
   }, [])
@@ -24,7 +28,9 @@ export function CardTilt() {
     if (reducedMotion() || matchMedia('(pointer: coarse)').matches) return
     let cur: HTMLElement | null = null, rx = 0, ry = 0, trx = 0, try_ = 0, raf = 0
     const onMove = (e: PointerEvent) => {
-      const el = (e.target as HTMLElement).closest?.('.card') as HTMLElement | null
+      let el = (e.target as HTMLElement).closest?.('.card') as HTMLElement | null
+      // Big cards (model viewer, print library) are too costly to re-raster on every move.
+      if (el && el.offsetWidth * el.offsetHeight > 900 * 650) el = null
       if (el !== cur) { if (cur) { cur.style.transform = ''; cur.classList.remove('tilting') } cur = el; rx = ry = 0 }
       if (!el) { trx = try_ = 0; return }
       const r = el.getBoundingClientRect()

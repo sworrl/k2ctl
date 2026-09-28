@@ -228,8 +228,18 @@ export default function ModelCard({ status, className = '' }: { status: Status; 
     const motion = !reducedMotion()
     controls.addEventListener('start', () => { idleSince = Infinity })
     controls.addEventListener('end', () => { idleSince = performance.now() })
+    // Off screen nothing renders; decorative motion (halo pulse, scan plane, auto-orbit)
+    // renders at 30 fps; data changes and dragging render every frame.
+    // While the page scrolls the viewer holds its last frame, so the bloom pass does not
+    // compete with scrolling.
+    let onScreen = true, lastRender = 0, scrolledAt = 0
+    const io = new IntersectionObserver(([e]) => { onScreen = e.isIntersecting; if (onScreen) dirty = true })
+    io.observe(el)
+    const onScroll = () => { scrolledAt = performance.now() }
+    addEventListener('scroll', onScroll, { passive: true })
     const loop = () => {
       raf = requestAnimationFrame(loop)
+      if (!onScreen || document.hidden) return
       const now = performance.now()
       let moved = controls.update()
       if (motion) {
@@ -309,7 +319,8 @@ export default function ModelCard({ status, className = '' }: { status: Status; 
         ;(scan.material as THREE.MeshBasicMaterial).opacity = .05 * Math.sin(Math.PI * ph)
         moved = true
       } else scan.visible = false
-      if (dirty || moved) { composer.render(); dirty = false }
+      if (now - scrolledAt < 250) return
+      if (dirty || (moved && (idleSince === Infinity || now - lastRender > 33))) { composer.render(); dirty = false; lastRender = now }
     }
     const fit = () => {
       const t = three.current
@@ -329,14 +340,14 @@ export default function ModelCard({ status, className = '' }: { status: Status; 
     const ro = new ResizeObserver(() => {
       const w = el.clientWidth, h = el.clientHeight
       if (!w || !h) return
-      renderer.setSize(w, h, false); composer.setSize(w, h); bloom.resolution.set(w, h); camera.aspect = w / h; camera.updateProjectionMatrix(); frame()
+      renderer.setSize(w, h, false); composer.setSize(w, h); bloom.resolution.set(w / 2, h / 2); camera.aspect = w / h; camera.updateProjectionMatrix(); frame()
     })
     ro.observe(el)
     controls.addEventListener('change', frame)
     three.current = { renderer, scene, camera, controls, nozzle, trail, track, frame, fit }
     fit(); loop()
     return () => {
-      cancelAnimationFrame(raf); ro.disconnect(); controls.dispose(); composer.dispose(); renderer.dispose()
+      cancelAnimationFrame(raf); ro.disconnect(); io.disconnect(); removeEventListener('scroll', onScroll); controls.dispose(); composer.dispose(); renderer.dispose()
       el.removeChild(renderer.domElement); three.current = null
     }
   }, [])

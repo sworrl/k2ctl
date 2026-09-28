@@ -51,10 +51,12 @@ export default function JobCard({ status, className = '' }: { status: Status; cl
               <div className="job-sub">{fmtHMS(j.elapsed_s)} elapsed{j.started_at ? `, started ${fmtClock(j.started_at)}` : ''}</div>
             </div>
           </div>
-          <div className="job-layer">
-            <span>Layer <b>{j.layer}</b>{j.total_layers ? <> / {j.total_layers}</> : null}</span>
-            <div className="bar"><i style={{ width: `${Math.min(100, layers)}%` }} /></div>
-          </div>
+          {j.layer > 0 && (
+            <div className="job-layer">
+              <span>Layer <b>{j.layer}</b>{j.total_layers ? <> / {j.total_layers}</> : null}</span>
+              <div className="bar"><i style={{ width: `${Math.min(100, layers)}%` }} /></div>
+            </div>
+          )}
           <div className="job-mini">
             <span>Speed <b>{status.speed_pct} %</b></span>
             <span>Flow <b>{status.flow_pct} %</b></span>
