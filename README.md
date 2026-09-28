@@ -31,6 +31,7 @@
   <a href="https://qt.io"><img src="https://img.shields.io/badge/Qt-6-41CD52?style=flat-square&logo=qt&logoColor=white" alt="Qt 6"></a>
   <a href="https://moonraker.readthedocs.io"><img src="https://img.shields.io/badge/Klipper-Moonraker-B12F35?style=flat-square" alt="Klipper and Moonraker"></a>
   <img src="https://img.shields.io/badge/Desktop-Linux%20(apt)-FCC624?style=flat-square&logo=linux&logoColor=black" alt="Linux desktop">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-GPL--3.0-blue?style=flat-square" alt="GPL-3.0 license"></a>
   <img src="https://img.shields.io/badge/Creality-not%20affiliated-lightgrey?style=flat-square" alt="Not affiliated with Creality">
 </p>
 
@@ -505,8 +506,14 @@ Questions, bugs, or a variant it does not handle: **github@falcontechnix.com**
 
 ## License
 
-No license file yet. Until one is added, the code is here to read and learn from, and all
-rights stay with the author.
+k2ctl is licensed under the [GNU General Public License v3.0](LICENSE). You can use,
+change and share it. If you share a changed version, it has to stay GPL-3.0 with its source
+available too.
+
+- **k2ctl**: [GPL-3.0](LICENSE), © sworrl / Falcon Technix
+- **Klipper, Moonraker**: GPL-3.0, their authors
+- **React, Vite, three.js**: MIT; **gorilla/websocket**: BSD-2-Clause; **Qt 6**: LGPL-3.0;
+  **Space Grotesk, IBM Plex Mono**: OFL-1.1. All compatible with GPL-3.0.
 
 ---
 
